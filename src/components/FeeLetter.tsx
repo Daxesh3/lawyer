@@ -64,7 +64,7 @@ const FeeLetter: React.FC = () => {
     const handleGenerate = async () => {
         setIsGenerating(true);
         // Simulate API call with a delay
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 7000));
         setIsGenerating(false);
         setHasGenerated(true);
     };
