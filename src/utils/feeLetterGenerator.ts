@@ -225,7 +225,7 @@ export const generateFeeLetterText = (data: FeeLetterData): string => {
 
     // Fee refunds - only for facility agent and security agent
     if (data.letterType === 'facilityAgent' || data.letterType === 'securityAgent') {
-        output += ` (Option 1) (Optional only for Facility Agent + Security Agent): 10. The ${
+        output += ` (Option 1): 10. The ${
             data.letterType === 'facilityAgent' ? 'Agency' : 'Security Agent'
         } Fees once paid are non-refundable (in whole or in part) and non-creditable (in whole or in part) against other fees in connection with the Facility Agreement\n\n`;
     }
