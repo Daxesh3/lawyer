@@ -250,7 +250,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                                 value={data.facilityType}
                                 onChange={handleInputChange}
                                 className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                                placeholder='E.g., Term Loan'
+                                placeholder='E.g., Single Currency'
                             />
                         </div>
                     </div>
@@ -349,7 +349,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                                 className='h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
                             />
                             <label htmlFor='hasFacilityAgentOptions' className='ml-2 block text-sm text-gray-700'>
-                                Include Setup Fee, Increase Fee & Debtdomain Fee
+                                Include Setup Fee, Increase Fee & Debtdomain Fee (Q.5)
                             </label>
                         </div>
                     </div>
@@ -735,7 +735,30 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                         </div>
                     </div>
                 </div>
-
+                <div>
+                    <label htmlFor='governingLaw' className='block text-sm font-medium text-gray-700 mb-1'>
+                        Q.14 Should a standalone Gross Up provision be included or should cross reference be made to the Facility Agreement?
+                    </label>
+                    <input
+                        type='text'
+                        // id='governingLaw'
+                        // name='governingLaw'
+                        // value={data.governingLaw}
+                        // onChange={handleInputChange}
+                        className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        placeholder='Enter Gross Up provision'
+                    />
+                </div>
+                <div>
+                    <label htmlFor='governingLaw' className='block text-sm font-medium text-gray-700 mb-1'>
+                        Q.15 Should a standalone VAT provision be included or should cross reference be made to the Facility Agreement?
+                    </label>
+                    <input
+                        type='text'
+                        className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        placeholder='Enter VAT provision'
+                    />
+                </div>
                 <div>
                     <label htmlFor='governingLaw' className='block text-sm font-medium text-gray-700 mb-1'>
                         Q.16 Governing Law
@@ -748,6 +771,16 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                         onChange={handleInputChange}
                         className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                         placeholder='Enter governing law'
+                    />
+                </div>
+                <div>
+                    <label htmlFor='governingLaw' className='block text-sm font-medium text-gray-700 mb-1'>
+                        Q.17 Should a standalone Jurisdiction provision be included or should cross reference be made to the Facility Agreement?
+                    </label>
+                    <input
+                        type='text'
+                        className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        placeholder='Enter Jurisdiction provision'
                     />
                 </div>
             </form>
