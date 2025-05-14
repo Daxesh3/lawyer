@@ -66,7 +66,7 @@ export const generateFeeLetterText = (data: FeeLetterData): string => {
 
     // Introduction
     output += `Introduction: 1. We refer to the Facility Agreement.\n\n`;
-    output += `Introduction: 2. Unless otherwise defined in this Fee Letter, terms defined in the Facility Agreement shall have the same meanings in this Fee Letter. The rules of interpretation and construction contained in clause *{[1.2] (Construction)}* ofthe Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the *{Finance Documents}* shall be construed as references to this Fee Letter.\n\n`;
+    output += `Introduction: 2. Unless otherwise defined in this Fee Letter, terms defined in the Facility Agreement shall have the same meanings in this Fee Letter. The rules of interpretation and construction contained in clause *{[1.2] (Construction)}* of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the *{Finance Documents}* shall be construed as references to this Fee Letter.\n\n`;
 
     // Specific introduction based on letter type
     switch (data.letterType) {
@@ -160,19 +160,19 @@ export const generateFeeLetterText = (data: FeeLetterData): string => {
     switch (data.letterType) {
         case 'facilityAgent':
             if (data.hasFacilityAgentOptions) {
-                output += `Payment Modalities Facilit Agent (More than one type)\n: 6. The Agency Fees shall become due and payable as set out below.\n`;
+                output += `Payment Modalities Facility Agent (More than one type)\n: 6. The Agency Fees shall become due and payable as set out below.\n`;
                 output += `(a) The Set-Up Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date").\n`;
 
                 if (data.paymentModality === 'annual') {
                     output += `[Optional]Option 1 Annual: b) The first payment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "FirstPayment Date")][the First Payment Date]. Each subsequent payment of the Facility Agent Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of(i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as facility agent and (iii) the date of prepayment of all *{Loans}* and cancellation - of all *{Commitments}*, in each case under the Facility Agreement (the "Final Payment Date").\n`;
                 } else if (data.paymentModality === 'semiannual') {
-                    output += `[Optional]Option 2 SemiAnnual: b) The Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half ofthe annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date")][the First Payment Date]. Thereafter any subsequent installment ofthe FacilityAgent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of (i) the *{FinaI Maturity Date}*, (ii) the date we resign or are replaced as agent and (iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the "Final Payment Date").\n`;
+                    output += `[Optional]Option 2 SemiAnnual: b) The Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date")][the First Payment Date]. Thereafter any subsequent installment of the FacilityAgent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of (i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as agent and (iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the "Final Payment Date").\n`;
                 } else if (data.paymentModality === 'quarterly') {
                     output += `[Optional]Option 3 Quarterly: b) The Facility Agent Fee shall be payable to us in equal quarterly instalments. Each instrument shall amount to a quarter of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date")] [the First Payment Date]. Thereafter any subsequent installment of the Facility Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of (i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as agent and (iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the "Final Payment Date").\n`;
                 }
 
                 output += `\n(c) The Increase Fee shall be payable to the Facility Agent on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after the ${data.increaseCount} Increase Date and on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after each subsequent Increase Date.\n`;
-                output += `(d) The first payment of the Debtdomain Fee is payable on or before the First Payment Date. Each subsequent payment ofthe Debtdomain Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until the Final Payment Date.\n\n`;
+                output += `(d) The first payment of the Debtdomain Fee is payable on or before the First Payment Date. Each subsequent payment of the Debtdomain Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until the Final Payment Date.\n\n`;
             }
             break;
 
@@ -182,18 +182,18 @@ export const generateFeeLetterText = (data: FeeLetterData): string => {
             if (data.paymentModality === 'annual') {
                 output += `Option 1 Annual: 6. The first payment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date"). Each subsequent payment of the Security Agent Fee shall be made annually in advance, commencing on the fist anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of(i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as facility agent and (iii) the date of prepayment of all *{Loans}* and cancellation of all *{Commitments}*, in each case under the Facility Agreement.\n\n`;
             } else if (data.paymentModality === 'semiannual') {
-                output += `Option 2 SemiAnnual: The Security Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to halfofthe annual Security Agent Fee. The first installment of the Security Agent Fee is payable on or before the earlier to occur ofthe date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date"). Thereafter any subsequent installment of the Security Agent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of (i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as agent and (iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.\n\n`;
+                output += `Option 2 SemiAnnual: The Security Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Security Agent Fee. The first installment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date"). Thereafter any subsequent installment of the Security Agent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of (i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as agent and (iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.\n\n`;
             } else if (data.paymentModality === 'quarterly') {
                 output += `Option 3 Quarterly: The Security Agent Fee shall be payable to us in equal quarterly instalments. Each installment shall amount to a quarter of the annual Security Agent Fee. The first installment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Uti1isation Date}* under the Facility Agreement (the "First Payment Date"). Thereafter any subsequent installment of the Security Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of (i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as agent and (iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.\n\n`;
             }
             break;
 
         case 'globalCoordinator':
-            output += `Payment Modalities Global Co-Ordinating Bank\n: 6. The Global Co-ordinator Fee is payable on or before the earlier to occur ofthe date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.\n\n`;
+            output += `Payment Modalities Global Co-Ordinating Bank\n: 6. The Global Co-ordinator Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.\n\n`;
             break;
 
         case 'coordinatingBank':
-            output += `Payment Modalities Co-Ordinating Bank\n: 6. The Co-ordinating Bank Fee is payable on or before the earlier to occur ofthe date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.\n\n`;
+            output += `Payment Modalities Co-Ordinating Bank\n: 6. The Co-ordinating Bank Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.\n\n`;
             break;
 
         case 'upfront':
@@ -220,7 +220,7 @@ export const generateFeeLetterText = (data: FeeLetterData): string => {
     }
 
     // Tax and VAT
-    output += ` (Option 1): 8. Clause *{ {12} (Tax Gross Up and Indemnities)}* of the Facility Agreement shdl apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.\n\n`;
+    output += ` (Option 1): 8. Clause *{ {12} (Tax Gross Up and Indemnities)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.\n\n`;
     output += ` (Option 1): 9. Clause *{ { ¢} (VAT)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.\n\n`;
 
     // Fee refunds - only for facility agent and security agent
@@ -259,12 +259,12 @@ export const generateFeeLetterText = (data: FeeLetterData): string => {
 
     output += `Miscellaneous: 12. This ${agentName} Fee Letter may not be amended or waived except as may be agreed in writing by the ${agentName} and the Borrower.\n\n`;
     output += `Miscellaneous: 13. This ${agentName} Fee Letter may be signed in any number of counterparts. This has the same effect as if the signatures on the counterparts were on a single copy of this Fee Letter.\n\n`;
-    output += `Miscellaneous: 14. Aperson who is not a party to this Fee Letter shall have no rights under the Contracts (Rights of Third Parties) Act 1999 or otherwise to enforce or enjoy the benefit of any terms ofthis Fee Letter.\n\n`;
+    output += `Miscellaneous: 14. A person who is not a party to this Fee Letter shall have no rights under the Contracts (Rights of Third Parties) Act 1999 or otherwise to enforce or enjoy the benefit of any terms of this Fee Letter.\n\n`;
     output += `Miscellaneous: 15. This letter and all non-contractual obligations arising from or connected with it are governed by ${data.governingLaw} law.\n\n`;
     output += `Miscellaneous  (Option 1): 16. Clause {¢} (Enforcement) of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the Finance Documents shall be construed as references to this Fee Letter.\n\n`;
 
     // Signature blocks
-    output += `By signing and returning a copy ofthis Fee Letter to the ${agentName}, you acknowledge your agreement to its terms.\n\n`;
+    output += `By signing and returning a copy of this Fee Letter to the ${agentName}, you acknowledge your agreement to its terms.\n\n`;
     output += `Yours faithfully\n\n\n\n`;
     output += `_______________\n\n`;
     output += `For and on behalf of \n${getSenderName()}\n\n\n`;

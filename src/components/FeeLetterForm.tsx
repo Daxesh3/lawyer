@@ -95,7 +95,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
 
                     <div>
                         <label htmlFor='letterType' className='block text-sm font-medium text-gray-700 mb-1'>
-                            Type of Letter
+                            Q.1 Type of Letter
                         </label>
                         <select
                             id='letterType'
@@ -119,7 +119,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <div>
                             <label htmlFor='borrowerName' className='block text-sm font-medium text-gray-700 mb-1'>
-                                Borrower Name
+                                Q.2 Borrower Name
                             </label>
                             <input
                                 type='text'
@@ -138,7 +138,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                             data.letterType === 'arranger') && (
                             <div>
                                 <label htmlFor='facilityAgentName' className='block text-sm font-medium text-gray-700 mb-1'>
-                                    Facility Agent Name
+                                    Q.3 Facility Agent Name
                                 </label>
                                 <input
                                     type='text'
@@ -172,7 +172,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                         {data.letterType === 'globalCoordinator' && (
                             <div>
                                 <label htmlFor='globalCoordinatorName' className='block text-sm font-medium text-gray-700 mb-1'>
-                                    Global Co-Ordinator Name
+                                    Q.2 Global Co-Ordinator Name
                                 </label>
                                 <input
                                     type='text'
@@ -189,7 +189,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                         {data.letterType === 'coordinatingBank' && (
                             <div>
                                 <label htmlFor='coordinatingBankName' className='block text-sm font-medium text-gray-700 mb-1'>
-                                    Co-Ordinating Bank Name
+                                    Q.2 Co-Ordinating Bank Name
                                 </label>
                                 <input
                                     type='text'
@@ -207,7 +207,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                     <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                         <div>
                             <label htmlFor='currency' className='block text-sm font-medium text-gray-700 mb-1'>
-                                Currency
+                                Q.3 Currency
                             </label>
                             <select
                                 id='currency'
@@ -241,7 +241,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
 
                         <div>
                             <label htmlFor='facilityType' className='block text-sm font-medium text-gray-700 mb-1'>
-                                Type of Facility
+                                Q.4 Type of Facility
                             </label>
                             <input
                                 type='text'
@@ -285,7 +285,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                                 className='h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
                             />
                             <label htmlFor='feeTypes.facilityAgentFee' className='ml-2 block text-sm text-gray-700'>
-                                Facility Agent Fee
+                                Facility Agent Fee (Q.5)
                             </label>
                         </div>
 
@@ -316,7 +316,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                                 className='h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
                             />
                             <label htmlFor='feeTypes.securityAgentFee' className='ml-2 block text-sm text-gray-700'>
-                                Security Agent Fee
+                                Security Agent Fee (Q.6)
                             </label>
                         </div>
 
@@ -429,7 +429,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                                 className='h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
                             />
                             <label htmlFor='feeTypes.globalCoordinatorFee' className='ml-2 block text-sm text-gray-700'>
-                                Global Coordinator Fee
+                                Global Coordinator Fee (Q.7)
                             </label>
                         </div>
 
@@ -460,7 +460,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                                 className='h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
                             />
                             <label htmlFor='feeTypes.coordinatingBankFee' className='ml-2 block text-sm text-gray-700'>
-                                Coordinating Bank Fee
+                                Coordinating Bank Fee (Q.8)
                             </label>
                         </div>
 
@@ -493,7 +493,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                                 className='h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
                             />
                             <label htmlFor='feeTypes.upfrontFee' className='ml-2 block text-sm text-gray-700'>
-                                Upfront Fee
+                                Upfront Fee (Q.9)
                             </label>
                         </div>
 
@@ -524,7 +524,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                                 className='h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
                             />
                             <label htmlFor='feeTypes.mandatedLeadArrangerFee' className='ml-2 block text-sm text-gray-700'>
-                                Mandated Lead Arranger Fee
+                                Mandated Lead Arranger Fee (Q.10)
                             </label>
                         </div>
 
@@ -557,7 +557,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                                 className='h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
                             />
                             <label htmlFor='feeTypes.arrangerFee' className='ml-2 block text-sm text-gray-700'>
-                                Arranger Fee
+                                Arranger Fee (Q.11)
                             </label>
                         </div>
 
@@ -626,7 +626,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
 
                     <div>
                         <label htmlFor='businessDays' className='block text-sm font-medium text-gray-700 mb-1'>
-                            Business Days Prior Notice
+                            Q.12 Business Days Prior Notice
                         </label>
                         <input
                             type='text'
@@ -638,25 +638,10 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                             placeholder='Enter business days'
                         />
                     </div>
-
-                    <div>
-                        <label htmlFor='governingLaw' className='block text-sm font-medium text-gray-700 mb-1'>
-                            Governing Law
-                        </label>
-                        <input
-                            type='text'
-                            id='governingLaw'
-                            name='governingLaw'
-                            value={data.governingLaw}
-                            onChange={handleInputChange}
-                            className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            placeholder='Enter governing law'
-                        />
-                    </div>
                 </div>
 
                 <div className='space-y-4'>
-                    <h3 className='text-lg font-semibold text-gray-700 border-b pb-2'>Bank Details</h3>
+                    <h3 className='text-lg font-semibold text-gray-700 border-b pb-2'>Q.13 Bank Details</h3>
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <div>
@@ -749,6 +734,21 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
                             />
                         </div>
                     </div>
+                </div>
+
+                <div>
+                    <label htmlFor='governingLaw' className='block text-sm font-medium text-gray-700 mb-1'>
+                        Q.16 Governing Law
+                    </label>
+                    <input
+                        type='text'
+                        id='governingLaw'
+                        name='governingLaw'
+                        value={data.governingLaw}
+                        onChange={handleInputChange}
+                        className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        placeholder='Enter governing law'
+                    />
                 </div>
             </form>
             <div className='mt-6 flex justify-end'>
