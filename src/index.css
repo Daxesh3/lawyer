@@ -1,3 +1,259 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.App {
+  text-align: center;
+  position: relative;
+}
+
+.auth-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.auth-left-container,
+.auth-right-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-left-container {
+  width: 50%;
+  background: #000000;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.auth-right-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  background: #282828;
+}
+
+.logo--wrapper {
+  width: 100%;
+  padding: 20px 0;
+}
+
+.auth-form {
+  width: 320px;
+  display: block;
+}
+
+.text-input-field {
+  width: calc(100% - 20px);
+  border: 1px solid grey;
+  border-radius: 20px;
+  background-color: transparent;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.auth-form-container {
+  width: 370px;
+  min-height: 475px;
+  height: fit-content;
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Semi-transparent border */
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  backdrop-filter: blur(20px); /* Blur effect */
+  transition: background 0.3s, border 0.3s; /* Smooth transition for hover effects */
+}
+
+.auth-form-wrapper {
+  padding: 0 20px 20px;
+}
+
+/* Optional: Add hover effects for the wrapper */
+.auth-form-wrapper:hover {
+  background: rgba(255, 255, 255, 0.2); /* Lighter background on hover */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* More visible border on hover */
+}
+
+.webcam-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-container {
+  position: relative;
+  display: block;
+  width: 320px;
+  height: 240px;
+  border: 2px solid grey;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  animation: border-glow 2s infinite alternate;
+}
+
+/* Scanning Line Animation */
+.camera-container::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 255, 0, 0.6); /* Green scan line */
+  top: -4px;
+  left: 0;
+  animation: scan 3s infinite linear;
+}
+
+/* Border Animation */
+@keyframes border-glow {
+  0% {
+    border-color: grey;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    border-color: rgba(123, 221, 243, 0.79);
+    box-shadow: 0 0 15px rgba(123, 221, 243, 0.79);
+  }
+}
+
+/* Scanning Line Movement */
+@keyframes scan {
+  0% {
+    top: -4px;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+.btn-wrapper {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.main-button {
+  height: 40px;
+  width: fit-content;
+  min-width: 80px;
+  outline: none;
+  border: 1px solid transparent;
+  padding: 5px 15px;
+  color: #41a5db;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.secondary-btn {
+  background-color: grey;
+  margin-right: 10px;
+}
+
+.primary-btn {
+  background-color: #023743;
+}
+
+.auth-form {
+  margin-top: 20px;
+}
+
+.auth-title {
+  font-size: 25px;
+  margin: 0 0 40px;
+  background-color: rgba(0, 165, 203, 0.9);
+  border-radius: 20px 20px 0 0;
+  padding: 10px;
+  color: #ffffff;
+}
+
+.login-text {
+  color: #000000;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 10px 0;
+  text-decoration: underline;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.cursor-animation-canvas {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+}
+
+.welcome-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(0, 165, 203, 0.9);
+  margin: 0 0 20px;
+}
+
+.bottom-text {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+.footer-text {
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.error-text {
+  font-size: 14px;
+  color: red;
+}
+
+.spinner-wrapper {
+  min-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 2px solid #3498db;
+  width: 14px;
+  height: 14px;
+  animation: spin 1s linear infinite;
+}
+
+.page-spinner {
+  width: 30px;
+  height: 30px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.green-tick-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
