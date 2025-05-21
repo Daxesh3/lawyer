@@ -1,12 +1,7 @@
 import React from 'react';
-import { IFeeLetterData } from '../../../types/feeLetterTypes';
+import { IFeeTypesProps } from '../interface/Letter.interface';
 
-interface FeeTypesProps {
-  form: IFeeLetterData;
-  onChange: (field: string, value: string | boolean) => void;
-}
-
-const FeeTypes: React.FC<FeeTypesProps> = ({ form, onChange }) => {
+const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
   return (
     <div className="space-y-4">
       <h3 className="text-blue-400 font-semibold mb-1">Step 3.</h3>

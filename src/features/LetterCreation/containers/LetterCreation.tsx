@@ -4,6 +4,7 @@ import BasicInformation from '../components/BasicInformation';
 import { INITIAL_FORM, STEPS } from '../constants/Letter.constants';
 import FeeTypes from '../components/FeeTypes';
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
+import PaymentModalities from '../components/PaymentModalities';
 
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -82,6 +83,7 @@ const LetterCreation = () => {
           {activeStep === 0 && <LetterTypeStep selected={selectedType} onSelect={setSelectedType} />}
           {activeStep === 1 && <BasicInformation form={form} onChange={handleFormChange} />}
           {activeStep === 2 && <FeeTypes form={form} onChange={handleFormChange} />}
+          {activeStep === 3 && <PaymentModalities form={form} onChange={handleFormChange} />}
         </div>
 
         {/* Navigation Buttons */}

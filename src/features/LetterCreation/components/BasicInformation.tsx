@@ -1,13 +1,8 @@
 import React from 'react';
 import { CURRENCIES } from '../constants/Letter.constants';
-import { IFeeLetterData } from '../../../types/feeLetterTypes';
+import { IFeeTypesProps } from '../interface/Letter.interface';
 
-type Props = {
-  form: IFeeLetterData;
-  onChange: (field: string, value: string) => void;
-};
-
-const BasicInformation: React.FC<Props> = ({ form, onChange }) => {
+const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
   return (
     <div>
       <h3 className="text-blue-400 font-semibold mb-1">Step 2.</h3>
