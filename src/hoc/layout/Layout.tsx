@@ -4,9 +4,9 @@ import Footer from '../footer/Footer';
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div>
+    <div className="bg-[#000000] h-screen">
       <Header />
-      <div className="main-content-wrapper">{children}</div>
+      <div className="main-content-wrapper flex-grow overflow-y-auto">{children}</div>
       <Footer />
     </div>
   );
