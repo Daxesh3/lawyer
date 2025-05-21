@@ -1,11 +1,4 @@
-const options = [
-  'Facility Agent Fee Letter',
-  'Security Agent Fee Letter',
-  'Global Co-Ordinator Fee Letter',
-  'Co-Ordinating Bank Fee Letter',
-  'Upfront Fee Letter',
-  'Mandated Lead Arranger Fee Letter',
-];
+import { LETTER_OPTIONS } from '../constants/Letter.constants';
 
 export default function LetterTypeStep({ selected, onSelect }: { selected: number; onSelect: (idx: number) => void }) {
   return (
@@ -13,7 +6,7 @@ export default function LetterTypeStep({ selected, onSelect }: { selected: numbe
       <h3 className="text-blue-400 font-semibold mb-1">Step 1.</h3>
       <h2 className="text-xl font-bold mb-6 text-white">Letter Type</h2>
       <div className="grid grid-cols-3 gap-4">
-        {options.map((label, idx) => (
+        {LETTER_OPTIONS.map((label, idx) => (
           <button
             key={label}
             className={`border-2 rounded-lg pl-5 pr-3 py-[2px] h-[78px] text-left text-[#A2A2A2] transition-all ${
