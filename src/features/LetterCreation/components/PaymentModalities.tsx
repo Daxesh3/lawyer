@@ -3,8 +3,7 @@ import { IFeeTypesProps } from '../interface/Letter.interface';
 
 const PaymentModalities: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
   return (
-    <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-white border-b pb-2">Payment Modalities</h3>
+    <div>
       <h3 className="text-blue-400 font-semibold mb-1">Step 4.</h3>
       <h2 className="text-xl font-bold mb-6 text-white">Payment Modalities</h2>
       <div>
@@ -48,9 +47,9 @@ const PaymentModalities: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
         </div>
       </div>
 
-      <div>
+      <div className="mt-4">
         <label htmlFor="businessDays" className="block text-sm font-medium text-white mb-1">
-          Q.12 Business Days Prior Notice
+          Business Days Prior Notice
         </label>
         <input
           type="text"
@@ -58,7 +57,7 @@ const PaymentModalities: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
           name="businessDays"
           value={form.businessDays}
           onChange={(e) => onChange('businessDays', e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
           placeholder="Enter business days"
         />
       </div>

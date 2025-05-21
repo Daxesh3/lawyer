@@ -13,6 +13,7 @@ export const STEPS = [
   { label: 'Fee Types' },
   { label: 'Payment Modalities' },
   { label: 'Bank Details' },
+  { label: 'Other Details' },
 ];
 
 export const INITIAL_FORM: IFeeLetterData = {

@@ -3,9 +3,9 @@ import { IFeeTypesProps } from '../interface/Letter.interface';
 
 const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
   return (
-    <div className="space-y-4">
+    <div>
       <h3 className="text-blue-400 font-semibold mb-1">Step 5.</h3>
-      <h2 className="text-xl font-bold mb-6 text-white">Bank Details</h2>
+      <h2 className="text-xl font-bold mb-6 text-white space-y-4">Bank Details</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label htmlFor="bankDetails.accountBank" className="block text-sm font-medium text-white mb-1">
@@ -17,7 +17,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             name="bankDetails.accountBank"
             value={form.bankDetails.accountBank}
             onChange={(e) => onChange('bankDetails.accountBank', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             placeholder="Enter account bank"
           />
         </div>
@@ -31,7 +31,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             name="bankDetails.accountHolder"
             value={form.bankDetails.accountHolder}
             onChange={(e) => onChange('bankDetails.accountHolder', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             placeholder="Enter account holder"
           />
         </div>
@@ -45,7 +45,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             name="bankDetails.accountNumber"
             value={form.bankDetails.accountNumber}
             onChange={(e) => onChange('bankDetails.accountNumber', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             placeholder="Enter account number"
           />
         </div>
@@ -59,7 +59,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             name="bankDetails.sortCode"
             value={form.bankDetails.sortCode}
             onChange={(e) => onChange('bankDetails.sortCode', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             placeholder="Enter sort code"
           />
         </div>
@@ -73,7 +73,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             name="bankDetails.iban"
             value={form.bankDetails.iban}
             onChange={(e) => onChange('bankDetails.iban', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             placeholder="Enter IBAN"
           />
         </div>
@@ -87,7 +87,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             name="bankDetails.reference"
             value={form.bankDetails.reference}
             onChange={(e) => onChange('bankDetails.reference', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             placeholder="Enter reference"
           />
         </div>

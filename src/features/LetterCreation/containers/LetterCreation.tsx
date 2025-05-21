@@ -6,6 +6,7 @@ import FeeTypes from '../components/FeeTypes';
 import LetterTypeStep from '../components/LetterType';
 import PaymentModalities from '../components/PaymentModalities';
 import { INITIAL_FORM, STEPS } from '../constants/Letter.constants';
+import OtherDetails from '../components/OtherDetails';
 
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -66,7 +67,7 @@ const LetterCreation = () => {
 
   return (
     <div className="flex flex-col items-center justify-center bg-black">
-      <div className="w-full max-w-4xl bg-[#232323] rounded-xl p-8 shadow-lg mt-12 min-h-[665px] flex flex-col justify-between">
+      <div className="w-full max-w-4xl bg-[#3b3b3b] rounded-xl p-8 shadow-lg mt-12 min-h-[665px] flex flex-col justify-between">
         <div>
           {/* Stepper */}
           <div className="flex items-center mb-8">
@@ -86,6 +87,7 @@ const LetterCreation = () => {
           {activeStep === 2 && <FeeTypes form={form} onChange={handleFormChange} />}
           {activeStep === 3 && <PaymentModalities form={form} onChange={handleFormChange} />}
           {activeStep === 4 && <BankDetails form={form} onChange={handleFormChange} />}
+          {activeStep === 5 && <OtherDetails form={form} onChange={handleFormChange} />}
         </div>
 
         {/* Navigation Buttons */}
@@ -97,15 +99,26 @@ const LetterCreation = () => {
           >
             BACK
           </button>
-          <button
-            className="bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold"
-            onClick={() => {
-              setActiveStep((s) => Math.min(STEPS.length - 1, s + 1));
-              console.log('first', form);
-            }}
-          >
-            NEXT
-          </button>
+          {activeStep < 5 ? (
+            <button
+              className="bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold"
+              onClick={() => {
+                setActiveStep((s) => Math.min(STEPS.length - 1, s + 1));
+                console.log('first', form);
+              }}
+            >
+              NEXT
+            </button>
+          ) : (
+            <button
+              className="bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold"
+              onClick={() => {
+                console.log('final form', form);
+              }}
+            >
+              SUBMIT
+            </button>
+          )}
         </div>
       </div>
     </div>
