@@ -3,7 +3,7 @@ import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-
 import FeeLetter from './features/FeeLetter/components/FeeLetter';
 import AuthContainer from './features/Auth/containers/AuthContainer';
 import Layout from './hoc/layout/Layout';
-import Dashboard from './features/Dashboard/Container/Dashboard';
+import Dashboard from './features/Dashboard/containers/Dashboard';
 
 function App() {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin') === 'true');

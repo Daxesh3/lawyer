@@ -3,7 +3,7 @@ import Logo from '../../assets/Images/Logo.png';
 
 export const Header: React.FC = () => {
   return (
-    <header className="bg-black text-white py-3 px-6 flex items-center justify-between w-full">
+    <header className="bg-black text-white pt-8 pb-3 px-6 flex items-center justify-between w-full">
       {/* Left: Logo */}
       <div className="h-[60px]">
         <img src={Logo} alt="Logo" className="h-full object-contain" />
