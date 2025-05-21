@@ -1,31 +1,49 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import FeeLetter from './features/FeeLetter/components/FeeLetter';
-import { HeaderLogo } from './features/Header/Header';
-import Animation from './features/Auth/components/Animation';
 import AuthContainer from './features/Auth/containers/AuthContainer';
+import Layout from './hoc/layout/Layout';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin') === 'true');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const newLoginState = localStorage.getItem('isLogin') === 'true';
+      setIsLogin(newLoginState);
+      if (newLoginState) {
+        navigate('/letter');
+      } else {
+        navigate('/login');
+      }
+    };
+
+    // Listen for storage changes from other tabs
+    window.addEventListener('storage', handleStorageChange);
+
+    // Initial check and route
+    handleStorageChange();
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [navigate]);
 
   return (
     <>
       {!isLogin ? (
-        <>
-          <Animation />
-          <AuthContainer />
-        </>
+        <Routes>
+          <Route path="/login" element={<AuthContainer />} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
       ) : (
-        <div className="min-h-screen bg-gray-50">
-          <HeaderLogo />
-          <main className="container mx-auto px-4 py-8">
-            <FeeLetter />
-          </main>
-          <footer className="bg-gray-100 py-6 mt-12">
-            <div className="container mx-auto px-4 text-center text-gray-600 text-sm">
-              <p>© {new Date().getFullYear()} Fee Letter Generator. All rights reserved.</p>
-            </div>
-          </footer>
-        </div>
+        <Layout>
+          <Routes>
+            <Route path="/letter" element={<FeeLetter />} />
+            <Route path="*" element={<Navigate to="/letter" replace />} />
+          </Routes>
+        </Layout>
       )}
     </>
   );

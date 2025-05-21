@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import FeeLetterForm from './FeeLetterForm';
 import FeeLetterOutput from './FeeLetterOutput';
 import { FeeLetterData } from '../../../types/feeLetterTypes';
@@ -52,41 +52,57 @@ const FeeLetter: React.FC = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [hasGenerated, setHasGenerated] = useState(false);
 
-  const handleFormChange = (newData: Partial<FeeLetterData>) => {
+  const handleFormChange = useCallback((newData: Partial<FeeLetterData>) => {
     setFeeLetterData((prevData) => ({
       ...prevData,
       ...newData,
     }));
-    // Reset hasGenerated when form data changes
     setHasGenerated(false);
-  };
+  }, []);
 
-  const handleGenerate = async () => {
+  const handleGenerate = useCallback(async () => {
     setIsGenerating(true);
-    // Simulate API call with a delay
-    await new Promise((resolve) => setTimeout(resolve, 7000));
-    setIsGenerating(false);
-    setHasGenerated(true);
-  };
+    try {
+      // Add your actual API call here instead of the timeout
+      // await generateFeeLetter(feeLetterData);
+      setHasGenerated(true);
+    } catch (error) {
+      console.error('Error generating fee letter:', error);
+    } finally {
+      setIsGenerating(false);
+    }
+  }, [feeLetterData]);
+
+  const memoizedFeeLetterForm = useMemo(() => (
+    <FeeLetterForm
+      data={feeLetterData}
+      onChange={handleFormChange}
+      onGenerate={handleGenerate}
+      isGenerating={isGenerating}
+    />
+  ), [feeLetterData, handleFormChange, handleGenerate, isGenerating]);
+
+  const memoizedFeeLetterOutput = useMemo(() => (
+    <FeeLetterOutput 
+      data={feeLetterData} 
+      isGenerating={isGenerating} 
+      hasGenerated={hasGenerated} 
+    />
+  ), [feeLetterData, isGenerating, hasGenerated]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <div className="bg-white rounded-lg shadow-md p-6 h-fit">
         <h2 className="text-xl font-bold mb-6 text-blue-900">Fee Letter Details</h2>
-        <FeeLetterForm
-          data={feeLetterData}
-          onChange={handleFormChange}
-          onGenerate={handleGenerate}
-          isGenerating={isGenerating}
-        />
+        {memoizedFeeLetterForm}
       </div>
 
       <div className="bg-white rounded-lg shadow-md p-6 h-fit sticky top-4">
         <h2 className="text-xl font-bold mb-6 text-blue-900">Generated Fee Letter</h2>
-        <FeeLetterOutput data={feeLetterData} isGenerating={isGenerating} hasGenerated={hasGenerated} />
+        {memoizedFeeLetterOutput}
       </div>
     </div>
   );
 };
 
-export default FeeLetter;
+export default React.memo(FeeLetter);

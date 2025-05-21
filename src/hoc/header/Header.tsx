@@ -1,7 +1,7 @@
 import React from 'react';
 import { FileText } from 'lucide-react';
 
-export const HeaderLogo: React.FC = () => {
+export const Header: React.FC = () => {
   return (
     <header className="bg-blue-900 text-white py-4 shadow-md">
       <div className="container mx-auto px-4">
