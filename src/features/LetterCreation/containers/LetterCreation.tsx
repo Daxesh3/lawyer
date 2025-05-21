@@ -7,6 +7,7 @@ import LetterTypeStep from '../components/LetterType';
 import PaymentModalities from '../components/PaymentModalities';
 import { INITIAL_FORM, STEPS } from '../constants/Letter.constants';
 import OtherDetails from '../components/OtherDetails';
+import { motion } from 'framer-motion';
 
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -67,16 +68,36 @@ const LetterCreation = () => {
 
   return (
     <div className="flex flex-col items-center justify-center bg-black">
-      <div className="w-full max-w-4xl bg-[#3b3b3b] rounded-xl p-8 shadow-lg mt-12 min-h-[665px] flex flex-col justify-between">
+      <div className="w-full max-w-4xl bg-[#3b3b3b] rounded-xl p-8 shadow-lg mt-12 min-h-[665px] flex flex-col justify-between ">
         <div>
           {/* Stepper */}
-          <div className="flex items-center mb-8">
+          <div className="flex items-center mb-8 w-full">
             {STEPS.map((step, idx) => (
               <React.Fragment key={step.label}>
-                <div className="flex flex-col items-center">
-                  <div className={`w-8 h-1 rounded-full ${idx <= activeStep ? 'bg-blue-400' : 'bg-gray-700'}`} />
-                </div>
-                {idx < STEPS.length - 1 && <div className="flex-1 h-1 bg-gray-700 mx-1" />}
+                <motion.div
+                  layout
+                  initial={false}
+                  animate={{
+                    backgroundColor: idx <= activeStep ? '#60a5fa' : '#374151',
+                    scaleX: idx <= activeStep ? 1 : 0.97,
+                    originX: idx <= activeStep ? 0 : 1,
+                  }}
+                  transition={{
+                    backgroundColor: {
+                      type: 'tween',
+                      ease: 'easeInOut',
+                      duration: 0.4,
+                    },
+                    scaleX: {
+                      type: 'spring',
+                      stiffness: 35,
+                      damping: 8,
+                      mass: 0.8,
+                      restDelta: 0.001,
+                    },
+                  }}
+                  className={`h-1 rounded-full flex-1 origin-left ${idx !== 0 ? 'ml-4' : ''}`}
+                />
               </React.Fragment>
             ))}
           </div>
