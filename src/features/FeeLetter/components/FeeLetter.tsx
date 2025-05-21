@@ -47,6 +47,9 @@ const FeeLetter: React.FC = () => {
       iban: '',
       reference: '',
     },
+    natureOfDocument: 'neutral',
+    facilityAgreementFile: undefined,
+    facilityAgreementUpload: '',
   });
 
   const [isGenerating, setIsGenerating] = useState(false);

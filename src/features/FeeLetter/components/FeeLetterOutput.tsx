@@ -1,9 +1,9 @@
 import React from 'react';
-import { FeeLetterData } from '../../../types/feeLetterTypes';
+import { IFeeLetterData } from '../../../types/feeLetterTypes';
 import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
 
 interface FeeLetterOutputProps {
-  data: FeeLetterData;
+  data: IFeeLetterData;
   isGenerating: boolean;
   hasGenerated: boolean;
 }
