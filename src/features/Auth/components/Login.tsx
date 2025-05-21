@@ -131,20 +131,12 @@ const Login = () => {
       if (data.firstName) {
         setUserName(`${data.firstName} ${data.lastName || ''}`);
         setNoRecordFound(false);
-        setIsWebCam(false); // Hide webcam after successful login
+        setIsWebCam(false);
+        handleRedirect();
       } else {
         handleRedirect();
-
-        // setNoRecordFound(true);
-        // setUserName(null);
       }
     } catch (error) {
-      // console.error('Authentication error:', error);
-      handleRedirect();
-
-      // setErrorMessage('Error during authentication. Please try again.');
-      // setNoRecordFound(false);
-    } finally {
       handleRedirect();
     }
   };
@@ -163,7 +155,7 @@ const Login = () => {
       setIsLoading(false);
       localStorage.setItem('isLogin', 'true');
       window.dispatchEvent(new StorageEvent('storage', { key: 'isLogin' }));
-      navigate('/letter');
+      navigate('/home', { replace: true });
     }, 3000);
   };
 

@@ -1,21 +1,25 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import FeeLetter from './features/FeeLetter/components/FeeLetter';
 import AuthContainer from './features/Auth/containers/AuthContainer';
 import Layout from './hoc/layout/Layout';
+import Dashboard from './features/Dashboard/Container/Dashboard';
 
 function App() {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin') === 'true');
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleStorageChange = () => {
       const newLoginState = localStorage.getItem('isLogin') === 'true';
       setIsLogin(newLoginState);
-      if (newLoginState) {
-        navigate('/letter');
-      } else {
-        navigate('/login');
+
+      // Only navigate if we're not already on the correct route
+      if (newLoginState && !location.pathname.startsWith('/home')) {
+        navigate('/home', { replace: true });
+      } else if (!newLoginState && location.pathname !== '/login') {
+        navigate('/login', { replace: true });
       }
     };
 
@@ -28,7 +32,7 @@ function App() {
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, [navigate]);
+  }, [navigate, location]);
 
   return (
     <>
@@ -40,8 +44,9 @@ function App() {
       ) : (
         <Layout>
           <Routes>
+            <Route path="/home" element={<Dashboard />} />
             <Route path="/letter" element={<FeeLetter />} />
-            <Route path="*" element={<Navigate to="/letter" replace />} />
+            <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </Layout>
       )}
