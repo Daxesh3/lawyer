@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import LetterTypeStep from '../components/LetterType';
-import BasicInformation from '../components/BasicInformation';
-import { INITIAL_FORM, STEPS } from '../constants/Letter.constants';
-import FeeTypes from '../components/FeeTypes';
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
+import BankDetails from '../components/BankDetails';
+import BasicInformation from '../components/BasicInformation';
+import FeeTypes from '../components/FeeTypes';
+import LetterTypeStep from '../components/LetterType';
 import PaymentModalities from '../components/PaymentModalities';
+import { INITIAL_FORM, STEPS } from '../constants/Letter.constants';
 
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -13,7 +14,7 @@ const LetterCreation = () => {
 
   const handleFormChange = (
     fieldOrEvent: string | React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
-    value?: string | boolean
+    value?: string | boolean | number
   ) => {
     // If called as an event handler
     if (typeof fieldOrEvent !== 'string') {
@@ -84,6 +85,7 @@ const LetterCreation = () => {
           {activeStep === 1 && <BasicInformation form={form} onChange={handleFormChange} />}
           {activeStep === 2 && <FeeTypes form={form} onChange={handleFormChange} />}
           {activeStep === 3 && <PaymentModalities form={form} onChange={handleFormChange} />}
+          {activeStep === 4 && <BankDetails form={form} onChange={handleFormChange} />}
         </div>
 
         {/* Navigation Buttons */}

@@ -10,8 +10,9 @@ export const LETTER_TYPES = [
 export const STEPS = [
   { label: 'Letter Type' },
   { label: 'Basic Information' },
-  { label: 'Step 3' },
-  { label: 'Step 4' },
+  { label: 'Fee Types' },
+  { label: 'Payment Modalities' },
+  { label: 'Bank Details' },
 ];
 
 export const INITIAL_FORM: IFeeLetterData = {
