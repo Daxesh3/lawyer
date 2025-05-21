@@ -17,18 +17,13 @@ const LetterCreation = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [hasGenerated, setHasGenerated] = useState(false);
 
-  const handleGenerate = useCallback(async () => {
+  const handleGenerate = async () => {
     setIsGenerating(true);
-    try {
-      // Add your actual API call here instead of the timeout
-      // await generateFeeLetter(feeLetterData);
-      setHasGenerated(true);
-    } catch (error) {
-      console.error('Error generating fee letter:', error);
-    } finally {
-      setIsGenerating(false);
-    }
-  }, [form]);
+    // Simulate API call with a delay
+    await new Promise((resolve) => setTimeout(resolve, 7000));
+    setIsGenerating(false);
+    setHasGenerated(true);
+  };
 
   const handleFormChange = (
     fieldOrEvent: string | React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
