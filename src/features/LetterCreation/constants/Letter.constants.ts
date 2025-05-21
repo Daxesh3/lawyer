@@ -59,6 +59,8 @@ export const INITIAL_FORM: IFeeLetterData = {
     iban: '',
     reference: '',
   },
+  natureOfDocument: 'neutral',
+  facilityAgreementUpload: '',
 };
 
 export const CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'CHF'];

@@ -16,7 +16,7 @@ const LetterCreation = () => {
 
   const handleFormChange = (
     fieldOrEvent: string | React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
-    value?: string | boolean | number
+    value?: string | boolean | number | File | null
   ) => {
     // If called as an event handler
     if (typeof fieldOrEvent !== 'string') {

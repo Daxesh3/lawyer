@@ -48,5 +48,8 @@ export interface IFeeLetterData {
     iban: string;
     reference: string;
   };
+  natureOfDocument: 'neutral' | 'bankFriendly' | 'borrowerFriendly';
+  facilityAgreementFile?: File;
+  facilityAgreementUpload?: string;
   [key: string]: any;
 }
