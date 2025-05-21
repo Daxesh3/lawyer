@@ -1,3 +1,5 @@
+import { IFeeLetterData } from '../../../types/feeLetterTypes';
+
 export const LETTER_TYPES = [
   {
     id: 1,
@@ -12,13 +14,49 @@ export const STEPS = [
   { label: 'Step 4' },
 ];
 
-export const INITIAL_FORM = {
+export const INITIAL_FORM: IFeeLetterData = {
   borrowerName: '',
   facilityAgentName: '',
+  securityAgentName: '',
+  globalCoordinatorName: '',
+  coordinatingBankName: '',
   currency: 'USD',
   amount: '',
   facilityType: '',
-  year: new Date().getFullYear().toString(),
+  currentYear: new Date().getFullYear().toString(),
+  letterType: 'facilityAgent',
+  feeTypes: {
+    facilityAgentFee: true,
+    securityAgentFee: false,
+    globalCoordinatorFee: false,
+    coordinatingBankFee: false,
+    upfrontFee: false,
+    mandatedLeadArrangerFee: false,
+    arrangerFee: false,
+  },
+  paymentModality: 'annual',
+  businessDays: '3',
+  governingLaw: 'English',
+  facilityAgentFeeAmount: '',
+  securityAgentFeeAmount: '',
+  globalCoordinatorFeeAmount: '',
+  coordinatingBankFeeAmount: '',
+  upfrontFeeAmount: '',
+  mandatedLeadArrangerFeeAmount: '',
+  arrangerFeeAmount: '',
+  setupFeeAmount: '',
+  increaseFeeAmount: '',
+  debtdomainFeeAmount: '',
+  increaseCount: '1',
+  hasFacilityAgentOptions: true,
+  bankDetails: {
+    accountBank: '',
+    accountHolder: '',
+    accountNumber: '',
+    sortCode: '',
+    iban: '',
+    reference: '',
+  },
 };
 
 export const CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'CHF'];

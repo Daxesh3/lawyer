@@ -1,9 +1,9 @@
 import React from 'react';
-import { FeeLetterData } from '../../../types/feeLetterTypes';
+import { IFeeLetterData } from '../../../types/feeLetterTypes';
 
 interface FeeLetterFormProps {
-  data: FeeLetterData;
-  onChange: (newData: Partial<FeeLetterData>) => void;
+  data: IFeeLetterData;
+  onChange: (newData: Partial<IFeeLetterData>) => void;
   onGenerate: () => void;
   isGenerating: boolean;
 }
@@ -20,7 +20,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
         const [parent, child] = name.split('.');
         onChange({
           [parent]: {
-            ...data[parent as keyof FeeLetterData],
+            ...data[parent as keyof IFeeLetterData],
             [child]: isChecked,
           },
         });
@@ -31,7 +31,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
       const [parent, child] = name.split('.');
       onChange({
         [parent]: {
-          ...data[parent as keyof FeeLetterData],
+          ...data[parent as keyof IFeeLetterData],
           [child]: value,
         },
       });
@@ -41,7 +41,7 @@ const FeeLetterForm: React.FC<FeeLetterFormProps> = ({ data, onChange, onGenerat
   };
 
   const handleLetterTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newLetterType = e.target.value as FeeLetterData['letterType'];
+    const newLetterType = e.target.value as IFeeLetterData['letterType'];
 
     // Reset all fee types
     const updatedFeeTypes = {

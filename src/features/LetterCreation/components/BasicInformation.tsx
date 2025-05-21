@@ -1,15 +1,9 @@
 import React from 'react';
 import { CURRENCIES } from '../constants/Letter.constants';
+import { IFeeLetterData } from '../../../types/feeLetterTypes';
 
 type Props = {
-  form: {
-    borrowerName: string;
-    facilityAgentName: string;
-    currency: string;
-    amount: string;
-    facilityType: string;
-    year: string;
-  };
+  form: IFeeLetterData;
   onChange: (field: string, value: string) => void;
 };
 

@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import FeeLetterForm from './FeeLetterForm';
 import FeeLetterOutput from './FeeLetterOutput';
-import { FeeLetterData } from '../../../types/feeLetterTypes';
+import { IFeeLetterData } from '../../../types/feeLetterTypes';
 
 const FeeLetter: React.FC = () => {
-  const [feeLetterData, setFeeLetterData] = useState<FeeLetterData>({
+  const [feeLetterData, setFeeLetterData] = useState<IFeeLetterData>({
     borrowerName: '',
     facilityAgentName: '',
     securityAgentName: '',
@@ -52,7 +52,7 @@ const FeeLetter: React.FC = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [hasGenerated, setHasGenerated] = useState(false);
 
-  const handleFormChange = useCallback((newData: Partial<FeeLetterData>) => {
+  const handleFormChange = useCallback((newData: Partial<IFeeLetterData>) => {
     setFeeLetterData((prevData) => ({
       ...prevData,
       ...newData,
@@ -73,22 +73,22 @@ const FeeLetter: React.FC = () => {
     }
   }, [feeLetterData]);
 
-  const memoizedFeeLetterForm = useMemo(() => (
-    <FeeLetterForm
-      data={feeLetterData}
-      onChange={handleFormChange}
-      onGenerate={handleGenerate}
-      isGenerating={isGenerating}
-    />
-  ), [feeLetterData, handleFormChange, handleGenerate, isGenerating]);
+  const memoizedFeeLetterForm = useMemo(
+    () => (
+      <FeeLetterForm
+        data={feeLetterData}
+        onChange={handleFormChange}
+        onGenerate={handleGenerate}
+        isGenerating={isGenerating}
+      />
+    ),
+    [feeLetterData, handleFormChange, handleGenerate, isGenerating]
+  );
 
-  const memoizedFeeLetterOutput = useMemo(() => (
-    <FeeLetterOutput 
-      data={feeLetterData} 
-      isGenerating={isGenerating} 
-      hasGenerated={hasGenerated} 
-    />
-  ), [feeLetterData, isGenerating, hasGenerated]);
+  const memoizedFeeLetterOutput = useMemo(
+    () => <FeeLetterOutput data={feeLetterData} isGenerating={isGenerating} hasGenerated={hasGenerated} />,
+    [feeLetterData, isGenerating, hasGenerated]
+  );
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
