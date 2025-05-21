@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Webcam from 'webcamjs';
-import { baseUrl } from '../../../shared/constants/constant';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../../shared/constants/constant';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -117,7 +117,7 @@ const Login = () => {
 
   const getAuthData = async (data_uri: string) => {
     try {
-      const response = await fetch(`${baseUrl}/login`, {
+      const response = await fetch(`${API_BASE_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ image: data_uri.replace('data:image/jpeg;base64,', '') }),

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
 import BankDetails from '../components/BankDetails';
 import BasicInformation from '../components/BasicInformation';
@@ -9,6 +9,7 @@ import { INITIAL_FORM, STEPS } from '../constants/Letter.constants';
 import OtherDetails from '../components/OtherDetails';
 import { motion } from 'framer-motion';
 import FeeLetterOutput from '../../FeeLetter/components/FeeLetterOutput';
+import { API_VITE_API_FACILITY_FILE_UPLOAD } from '../../../shared/constants/constant';
 
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -19,10 +20,33 @@ const LetterCreation = () => {
 
   const handleGenerate = async () => {
     setIsGenerating(true);
+    if (form.facilityAgreementFile) {
+      console.log('form.facilityAgreementFile', form.facilityAgreementFile);
+      await handleFacilityAgreementUpload(form.facilityAgreementFile);
+    }
     // Simulate API call with a delay
     await new Promise((resolve) => setTimeout(resolve, 7000));
     setIsGenerating(false);
     setHasGenerated(true);
+  };
+
+  const handleFacilityAgreementUpload = async (file: File) => {
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      const response = await fetch(API_VITE_API_FACILITY_FILE_UPLOAD, {
+        method: 'POST',
+        body: formData,
+      });
+      if (!response.ok) throw new Error('Upload failed');
+      const data = await response.json();
+      console.log('Upload success:', data);
+      // Optionally update form state with uploaded file info here
+    } catch (error) {
+      console.error('Upload error:', error);
+    }
   };
 
   const handleFormChange = (
