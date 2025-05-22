@@ -17,7 +17,9 @@ const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             className="w-full border border-[#454545] rounded-md px-3 py-2 text-[#FBFBFB] bg-[#191919] placeholder-gray-400 focus:outline-none focus:border-blue-400"
             placeholder="Enter borrower name"
             value={form.borrowerName}
-            onChange={(e) => onChange('borrowerName', e.target.value)}
+            onChange={(e) => {
+              onChange('borrowerName', e.target.value);
+            }}
           />
         </div>
         <div>
@@ -29,13 +31,16 @@ const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             className="w-full border border-[#454545] rounded-md px-3 py-2 text-[#FBFBFB] bg-[#191919] placeholder-gray-400 focus:outline-none focus:border-blue-400"
             placeholder="Enter facility agent name"
             value={form.facilityAgentName}
-            onChange={(e) => onChange('facilityAgentName', e.target.value)}
+            onChange={(e) => {
+              onChange('facilityAgentName', e.target.value);
+              onChange('bankDetails.accountHolder', e.target.value);
+            }}
           />
         </div>
       </div>
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-white mb-1">Currency</label>
+          <label className="block text-sm font-medium text-white mb-1">Facility Currency</label>
           <select
             className="w-full border border-[#454545] rounded-md px-3 py-2 text-[#FBFBFB] bg-[#191919] focus:outline-none focus:border-blue-400"
             value={form.currency}
@@ -50,7 +55,7 @@ const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
         </div>
         <div>
           <label className="block text-sm font-medium text-white mb-1">
-            Amount
+            Facility Amount
             <span className="text-red-500 text-xs align-super ml-1">*</span>
           </label>
           <input
@@ -65,12 +70,14 @@ const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             Type of Facility
             <span className="text-red-500 text-xs align-super ml-1">*</span>
           </label>
-          <input
-            className="w-full border border-[#454545] rounded-md px-3 py-2 text-[#FBFBFB] bg-[#191919] placeholder-gray-400 focus:outline-none focus:border-blue-400"
-            placeholder="E.g., Single Currency"
-            value={form.facilityType}
+          <select
+            className="w-full border border-[#454545] rounded-md px-3 py-2 text-[#FBFBFB] bg-[#191919] focus:outline-none focus:border-blue-400"
+            value={form.facilityType || 'Single Currency'}
             onChange={(e) => onChange('facilityType', e.target.value)}
-          />
+          >
+            <option value="Single Currency">Single Currency</option>
+            <option value="Multiple Currency">Multiple Currency</option>
+          </select>
         </div>
       </div>
     </div>

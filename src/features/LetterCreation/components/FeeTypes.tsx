@@ -25,7 +25,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
           {form.feeTypes.facilityAgentFee && (
             <div>
               <label htmlFor="facilityAgentFeeAmount" className="block text-sm font-medium text-white mb-1">
-                Facility Agent Fee Amount
+                Facility Agent Fee Amount <b>(per annum)</b>
                 <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <input
@@ -140,7 +140,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
 
             <div>
               <label htmlFor="increaseCount" className="block text-sm font-medium text-white mb-1">
-                Increase Count
+                Number of Free Increases
                 <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <input
@@ -315,6 +315,35 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
               />
             </div>
           )}
+        </div>
+        <div>
+          <p className="mb-2 block text-sm text-white">
+            Refundable Terms
+            <span className="text-red-500 text-xs align-super ml-1">*</span>
+          </p>
+          <label className="inline-flex items-center text-white mr-4">
+            <input
+              type="radio"
+              name="paymentModality"
+              value="annual"
+              checked={form.paymentModality === 'annual'}
+              onChange={(e) => onChange('paymentModality', e.target.value)}
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+            />
+            <span className="ml-2 text-sm text-white">Refundable</span>
+          </label>
+
+          <label className="inline-flex items-center text-white">
+            <input
+              type="radio"
+              name="paymentModality"
+              value="semiannual"
+              checked={form.paymentModality === 'semiannual'}
+              onChange={(e) => onChange('paymentModality', e.target.value)}
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+            />
+            <span className="ml-2 text-sm text-white">Non Refundable</span>
+          </label>
         </div>
       </div>
     </div>

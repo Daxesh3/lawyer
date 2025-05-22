@@ -24,7 +24,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
         </div>
         <div>
           <label htmlFor="bankDetails.accountHolder" className="block text-sm font-medium text-white mb-1">
-            Account Holder
+            Account Holder (if different from Facility Agent Name)
             <span className="text-red-500 text-xs align-super ml-1">*</span>
           </label>
           <input
@@ -90,7 +90,9 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             type="text"
             id="bankDetails.reference"
             name="bankDetails.reference"
-            value={form.bankDetails.reference}
+            readOnly
+            value={`${form.borrowerName}-${form.currency}${form.amount} ${form.facilityType}`}
+            defaultValue={`${form.borrowerName}-${form.currency} ${form.amount} ${form.facilityType}`}
             onChange={(e) => onChange('bankDetails.reference', e.target.value)}
             className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             placeholder="Enter reference"
