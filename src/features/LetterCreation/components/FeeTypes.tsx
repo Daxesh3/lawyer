@@ -26,6 +26,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             <div>
               <label htmlFor="facilityAgentFeeAmount" className="block text-sm font-medium text-white mb-1">
                 Facility Agent Fee Amount
+                <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <input
                 type="text"
@@ -92,6 +93,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             <div>
               <label htmlFor="setupFeeAmount" className="block text-sm font-medium text-white mb-1">
                 Setup Fee Amount
+                <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <input
                 type="text"
@@ -107,6 +109,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             <div>
               <label htmlFor="increaseFeeAmount" className="block text-sm font-medium text-white mb-1">
                 Increase Fee Amount
+                <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <input
                 type="text"
@@ -122,6 +125,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             <div>
               <label htmlFor="debtdomainFeeAmount" className="block text-sm font-medium text-white mb-1">
                 Debtdomain Fee Amount
+                <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <input
                 type="text"
@@ -137,6 +141,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             <div>
               <label htmlFor="increaseCount" className="block text-sm font-medium text-white mb-1">
                 Increase Count
+                <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <input
                 type="text"

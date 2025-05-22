@@ -9,7 +9,10 @@ const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
       <h2 className="text-xl font-bold mb-6 text-white">Basic Information</h2>
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-white mb-1">Borrower Name</label>
+          <label className="block text-sm font-medium text-white mb-1">
+            Borrower Name
+            <span className="text-red-500 text-xs align-super ml-1">*</span>
+          </label>
           <input
             className="w-full border border-[#454545] rounded-md px-3 py-2 text-[#FBFBFB] bg-[#191919] placeholder-gray-400 focus:outline-none focus:border-blue-400"
             placeholder="Enter borrower name"
@@ -18,7 +21,10 @@ const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-white mb-1">Facility Agent Name</label>
+          <label className="block text-sm font-medium text-white mb-1">
+            Facility Agent Name
+            <span className="text-red-500 text-xs align-super ml-1">*</span>
+          </label>
           <input
             className="w-full border border-[#454545] rounded-md px-3 py-2 text-[#FBFBFB] bg-[#191919] placeholder-gray-400 focus:outline-none focus:border-blue-400"
             placeholder="Enter facility agent name"
@@ -43,7 +49,10 @@ const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-white mb-1">Amount</label>
+          <label className="block text-sm font-medium text-white mb-1">
+            Amount
+            <span className="text-red-500 text-xs align-super ml-1">*</span>
+          </label>
           <input
             className="w-full border border-[#454545] rounded-md px-3 py-2 text-[#FBFBFB] bg-[#191919] placeholder-gray-400 focus:outline-none focus:border-blue-400"
             placeholder="Enter amount"
@@ -52,7 +61,10 @@ const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-white mb-1">Type of Facility</label>
+          <label className="block text-sm font-medium text-white mb-1">
+            Type of Facility
+            <span className="text-red-500 text-xs align-super ml-1">*</span>
+          </label>
           <input
             className="w-full border border-[#454545] rounded-md px-3 py-2 text-[#FBFBFB] bg-[#191919] placeholder-gray-400 focus:outline-none focus:border-blue-400"
             placeholder="E.g., Single Currency"

@@ -69,7 +69,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 mt-12">
       {hasGenerated && (
         <div className="flex justify-between">
           <button

@@ -10,6 +10,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
         <div>
           <label htmlFor="bankDetails.accountBank" className="block text-sm font-medium text-white mb-1">
             Account Bank
+            <span className="text-red-500 text-xs align-super ml-1">*</span>
           </label>
           <input
             type="text"
@@ -24,6 +25,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
         <div>
           <label htmlFor="bankDetails.accountHolder" className="block text-sm font-medium text-white mb-1">
             Account Holder
+            <span className="text-red-500 text-xs align-super ml-1">*</span>
           </label>
           <input
             type="text"
@@ -38,6 +40,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
         <div>
           <label htmlFor="bankDetails.accountNumber" className="block text-sm font-medium text-white mb-1">
             Account Number
+            <span className="text-red-500 text-xs align-super ml-1">*</span>
           </label>
           <input
             type="text"
@@ -52,6 +55,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
         <div>
           <label htmlFor="bankDetails.sortCode" className="block text-sm font-medium text-white mb-1">
             Sort Code
+            <span className="text-red-500 text-xs align-super ml-1">*</span>
           </label>
           <input
             type="text"
@@ -66,6 +70,7 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
         <div>
           <label htmlFor="bankDetails.iban" className="block text-sm font-medium text-white mb-1">
             IBAN
+            <span className="text-red-500 text-xs align-super ml-1">*</span>
           </label>
           <input
             type="text"

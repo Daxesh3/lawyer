@@ -64,7 +64,10 @@ const OtherDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
         </div>
         <div className="flex justify-between gap-4">
           <div className="w-1/2">
-            <label className="block text-sm font-medium text-white mb-1">Nature of Document</label>
+            <label className="block text-sm font-medium text-white mb-1">
+              Nature of Document
+              <span className="text-red-500 text-xs align-super ml-1">*</span>
+            </label>
             <select
               name="natureOfDocument"
               value={form.natureOfDocument || 'neutral'}
@@ -77,7 +80,10 @@ const OtherDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             </select>
           </div>
           <div className="w-1/2">
-            <label className="block text-sm font-medium text-white mb-1">Upload Facility Agreement</label>
+            <label className="block text-sm font-medium text-white mb-1">
+              Upload Facility Agreement
+              <span className="text-red-500 text-xs align-super ml-1">*</span>
+            </label>
             <div className="flex items-center space-x-3">
               <input
                 type="file"

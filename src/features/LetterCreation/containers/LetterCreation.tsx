@@ -108,21 +108,24 @@ const LetterCreation = () => {
         return basicFields.some((field) => !form[field as keyof typeof form]);
       }
       case 1: {
+        const hasAnyFeeType = Object.values(form.feeTypes).some((value) => value);
+        if (!hasAnyFeeType) return true;
+
         // Check if any selected fee type has an amount
-        const hasSelectedFeeTypes = Object.entries(form.feeTypes).some(([, value]) => value === true);
-        if (!hasSelectedFeeTypes) return true;
+        const hasFeeAmount = Object.entries(form.feeTypes).some(([key, value]) => {
+          if (!value) return false;
+          const amountField = `${key.replace('feeTypes.', '')}Amount`;
+          return !form[amountField];
+        });
 
-        // Check amounts for selected fee types
-        const selectedFeeTypes = Object.entries(form.feeTypes)
-          .filter(([, value]) => value === true)
-          .map(([key]) => key.replace('Fee', 'FeeAmount'));
+        // Only validate additional fee fields if hasFacilityAgentOptions is checked
+        if (form.hasFacilityAgentOptions) {
+          const additionalFeeFields = ['setupFeeAmount', 'increaseFeeAmount', 'debtdomainFeeAmount', 'increaseCount'];
+          const hasAdditionalFeeAmount = additionalFeeFields.some((field) => !form[field]);
+          return hasFeeAmount || hasAdditionalFeeAmount;
+        }
 
-        // Additional fee-related fields to check
-        const additionalFeeFields = ['setupFeeAmount', 'increaseFeeAmount', 'debtdomainFeeAmount', 'increaseCount'];
-
-        // Check both selected fee types and additional fee fields
-        const allFieldsToCheck = [...selectedFeeTypes, ...additionalFeeFields];
-        return allFieldsToCheck.some((field) => !form[field as keyof typeof form]);
+        return hasFeeAmount;
       }
       case 2: {
         const paymentFields = ['paymentModality', 'businessDays', 'governingLaw'];
@@ -134,7 +137,9 @@ const LetterCreation = () => {
       }
       case 4: {
         const otherFields = ['natureOfDocument'];
-        return otherFields.some((field) => !form[field as keyof typeof form]) || !form.facilityAgreementUpload;
+        const hasRequiredFields = otherFields.some((field) => !form[field as keyof typeof form]);
+        const hasFileUpload = form.facilityAgreementFile !== null && form.facilityAgreementFile !== undefined;
+        return hasRequiredFields || !hasFileUpload;
       }
       default:
         return false;
@@ -212,7 +217,7 @@ const LetterCreation = () => {
             {activeStep < 4 ? (
               <button
                 className={`bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold ${
-                  handleDisable() ? 'opacity-80' : ''
+                  handleDisable() ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
                 onClick={() => {
                   setActiveStep((s) => Math.min(STEPS.length - 1, s + 1));
@@ -223,9 +228,11 @@ const LetterCreation = () => {
               </button>
             ) : (
               <button
-                className="bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold"
+                className={`bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold ${
+                  handleDisable() ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
                 onClick={handleGenerate}
-                disabled={isGenerating}
+                disabled={isGenerating || handleDisable()}
               >
                 {isGenerating ? 'Generating...' : 'Generate Fee Letter'}
               </button>
