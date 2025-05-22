@@ -1,3 +1,5 @@
+import { Document, Packer, Paragraph, TextRun } from 'docx';
+import { saveAs } from 'file-saver';
 import React from 'react';
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
 import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
@@ -23,15 +25,55 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
     }
   };
 
+  const handleDownload = async () => {
+    try {
+      const content = document.getElementById('fee-letter-content');
+      if (!content) return;
+
+      // Split content into paragraphs and create document sections
+      const paragraphs = content.textContent?.split('\n').filter((line) => line.trim()) || [];
+
+      const doc = new Document({
+        sections: [
+          {
+            properties: {},
+            children: paragraphs.map(
+              (text) =>
+                new Paragraph({
+                  spacing: {
+                    before: 200,
+                    after: 200,
+                    line: 360, // 1.5 line spacing
+                  },
+                  children: [
+                    new TextRun({
+                      text: text.trim(),
+                      size: 24, // 12pt
+                      font: 'Calibri',
+                    }),
+                  ],
+                })
+            ),
+          },
+        ],
+      });
+
+      // Generate and save the document
+      const blob = await Packer.toBlob(doc);
+      saveAs(blob, 'Fee_Letter.docx');
+    } catch (error) {
+      console.error('Error generating DOCX:', error);
+    }
+  };
+
   return (
     <div className="space-y-4">
       {hasGenerated && (
         <div className="flex justify-end">
-          <button
-            onClick={handleCopy}
-            // className="px-4 py-2 text-sm text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            className="main-button primary-button max-w-fit mr-5"
-          >
+          <button className="main-button primary-button max-w-fit mr-5" onClick={handleDownload}>
+            Download
+          </button>
+          <button onClick={handleCopy} className="main-button primary-button max-w-fit mr-5">
             Copy to Clipboard
           </button>
         </div>
@@ -45,7 +87,10 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
             </div>
           </div>
         ) : null}
-        <div className="whitespace-pre-wrap font-mono text-sm bg-gray-50 p-4 rounded-lg min-h-[500px] mx-5">
+        <div
+          id="fee-letter-content"
+          className="whitespace-pre-wrap font-mono text-sm bg-gray-50 p-4 rounded-lg min-h-[500px] mx-5"
+        >
           {hasGenerated
             ? generateFeeLetterText(data, facilityUploadDetails)
             : 'Click Generate to create the fee letter'}
