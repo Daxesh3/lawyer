@@ -195,6 +195,7 @@ const LetterCreation = () => {
           isGenerating={isGenerating}
           hasGenerated={hasGenerated}
           facilityUploadDetails={facilityUploadDetails as IFacilityUploadDetails}
+          setHasGenerated={setHasGenerated}
         />
       )}
     </div>

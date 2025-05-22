@@ -16,11 +16,11 @@ export const Header: React.FC = () => {
         <div className="flex items-center space-x-2">
           {/* Avatar with initials */}
           <div className="w-8 h-8 rounded-full border border-gray-400 flex items-center justify-center bg-black text-white font-semibold">
-            MS
+            EB
           </div>
           <div className="flex flex-col">
-            <span className="font-medium text-sm">Mishil</span>
-            <span className="text-xs text-gray-400">Mishil@scaletech.xyz</span>
+            <span className="font-medium text-sm">Edmund Boyo</span>
+            <span className="text-xs text-gray-400">Edmund.Boyo@CliffordChance.com</span>
           </div>
           {/* Dropdown arrow */}
           <svg

@@ -9,6 +9,7 @@ interface FeeLetterOutputProps {
   data: IFeeLetterData;
   isGenerating: boolean;
   hasGenerated: boolean;
+  setHasGenerated: (hasGenerated: boolean) => void;
   facilityUploadDetails: IFacilityUploadDetails;
 }
 
@@ -16,6 +17,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
   data,
   isGenerating,
   hasGenerated,
+  setHasGenerated,
   facilityUploadDetails,
 }) => {
   const handleCopy = () => {
@@ -69,13 +71,21 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
   return (
     <div className="space-y-4">
       {hasGenerated && (
-        <div className="flex justify-end">
-          <button className="main-button primary-button max-w-fit mr-5" onClick={handleDownload}>
-            Download
+        <div className="flex justify-between">
+          <button
+            className="bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold ml-4"
+            onClick={() => setHasGenerated(false)}
+          >
+            Edit Fee Letter
           </button>
-          <button onClick={handleCopy} className="main-button primary-button max-w-fit mr-5">
-            Copy to Clipboard
-          </button>
+          <div className="flex">
+            <button className="main-button primary-button max-w-fit mr-5" onClick={handleDownload}>
+              Download
+            </button>
+            <button onClick={handleCopy} className="main-button primary-button max-w-fit mr-5">
+              Copy to Clipboard
+            </button>
+          </div>
         </div>
       )}
       <div className="relative">
@@ -89,7 +99,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
         ) : null}
         <div
           id="fee-letter-content"
-          className="whitespace-pre-wrap font-mono text-sm bg-gray-50 p-4 rounded-lg min-h-[500px] mx-5"
+          className="whitespace-pre-wrap font-mono text-sm bg-gray-50 p-4 rounded-lg min-h-[500px] mx-5 max-w-4xl"
         >
           {hasGenerated
             ? generateFeeLetterText(data, facilityUploadDetails)
