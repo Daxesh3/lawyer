@@ -100,7 +100,7 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
   output += `introduction 4. This ${getLetterTitle().replace(
     /\(|\)/g,
     ''
-  )} is a *{Finance Document}* for the purposes of the Facility Agreement.\n\n`;
+  )} is a *{Finance Documents}* for the purposes of the Facility Agreement.\n\n`;
 
   // Fees section based on letter type
   switch (data.letterType) {
@@ -311,6 +311,33 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
       };
       output = replaceDefinitionWordsWithSup(output);
     }
-    return output;
+
+    output = normalizeLetterTerms(output, facilityUploadDetails);
+
+    // Replace variations in letter content
   }
+
+  return output;
+};
+
+const buildDefinitionReplacementMap = (
+  definitions: string[],
+  variations: Record<string, string>
+): Record<string, string> => {
+  const replacements: Record<string, string> = {};
+  for (const [key, value] of Object.entries(variations)) {
+    if (definitions.includes(key)) {
+      replacements[value] = key;
+    } else if (definitions.includes(value)) {
+      replacements[key] = value;
+    }
+  }
+  return replacements;
+};
+
+// Replace in text
+const normalizeLetterTerms = (letterText: string, details: IFacilityUploadDetails): string => {
+  const replacements = buildDefinitionReplacementMap(details.definitions, details.variations);
+  const pattern = new RegExp(`\\b(${Object.keys(replacements).join('|')})\\b`, 'g');
+  return letterText.replace(pattern, (match) => replacements[match]);
 };
