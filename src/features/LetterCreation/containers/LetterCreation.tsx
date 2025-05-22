@@ -104,7 +104,7 @@ const LetterCreation = () => {
   const handleDisable = (): boolean => {
     switch (activeStep) {
       case 0: {
-        const basicFields = ['borrowerName', 'facilityAgentName', 'amount', 'facilityType'];
+        const basicFields = ['borrowerName', 'facilityAgentName', 'amount'];
         return basicFields.some((field) => !form[field as keyof typeof form]);
       }
       case 1: {

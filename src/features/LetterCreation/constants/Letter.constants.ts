@@ -23,7 +23,7 @@ export const INITIAL_FORM: IFeeLetterData = {
   coordinatingBankName: '',
   currency: 'USD',
   amount: '',
-  facilityType: '',
+  facilityType: 'Single Currency',
   currentYear: new Date().getFullYear().toString(),
   letterType: 'facilityAgent',
   feeTypes: {
