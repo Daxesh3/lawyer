@@ -179,7 +179,7 @@ const Login = () => {
       {isWebCam && <div id="my_camera" className="camera-container" />}
       {errorMessage && (
         <div className="error-container">
-          <button onClick={handleRetry} className="retry-button">
+          <button onClick={handleRetry} className="retry-button text-white mt-2">
             Retry
           </button>
         </div>
