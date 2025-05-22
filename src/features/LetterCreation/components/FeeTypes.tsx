@@ -39,7 +39,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             </div>
           )}
 
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <input
               type="checkbox"
               id="feeTypes.securityAgentFee"
@@ -51,7 +51,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             <label htmlFor="feeTypes.securityAgentFee" className="ml-2 block text-sm text-white">
               Security Agent Fee
             </label>
-          </div>
+          </div> */}
 
           {form.feeTypes.securityAgentFee && (
             <div>
@@ -151,7 +151,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex items-center">
             <input
               type="checkbox"
@@ -213,7 +213,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
               />
             </div>
           )}
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex items-center">

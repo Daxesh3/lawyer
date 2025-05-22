@@ -134,10 +134,17 @@ const Login = () => {
         setIsWebCam(false);
         handleRedirect();
       } else {
-        handleRedirect();
+        // handleRedirect();
+        setErrorMessage('No record found');
+        setNoRecordFound(true);
+        setIsLoading(false);
       }
     } catch (error) {
-      handleRedirect();
+      // handleRedirect();
+      console.error(error);
+      setErrorMessage('No record found');
+      setNoRecordFound(true);
+      setIsLoading(false);
     }
   };
 
@@ -172,7 +179,6 @@ const Login = () => {
       {isWebCam && <div id="my_camera" className="camera-container" />}
       {errorMessage && (
         <div className="error-container">
-          <p className="error-text">{errorMessage}</p>
           <button onClick={handleRetry} className="retry-button">
             Retry
           </button>
@@ -200,16 +206,19 @@ const Login = () => {
       {noRecordFound && (
         <div className="error-container">
           <p className="error-text">No record found</p>
-          <button onClick={handleRetry} className="retry-button">
-            Try Again
-          </button>
         </div>
       )}
       {!isWebCam && userName && (
-        <>
-          <h4 className="welcome-text">Welcome, {userName}!</h4>
-          {formData.imageData && <img src={formData.imageData} alt="Captured" />}
-        </>
+        <div className="auth-form max-w-[500px] mx-auto">
+          <h4 className="welcome-text text-center">Welcome, {userName}!</h4>
+          {formData.imageData && (
+            <img
+              src={formData.imageData}
+              alt="Captured"
+              className="w-[360px] h-[280px] rounded-[10px] border-2 border-[#00a5cbe6]"
+            />
+          )}
+        </div>
       )}
     </div>
   );
