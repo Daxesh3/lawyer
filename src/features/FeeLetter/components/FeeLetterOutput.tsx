@@ -23,7 +23,8 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ data, isGenerating, h
         <div className="flex justify-end">
           <button
             onClick={handleCopy}
-            className="px-4 py-2 text-sm text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            // className="px-4 py-2 text-sm text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="main-button primary-button max-w-fit mr-5"
           >
             Copy to Clipboard
           </button>
@@ -38,7 +39,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ data, isGenerating, h
             </div>
           </div>
         ) : null}
-        <div className="whitespace-pre-wrap font-mono text-sm bg-gray-50 p-4 rounded-lg min-h-[500px]">
+        <div className="whitespace-pre-wrap font-mono text-sm bg-gray-50 p-4 rounded-lg min-h-[500px] mx-5">
           {hasGenerated
             ? generateFeeLetterText(data, facilityUploadDetails)
             : 'Click Generate to create the fee letter'}
