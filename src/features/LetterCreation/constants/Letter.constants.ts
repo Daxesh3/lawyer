@@ -73,3 +73,12 @@ export const LETTER_OPTIONS = [
   'Upfront Fee Letter',
   'Mandated Lead Arranger Fee Letter',
 ];
+
+export const CARD_OPTIONS = [
+  'Facility Agreement',
+  'Guarantee',
+  'Security Assignment',
+  'Bank Account Charge',
+  'Fee Letters',
+  'Conditions Precedent',
+];

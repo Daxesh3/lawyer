@@ -1,15 +1,21 @@
 import React from 'react';
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
 import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
-import { facilityUploadDetails } from '../../../shared/constants/constant';
+import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
 
 interface FeeLetterOutputProps {
   data: IFeeLetterData;
   isGenerating: boolean;
   hasGenerated: boolean;
+  facilityUploadDetails: IFacilityUploadDetails;
 }
 
-const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ data, isGenerating, hasGenerated }) => {
+const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
+  data,
+  isGenerating,
+  hasGenerated,
+  facilityUploadDetails,
+}) => {
   const handleCopy = () => {
     const text = generateFeeLetterText(data, facilityUploadDetails);
     if (text) {

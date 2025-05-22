@@ -10,18 +10,19 @@ import OtherDetails from '../components/OtherDetails';
 import { motion } from 'framer-motion';
 import FeeLetterOutput from '../../FeeLetter/components/FeeLetterOutput';
 import { API_VITE_API_FACILITY_FILE_UPLOAD } from '../../../shared/constants/constant';
+import { IFacilityUploadDetails } from '../interface/Letter.interface';
 
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [selectedType, setSelectedType] = useState<number>(0);
   const [form, setForm] = useState<IFeeLetterData>(INITIAL_FORM);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [hasGenerated, setHasGenerated] = useState(true);
+  const [hasGenerated, setHasGenerated] = useState(false);
+  const [facilityUploadDetails, setFacilityUploadDetails] = useState<IFacilityUploadDetails>();
 
   const handleGenerate = async () => {
     setIsGenerating(true);
     if (form.facilityAgreementFile) {
-      console.log('form.facilityAgreementFile', form.facilityAgreementFile);
       await handleFacilityAgreementUpload(form.facilityAgreementFile);
     }
     // Simulate API call with a delay
@@ -41,8 +42,9 @@ const LetterCreation = () => {
         body: formData,
       });
       if (!response.ok) throw new Error('Upload failed');
-      const data = await response.json();
-      console.log('Upload success:', data);
+      const data: IFacilityUploadDetails = await response.json();
+      setFacilityUploadDetails(data);
+
       // Optionally update form state with uploaded file info here
     } catch (error) {
       console.error('Upload error:', error);
@@ -178,7 +180,12 @@ const LetterCreation = () => {
           </div>
         </div>
       ) : (
-        <FeeLetterOutput data={form} isGenerating={isGenerating} hasGenerated={hasGenerated} />
+        <FeeLetterOutput
+          data={form}
+          isGenerating={isGenerating}
+          hasGenerated={hasGenerated}
+          facilityUploadDetails={facilityUploadDetails as IFacilityUploadDetails}
+        />
       )}
     </div>
   );
