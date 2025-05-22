@@ -101,6 +101,46 @@ const LetterCreation = () => {
     }
   };
 
+  const handleDisable = (): boolean => {
+    switch (activeStep) {
+      case 0: {
+        const basicFields = ['borrowerName', 'facilityAgentName', 'amount', 'facilityType'];
+        return basicFields.some((field) => !form[field as keyof typeof form]);
+      }
+      case 1: {
+        // Check if any selected fee type has an amount
+        const hasSelectedFeeTypes = Object.entries(form.feeTypes).some(([, value]) => value === true);
+        if (!hasSelectedFeeTypes) return true;
+
+        // Check amounts for selected fee types
+        const selectedFeeTypes = Object.entries(form.feeTypes)
+          .filter(([, value]) => value === true)
+          .map(([key]) => key.replace('Fee', 'FeeAmount'));
+
+        // Additional fee-related fields to check
+        const additionalFeeFields = ['setupFeeAmount', 'increaseFeeAmount', 'debtdomainFeeAmount', 'increaseCount'];
+
+        // Check both selected fee types and additional fee fields
+        const allFieldsToCheck = [...selectedFeeTypes, ...additionalFeeFields];
+        return allFieldsToCheck.some((field) => !form[field as keyof typeof form]);
+      }
+      case 2: {
+        const paymentFields = ['paymentModality', 'businessDays', 'governingLaw'];
+        return paymentFields.some((field) => !form[field as keyof typeof form]);
+      }
+      case 3: {
+        const bankFields = ['accountBank', 'accountHolder', 'accountNumber', 'sortCode', 'iban'];
+        return bankFields.some((field) => !form.bankDetails[field as keyof typeof form.bankDetails]);
+      }
+      case 4: {
+        const otherFields = ['natureOfDocument'];
+        return otherFields.some((field) => !form[field as keyof typeof form]) || !form.facilityAgreementUpload;
+      }
+      default:
+        return false;
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center bg-black">
       {!hasGenerated ? (
@@ -171,10 +211,13 @@ const LetterCreation = () => {
             )}
             {activeStep < 4 ? (
               <button
-                className="bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold"
+                className={`bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold ${
+                  handleDisable() ? 'opacity-80' : ''
+                }`}
                 onClick={() => {
                   setActiveStep((s) => Math.min(STEPS.length - 1, s + 1));
                 }}
+                disabled={handleDisable()}
               >
                 NEXT
               </button>
