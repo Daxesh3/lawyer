@@ -106,7 +106,17 @@ const LetterCreation = () => {
   return (
     <div className="flex flex-col items-center justify-center bg-black">
       {!hasGenerated ? (
-        <div className="w-full max-w-4xl bg-[#3b3b3b] rounded-xl p-8 shadow-lg mt-12 min-h-[665px] flex flex-col justify-between ">
+        <div
+          className={`w-full max-w-4xl bg-[#3b3b3b] rounded-xl p-8 shadow-lg mt-12 min-h-[665px] flex flex-col justify-between relative`}
+        >
+          {isGenerating ? (
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center z-50">
+              <div className="flex flex-col items-center gap-4">
+                <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent" />
+                <p className="text-white text-lg font-medium">Generating Fee Letter...</p>
+              </div>
+            </div>
+          ) : null}
           <div>
             {/* Stepper */}
             <div className="flex items-center mb-8 w-full">
@@ -163,7 +173,6 @@ const LetterCreation = () => {
                 className="bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold"
                 onClick={() => {
                   setActiveStep((s) => Math.min(STEPS.length - 1, s + 1));
-                  console.log('first', form);
                 }}
               >
                 NEXT
