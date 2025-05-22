@@ -279,16 +279,19 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
       const clausePattern =
         /clause\s*(?:\*\s*)?(?:{\s*)?(?:{\s*)?([^{()]+)(?:}\s*)?(?:}\s*)?\(\s*([^)]+?)\s*\)(?:\s*}\s*)?(?:\*\s*)?/gi;
 
-      const replaceClauseWithNumber = (_match: string, clauseValue: string, title: string) => {
+      const replaceClauseWithNumber = (match: string, clauseValue: string, title: string) => {
+        // Extract the original 'clause' text (preserving case)
+        const originalClause = match.match(/^[Cc]lause/)?.[0] || 'Clause';
+
         const matchingClause = facilityUploadDetails.indexClauses.find(
           (clause) => clause.title.toLowerCase() === title.toLowerCase()
         );
 
         if (matchingClause) {
-          return `Clause {${matchingClause.clause}} (${matchingClause.title}) `;
+          return `${originalClause} {${matchingClause.clause}} (${matchingClause.title}) `;
         }
 
-        return _match;
+        return match;
       };
 
       output = output.replace(clausePattern, replaceClauseWithNumber);
