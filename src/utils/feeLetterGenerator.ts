@@ -275,35 +275,25 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
 
   if (facilityUploadDetails) {
     if (facilityUploadDetails.indexClauses.length > 0) {
-      // Regular expression to match both formats with any value:
-      // 1. Clause *{ {anyValue} (Title)}* - where anyValue can be:
-      //    - Numbers: 1, 1.2, 12, etc.
-      //    - Special chars: ¢, [3], etc.
-      //    - Any other characters
-      // 2. Clause {anyValue} (Title)
-      //   const clausePattern = /Clause\s*\*\s*\{\s*\{([^}]+)\}\s*\(([^)]+)\)\s*\}\s*\*/gi;
-      const clausePattern = /Clause\s*(?:\*\s*)?\{\s*\{?([^}]+?)\}?\s*\(([^)]+)\)\s*\}?\s*\*/gi;
+      // Updated regex to match all clause formats:
+      const clausePattern =
+        /clause\s*(?:\*\s*)?(?:{\s*)?(?:{\s*)?([^{()]+)(?:}\s*)?(?:}\s*)?\(\s*([^)]+?)\s*\)(?:\s*}\s*)?(?:\*\s*)?/gi;
 
-      // Function to find matching clause and replace with correct number
-      const replaceClauseWithNumber = (match: string, anyValue: string, title: string) => {
-        // Find matching clause from indexClauses (case-insensitive)
+      const replaceClauseWithNumber = (_match: string, clauseValue: string, title: string) => {
         const matchingClause = facilityUploadDetails.indexClauses.find(
           (clause) => clause.title.toLowerCase() === title.toLowerCase()
         );
 
         if (matchingClause) {
-          // Preserve the original format (with or without asterisks)
-
-          return `Clause {${matchingClause.clause}} (${matchingClause.title})`;
+          return `Clause {${matchingClause.clause}} (${matchingClause.title}) `;
         }
 
-        // If no match found, return the original pattern
-        return match;
+        return _match;
       };
 
-      // Replace all matching patterns in the output string
       output = output.replace(clausePattern, replaceClauseWithNumber);
     }
+
     return output;
   }
 };
