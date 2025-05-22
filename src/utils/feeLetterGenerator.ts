@@ -297,6 +297,20 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
       output = output.replace(clausePattern, replaceClauseWithNumber);
     }
 
+    if (facilityUploadDetails.definitions.length > 0) {
+      const replaceDefinitionWordsWithSup = (text: string): string => {
+        return text.replace(/\*\{([^}]+)\}\*/g, (_, defWord) => {
+          // Extract initials from the definition word
+          const initials = defWord
+            .split(/\s+/)
+            .map((word: string) => word[0]?.toUpperCase() || '')
+            .join('');
+
+          return `${defWord} ${initials}`;
+        });
+      };
+      output = replaceDefinitionWordsWithSup(output);
+    }
     return output;
   }
 };
