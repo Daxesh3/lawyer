@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
-import FeeLetter from './features/FeeLetter/components/FeeLetter';
+// import FeeLetter from './features/FeeLetter/components/FeeLetter';
 import AuthContainer from './features/Auth/containers/AuthContainer';
 import Layout from './hoc/layout/Layout';
 import Dashboard from './features/Dashboard/containers/Dashboard';
+import LetterCreation from './features/LetterCreation/containers/LetterCreation';
 
 function App() {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin') === 'true');
@@ -16,7 +17,7 @@ function App() {
       setIsLogin(newLoginState);
 
       // Only navigate if we're not already on the correct route
-      if (newLoginState && !location.pathname.startsWith('/home')) {
+      if (newLoginState && location.pathname === '/login') {
         navigate('/home', { replace: true });
       } else if (!newLoginState && location.pathname !== '/login') {
         navigate('/login', { replace: true });
@@ -45,7 +46,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/home" element={<Dashboard />} />
-            <Route path="/letter" element={<FeeLetter />} />
+            <Route path="/letter" element={<LetterCreation />} />
             <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </Layout>

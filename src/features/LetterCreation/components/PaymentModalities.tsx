@@ -4,7 +4,7 @@ import { IFeeTypesProps } from '../interface/Letter.interface';
 const PaymentModalities: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
   return (
     <div>
-      <h3 className="text-blue-400 font-semibold mb-1">Step 4.</h3>
+      <h3 className="text-blue-400 font-semibold mb-1">Step 3.</h3>
       <h2 className="text-xl font-bold mb-6 text-white">Payment Modalities</h2>
       <div>
         <label className="block text-sm font-medium text-white mb-2">Payment Schedule</label>

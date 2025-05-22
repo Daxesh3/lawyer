@@ -5,7 +5,7 @@ import { IFeeTypesProps } from '../interface/Letter.interface';
 const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
   return (
     <div>
-      <h3 className="text-blue-400 font-semibold mb-1">Step 2.</h3>
+      <h3 className="text-blue-400 font-semibold mb-1">Step 1.</h3>
       <h2 className="text-xl font-bold mb-6 text-white">Basic Information</h2>
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
@@ -27,7 +27,7 @@ const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-4 mb-4">
+      <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
           <label className="block text-sm font-medium text-white mb-1">Currency</label>
           <select

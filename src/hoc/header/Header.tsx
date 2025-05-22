@@ -1,12 +1,15 @@
 import React from 'react';
 import Logo from '../../assets/Images/Logo.png';
+import { Link } from 'react-router-dom';
 
 export const Header: React.FC = () => {
   return (
     <header className="bg-black text-white pt-8 pb-3 px-6 flex items-center justify-between w-full">
       {/* Left: Logo */}
       <div className="h-[60px]">
-        <img src={Logo} alt="Logo" className="h-full object-contain" />
+        <Link to="/home" className="block h-full">
+          <img src={Logo} alt="Logo" className="h-full object-contain" />
+        </Link>
       </div>
       {/* Right: User Info */}
       <div className="flex items-center space-x-3">

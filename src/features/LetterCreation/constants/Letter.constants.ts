@@ -8,7 +8,6 @@ export const LETTER_TYPES = [
 ];
 
 export const STEPS = [
-  { label: 'Letter Type' },
   { label: 'Basic Information' },
   { label: 'Fee Types' },
   { label: 'Payment Modalities' },

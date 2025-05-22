@@ -6,7 +6,7 @@ const OtherDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
 
   return (
     <div>
-      <h3 className="text-blue-400 font-semibold mb-1">Step 6.</h3>
+      <h3 className="text-blue-400 font-semibold mb-1">Step 5.</h3>
       <h2 className="text-xl font-bold mb-6 text-white">Other Details</h2>
       <div className="space-y-4">
         <div>

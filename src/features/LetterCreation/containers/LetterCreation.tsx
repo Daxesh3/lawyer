@@ -1,20 +1,18 @@
+import { motion } from 'framer-motion';
 import React, { useState } from 'react';
+import { API_VITE_API_FACILITY_FILE_UPLOAD } from '../../../shared/constants/constant';
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
+import FeeLetterOutput from '../../FeeLetter/components/FeeLetterOutput';
 import BankDetails from '../components/BankDetails';
 import BasicInformation from '../components/BasicInformation';
 import FeeTypes from '../components/FeeTypes';
-import LetterTypeStep from '../components/LetterType';
+import OtherDetails from '../components/OtherDetails';
 import PaymentModalities from '../components/PaymentModalities';
 import { INITIAL_FORM, STEPS } from '../constants/Letter.constants';
-import OtherDetails from '../components/OtherDetails';
-import { motion } from 'framer-motion';
-import FeeLetterOutput from '../../FeeLetter/components/FeeLetterOutput';
-import { API_VITE_API_FACILITY_FILE_UPLOAD } from '../../../shared/constants/constant';
 import { IFacilityUploadDetails } from '../interface/Letter.interface';
 
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [selectedType, setSelectedType] = useState<number>(0);
   const [form, setForm] = useState<IFeeLetterData>(INITIAL_FORM);
   const [isGenerating, setIsGenerating] = useState(false);
   const [hasGenerated, setHasGenerated] = useState(false);
@@ -151,24 +149,27 @@ const LetterCreation = () => {
             </div>
 
             {/* Step Content */}
-            {activeStep === 0 && <LetterTypeStep selected={selectedType} onSelect={setSelectedType} />}
-            {activeStep === 1 && <BasicInformation form={form} onChange={handleFormChange} />}
-            {activeStep === 2 && <FeeTypes form={form} onChange={handleFormChange} />}
-            {activeStep === 3 && <PaymentModalities form={form} onChange={handleFormChange} />}
-            {activeStep === 4 && <BankDetails form={form} onChange={handleFormChange} />}
-            {activeStep === 5 && <OtherDetails form={form} onChange={handleFormChange} />}
+            {activeStep === 0 && <BasicInformation form={form} onChange={handleFormChange} />}
+            {activeStep === 1 && <FeeTypes form={form} onChange={handleFormChange} />}
+            {activeStep === 2 && <PaymentModalities form={form} onChange={handleFormChange} />}
+            {activeStep === 3 && <BankDetails form={form} onChange={handleFormChange} />}
+            {activeStep === 4 && <OtherDetails form={form} onChange={handleFormChange} />}
           </div>
 
           {/* Navigation Buttons */}
           <div className="flex justify-between mt-10">
-            <button
-              className="bg-gray-600 text-white px-8 py-2 rounded-lg font-semibold"
-              disabled={activeStep === 0}
-              onClick={() => setActiveStep((s) => Math.max(0, s - 1))}
-            >
-              BACK
-            </button>
-            {activeStep < 5 ? (
+            {activeStep > 0 ? (
+              <button
+                className="bg-gray-600 text-white px-8 py-2 rounded-lg font-semibold"
+                disabled={activeStep === 0}
+                onClick={() => setActiveStep((s) => Math.max(0, s - 1))}
+              >
+                BACK
+              </button>
+            ) : (
+              <div />
+            )}
+            {activeStep < 4 ? (
               <button
                 className="bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold"
                 onClick={() => {
