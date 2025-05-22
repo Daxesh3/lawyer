@@ -16,7 +16,7 @@ const LetterCreation = () => {
   const [selectedType, setSelectedType] = useState<number>(0);
   const [form, setForm] = useState<IFeeLetterData>(INITIAL_FORM);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [hasGenerated, setHasGenerated] = useState(false);
+  const [hasGenerated, setHasGenerated] = useState(true);
 
   const handleGenerate = async () => {
     setIsGenerating(true);

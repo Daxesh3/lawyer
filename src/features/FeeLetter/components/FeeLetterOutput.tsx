@@ -1,6 +1,7 @@
 import React from 'react';
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
 import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
+import { facilityUploadDetails } from '../../../shared/constants/constant';
 
 interface FeeLetterOutputProps {
   data: IFeeLetterData;
@@ -10,8 +11,10 @@ interface FeeLetterOutputProps {
 
 const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ data, isGenerating, hasGenerated }) => {
   const handleCopy = () => {
-    const text = generateFeeLetterText(data);
-    navigator.clipboard.writeText(text);
+    const text = generateFeeLetterText(data, facilityUploadDetails);
+    if (text) {
+      navigator.clipboard.writeText(text);
+    }
   };
 
   return (
@@ -36,7 +39,9 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ data, isGenerating, h
           </div>
         ) : null}
         <div className="whitespace-pre-wrap font-mono text-sm bg-gray-50 p-4 rounded-lg min-h-[500px]">
-          {hasGenerated ? generateFeeLetterText(data) : 'Click Generate to create the fee letter'}
+          {hasGenerated
+            ? generateFeeLetterText(data, facilityUploadDetails)
+            : 'Click Generate to create the fee letter'}
         </div>
       </div>
     </div>
