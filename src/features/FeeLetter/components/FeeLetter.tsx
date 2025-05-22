@@ -90,6 +90,7 @@ const FeeLetter: React.FC = () => {
           data={feeLetterData}
           isGenerating={isGenerating}
           hasGenerated={hasGenerated}
+          setHasGenerated={setHasGenerated}
           facilityUploadDetails={{} as IFacilityUploadDetails}
         />
       </div>
