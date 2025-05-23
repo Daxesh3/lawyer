@@ -52,7 +52,7 @@ const PaymentModalities: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
 
       <div className="mt-4">
         <label htmlFor="businessDays" className="block text-sm font-medium text-white mb-1">
-          Business Days Prior Notice
+          Business Days For Payment
           <span className="text-red-500 text-xs align-super ml-1">*</span>
         </label>
         <input

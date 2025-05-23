@@ -76,7 +76,7 @@ const BasicInformation: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             onChange={(e) => onChange('facilityType', e.target.value)}
           >
             <option value="Single Currency">Single Currency</option>
-            <option value="Multiple Currency">Multiple Currency</option>
+            <option value="Multi Currency">Multi Currency</option>
           </select>
         </div>
       </div>

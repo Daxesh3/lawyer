@@ -91,8 +91,8 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             id="bankDetails.reference"
             name="bankDetails.reference"
             readOnly
-            value={`${form.borrowerName}-${form.currency}${form.amount} ${form.facilityType}`}
-            defaultValue={`${form.borrowerName}-${form.currency} ${form.amount} ${form.facilityType}`}
+            value={`${form.borrowerName}-${form.currency}${form.amount} ${form.facilityType} facility agreement`}
+            defaultValue={`${form.borrowerName}-${form.currency} ${form.amount} ${form.facilityType} facility agreement`}
             onChange={(e) => onChange('bankDetails.reference', e.target.value)}
             className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             placeholder="Enter reference"

@@ -40,6 +40,8 @@ function App() {
       {!isLogin ? (
         <Routes>
           <Route path="/login" element={<AuthContainer />} />
+          <Route path="/home" element={<Dashboard />} />
+          <Route path="/letter" element={<LetterCreation />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       ) : (
