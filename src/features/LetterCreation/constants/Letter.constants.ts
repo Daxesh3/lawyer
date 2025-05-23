@@ -74,10 +74,10 @@ export const LETTER_OPTIONS = [
 ];
 
 export const CARD_OPTIONS = [
-  'Facility Agreement',
-  'Guarantee',
-  'Security Assignment',
-  'Bank Account Charge',
-  'Fee Letters',
-  'Conditions Precedent',
+  { label: 'Facility Agreement', link: 'cover' },
+  { label: 'Fee Letters', link: 'letter' },
+  { label: 'Guarantee', link: 'guarantee' },
+  { label: 'Security Assignment', link: 'security-assignment' },
+  { label: 'Bank Account Charge', link: 'bank-account-charge' },
+  { label: 'Conditions Precedent', link: 'conditions-precedent' },
 ];
