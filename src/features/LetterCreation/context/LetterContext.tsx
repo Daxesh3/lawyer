@@ -11,9 +11,16 @@ interface ICoverFormData {
   facilityType: 'Revolving' | 'Term';
 }
 
+export interface ClauseSelection {
+  clause: number;
+  title: string;
+}
+
 interface ILetterContext {
   coverFormData: ICoverFormData;
   setCoverFormData: (data: ICoverFormData) => void;
+  letterIndexSelections: (ClauseSelection | null)[];
+  setLetterIndexSelections: (selections: (ClauseSelection | null)[]) => void;
 }
 
 const LetterContext = createContext<ILetterContext | undefined>(undefined);
@@ -30,7 +37,20 @@ export const LetterProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     facilityType: 'Term',
   });
 
-  return <LetterContext.Provider value={{ coverFormData, setCoverFormData }}>{children}</LetterContext.Provider>;
+  const [letterIndexSelections, setLetterIndexSelections] = useState<(ClauseSelection | null)[]>(Array(24).fill(null));
+
+  return (
+    <LetterContext.Provider
+      value={{
+        coverFormData,
+        setCoverFormData,
+        letterIndexSelections,
+        setLetterIndexSelections,
+      }}
+    >
+      {children}
+    </LetterContext.Provider>
+  );
 };
 
 export const useLetterContext = () => {

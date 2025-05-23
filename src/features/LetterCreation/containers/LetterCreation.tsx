@@ -12,6 +12,7 @@ import OtherDetails from '../components/OtherDetails';
 import PaymentModalities from '../components/PaymentModalities';
 import { INITIAL_FORM, STEPS } from '../constants/Letter.constants';
 import { IFacilityUploadDetails } from '../interface/Letter.interface';
+import LetterIndex from '../components/LetterIndex';
 
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -151,7 +152,7 @@ const LetterCreation = () => {
     <div className="flex flex-col items-center justify-center bg-black">
       {!hasGenerated ? (
         <div
-          className={`w-full max-w-4xl bg-[#3b3b3b] rounded-xl p-8 shadow-lg mt-12 min-h-[665px] flex flex-col justify-between relative`}
+          className={`w-full max-w-5xl bg-[#3b3b3b] rounded-xl p-8 shadow-lg mt-12 min-h-[665px] flex flex-col justify-between relative`}
         >
           {isGenerating ? (
             <div className="absolute inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center z-50">
@@ -192,7 +193,12 @@ const LetterCreation = () => {
             </div>
 
             {/* Step Content */}
-            {activeStep === 0 && <BasicInformation form={form} onChange={handleFormChange} />}
+            {activeStep === 0 && (
+              <>
+                <LetterIndex />
+                <BasicInformation form={form} onChange={handleFormChange} />
+              </>
+            )}
             {activeStep === 1 && <FeeTypes form={form} onChange={handleFormChange} />}
             {activeStep === 2 && <PaymentModalities form={form} onChange={handleFormChange} />}
             {activeStep === 3 && <BankDetails form={form} onChange={handleFormChange} />}
