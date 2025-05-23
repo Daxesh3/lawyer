@@ -138,8 +138,7 @@ const LetterCreation = () => {
       case 4: {
         const otherFields = ['natureOfDocument'];
         const hasRequiredFields = otherFields.some((field) => !form[field as keyof typeof form]);
-        const hasFileUpload = form.facilityAgreementFile !== null && form.facilityAgreementFile !== undefined;
-        return hasRequiredFields || !hasFileUpload;
+        return hasRequiredFields || !form.facilityAgreementUpload;
       }
       default:
         return false;
