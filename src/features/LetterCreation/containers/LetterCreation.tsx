@@ -169,14 +169,18 @@ const LetterCreation = () => {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-between mt-8">
-            <button
-              className="bg-gray-600 text-white px-8 py-2 rounded-lg font-semibold"
-              disabled={activeStep === 0}
-              onClick={() => setActiveStep((prev) => prev - 1)}
-            >
-              BACK
-            </button>
+          <div className={`flex mt-8 ${activeStep === 0 ? 'justify-center' : 'justify-between '}`}>
+            {activeStep > 0 ? (
+              <button
+                className="bg-gray-600 text-white px-8 py-2 rounded-lg font-semibold"
+                disabled={activeStep === 0}
+                onClick={() => setActiveStep((prev) => prev - 1)}
+              >
+                BACK
+              </button>
+            ) : (
+              <div />
+            )}
             {activeStep < STEPS.length - 1 ? (
               <button
                 className={`bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold ${
@@ -185,7 +189,7 @@ const LetterCreation = () => {
                 onClick={() => setActiveStep((prev) => prev + 1)}
                 disabled={handleDisable()}
               >
-                Next
+                {activeStep > 0 ? 'Next' : 'Upload'}
               </button>
             ) : (
               <button
