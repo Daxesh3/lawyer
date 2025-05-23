@@ -5,7 +5,6 @@ import letterGeneration from '../../../assets/Json/LetterGenerate.json';
 import { API_VITE_API_FACILITY_FILE_UPLOAD } from '../../../shared/constants/constant';
 import FeeLetterOutput from '../../FeeLetter/components/FeeLetterOutput';
 import BankDetails from '../components/BankDetails';
-import BasicInformation from '../components/BasicInformation';
 import FeeTypes from '../components/FeeTypes';
 import OtherDetails from '../components/OtherDetails';
 import PaymentModalities from '../components/PaymentModalities';
@@ -72,10 +71,8 @@ const LetterCreation = () => {
 
   const handleDisable = (): boolean => {
     switch (activeStep) {
-      case 0: {
-        const basicFields = ['borrowerName', 'facilityAgentName', 'amount'];
-        return basicFields.some((field) => !formData[field as keyof typeof formData]);
-      }
+      case 0:
+        return false;
       case 1: {
         const hasAnyFeeType = Object.values(formData.feeTypes).some((value) => value);
         if (!hasAnyFeeType) return true;
@@ -162,7 +159,7 @@ const LetterCreation = () => {
             {activeStep === 0 && (
               <>
                 <LetterIndex />
-                <BasicInformation form={formData} onChange={handleFormChange} />
+                {/* <BasicInformation form={formData} onChange={handleFormChange} /> */}
               </>
             )}
             {activeStep === 1 && <FeeTypes form={formData} onChange={handleFormChange} />}

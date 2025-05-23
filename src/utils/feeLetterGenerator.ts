@@ -274,30 +274,29 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
   output += `_______________\n\n`;
   output += `For and on behalf of \n${data.borrowerName}\n`;
 
+  if (data?.indexClauses.length > 0) {
+    // Updated regex to match all clause formats:
+    const clausePattern =
+      /clause\s*(?:\*\s*)?(?:{\s*)?(?:{\s*)?([^{()]+)(?:}\s*)?(?:}\s*)?\(\s*([^)]+?)\s*\)(?:\s*}\s*)?(?:\*\s*)?/gi;
+
+    const replaceClauseWithNumber = (match: string, clauseValue: string, title: string) => {
+      // Extract the original 'clause' text (preserving case)
+      const originalClause = match.match(/^[Cc]lause/)?.[0] || 'Clause';
+
+      const matchingClause = data.indexClauses.find(
+        (clause: any) => clause.title.toLowerCase() === title.toLowerCase()
+      );
+
+      if (matchingClause) {
+        return `${originalClause} {${matchingClause.clause}} (${matchingClause.title}) `;
+      }
+
+      return match;
+    };
+
+    output = output.replace(clausePattern, replaceClauseWithNumber);
+  }
   if (facilityUploadDetails) {
-    if (facilityUploadDetails.indexClauses.length > 0) {
-      // Updated regex to match all clause formats:
-      const clausePattern =
-        /clause\s*(?:\*\s*)?(?:{\s*)?(?:{\s*)?([^{()]+)(?:}\s*)?(?:}\s*)?\(\s*([^)]+?)\s*\)(?:\s*}\s*)?(?:\*\s*)?/gi;
-
-      const replaceClauseWithNumber = (match: string, clauseValue: string, title: string) => {
-        // Extract the original 'clause' text (preserving case)
-        const originalClause = match.match(/^[Cc]lause/)?.[0] || 'Clause';
-
-        const matchingClause = facilityUploadDetails.indexClauses.find(
-          (clause) => clause.title.toLowerCase() === title.toLowerCase()
-        );
-
-        if (matchingClause) {
-          return `${originalClause} {${matchingClause.clause}} (${matchingClause.title}) `;
-        }
-
-        return match;
-      };
-
-      output = output.replace(clausePattern, replaceClauseWithNumber);
-    }
-
     if (facilityUploadDetails.definitions.length > 0) {
       const replaceDefinitionWordsWithSup = (text: string): string => {
         return text.replace(/\*\{([^}]+)\}\*/g, (_, defWord) => {

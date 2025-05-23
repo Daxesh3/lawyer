@@ -3,11 +3,11 @@ import { saveAs } from 'file-saver';
 import Lottie from 'lottie-react';
 import React from 'react';
 import letterGeneration from '../../../assets/Json/LetterGenerate.json';
-import { IFeeLetterData } from '../../../types/feeLetterTypes';
-import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
 import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
+import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
+import { useLetterContext } from '../../LetterCreation/context/LetterContext';
+
 interface FeeLetterOutputProps {
-  data: IFeeLetterData;
   isGenerating: boolean;
   hasGenerated: boolean;
   setHasGenerated: (hasGenerated: boolean) => void;
@@ -15,14 +15,18 @@ interface FeeLetterOutputProps {
 }
 
 const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
-  data,
   isGenerating,
   hasGenerated,
   setHasGenerated,
   facilityUploadDetails,
 }) => {
+  const { formData, coverFormData, letterIndexSelections } = useLetterContext();
+
   const handleCopy = () => {
-    const text = generateFeeLetterText(data, facilityUploadDetails);
+    const text = generateFeeLetterText(
+      { ...formData, ...coverFormData, indexClauses: letterIndexSelections.filter(Boolean) },
+      facilityUploadDetails
+    );
     if (text) {
       navigator.clipboard.writeText(text);
     }
@@ -100,7 +104,10 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
           className="whitespace-pre-wrap font-mono text-sm bg-gray-50 p-4 rounded-lg min-h-[500px] mx-5 max-w-4xl"
         >
           {hasGenerated
-            ? generateFeeLetterText(data, facilityUploadDetails)
+            ? generateFeeLetterText(
+                { ...formData, ...coverFormData, indexClauses: letterIndexSelections.filter(Boolean) },
+                facilityUploadDetails
+              )
             : 'Click Generate to create the fee letter'}
         </div>
       </div>
