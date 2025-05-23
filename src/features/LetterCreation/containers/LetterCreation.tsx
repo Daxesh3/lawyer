@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
+import Lottie from 'lottie-react';
 import React, { useState } from 'react';
+import letterGeneration from '../../../assets/Json/LetterGenerate.json';
 import { API_VITE_API_FACILITY_FILE_UPLOAD } from '../../../shared/constants/constant';
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
 import FeeLetterOutput from '../../FeeLetter/components/FeeLetterOutput';
@@ -153,10 +155,7 @@ const LetterCreation = () => {
         >
           {isGenerating ? (
             <div className="absolute inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center z-50">
-              <div className="flex flex-col items-center gap-4">
-                <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-600 border-t-transparent" />
-                <p className="text-white text-lg font-medium">Generating Fee Letter...</p>
-              </div>
+              <Lottie animationData={letterGeneration} loop={true} />
             </div>
           ) : null}
           <div>

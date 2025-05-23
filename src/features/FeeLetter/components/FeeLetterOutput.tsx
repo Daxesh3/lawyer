@@ -1,10 +1,11 @@
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
+import Lottie from 'lottie-react';
 import React from 'react';
+import letterGeneration from '../../../assets/Json/LetterGenerate.json';
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
 import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
 import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
-
 interface FeeLetterOutputProps {
   data: IFeeLetterData;
   isGenerating: boolean;
@@ -91,10 +92,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
       <div className="relative">
         {isGenerating ? (
           <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75">
-            <div className="flex flex-col items-center space-y-4">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-              <p className="text-gray-600">Generating Fee Letter...</p>
-            </div>
+            <Lottie animationData={letterGeneration} loop={true} />
           </div>
         ) : null}
         <div

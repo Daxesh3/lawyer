@@ -1,7 +1,4 @@
 import { FC } from 'react';
-import Lottie from 'lottie-react';
-import loginAnimation from '../../../assets/Json/Login.json';
-// import loadingAnimation from '../../../assets/Json/whiteLogin.json';
 import Login from '../components/Login';
 import Logo from '../../../assets/Images/Logo.png';
 import Animation from '../components/Animation';
@@ -15,9 +12,8 @@ const AuthContainer: FC = () => {
           <div className="logo--wrapper">
             <img src={Logo} className="brand-logo" alt="logo" />
           </div>
-          <div className="animated-image pointer-events-none">
-            <Lottie animationData={loginAnimation} loop={true} style={{ height: '600px' }} />
-            {/* <Lottie animationData={loadingAnimation} loop={true} style={{ height: '600px' }} /> */}
+          <div className="h-[calc(100vh-300px)] flex justify-center items-center">
+            <h1 className="text-7xl text-white">First Draft</h1>
           </div>
         </div>
         <div className="auth-right-container">
