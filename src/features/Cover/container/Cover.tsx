@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLetterContext } from '../../LetterCreation/context/LetterContext';
+import { CURRENCIES } from '../../LetterCreation/constants/Letter.constants';
 
 interface ICoverForm {
   borrowerName: string;
@@ -8,9 +9,9 @@ interface ICoverForm {
   bookrunnerNames: string;
   facilityAgentName: string;
   currency: string;
-  quantum: string;
-  currencyType: 'Single Currency' | 'Multicurrency';
-  facilityType: 'Revolving' | 'Term';
+  amount: string;
+  facilityType: 'Single Currency' | 'Multicurrency';
+  termType: 'Revolving' | 'Term';
 }
 
 const Cover = () => {
@@ -22,9 +23,9 @@ const Cover = () => {
     bookrunnerNames: '',
     facilityAgentName: '',
     currency: '',
-    quantum: '',
-    currencyType: 'Single Currency',
-    facilityType: 'Term',
+    amount: '',
+    facilityType: 'Single Currency',
+    termType: 'Term',
   });
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const Cover = () => {
       coverFormData.bookrunnerNames ||
       coverFormData.facilityAgentName ||
       coverFormData.currency ||
-      coverFormData.quantum
+      coverFormData.amount
     ) {
       setForm(coverFormData);
     }
@@ -123,15 +124,19 @@ const Cover = () => {
                 What is the currency of the Facility?
                 <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
-              <input
-                type="text"
+              <select
                 name="currency"
                 value={form.currency}
                 onChange={handleChange}
                 required
                 className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
-                placeholder="Enter currency"
-              />
+              >
+                {CURRENCIES.map((cur) => (
+                  <option key={cur} value={cur}>
+                    {cur}
+                  </option>
+                ))}
+              </select>
             </div>
             <div>
               <label className="block text-sm font-medium text-white mb-1">
@@ -140,8 +145,8 @@ const Cover = () => {
               </label>
               <input
                 type="text"
-                name="quantum"
-                value={form.quantum}
+                name="amount"
+                value={form.amount}
                 onChange={handleChange}
                 required
                 className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
@@ -154,8 +159,8 @@ const Cover = () => {
                 <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <select
-                name="currencyType"
-                value={form.currencyType}
+                name="facilityType"
+                value={form.facilityType}
                 onChange={handleChange}
                 required
                 className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
@@ -170,8 +175,8 @@ const Cover = () => {
                 <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <select
-                name="facilityType"
-                value={form.facilityType}
+                name="termType"
+                value={form.termType}
                 onChange={handleChange}
                 required
                 className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"

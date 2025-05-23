@@ -3,28 +3,28 @@ import Lottie from 'lottie-react';
 import React, { useState } from 'react';
 import letterGeneration from '../../../assets/Json/LetterGenerate.json';
 import { API_VITE_API_FACILITY_FILE_UPLOAD } from '../../../shared/constants/constant';
-import { IFeeLetterData } from '../../../types/feeLetterTypes';
 import FeeLetterOutput from '../../FeeLetter/components/FeeLetterOutput';
 import BankDetails from '../components/BankDetails';
 import BasicInformation from '../components/BasicInformation';
 import FeeTypes from '../components/FeeTypes';
 import OtherDetails from '../components/OtherDetails';
 import PaymentModalities from '../components/PaymentModalities';
-import { INITIAL_FORM, STEPS } from '../constants/Letter.constants';
+import { STEPS } from '../constants/Letter.constants';
 import { IFacilityUploadDetails } from '../interface/Letter.interface';
 import LetterIndex from '../components/LetterIndex';
+import { useLetterContext } from '../context/LetterContext';
 
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [form, setForm] = useState<IFeeLetterData>(INITIAL_FORM);
   const [isGenerating, setIsGenerating] = useState(false);
   const [hasGenerated, setHasGenerated] = useState(false);
   const [facilityUploadDetails, setFacilityUploadDetails] = useState<IFacilityUploadDetails>();
+  const { formData, updateFormField } = useLetterContext();
 
   const handleGenerate = async () => {
     setIsGenerating(true);
-    if (form.facilityAgreementFile) {
-      await handleFacilityAgreementUpload(form.facilityAgreementFile);
+    if (formData.facilityAgreementFile) {
+      await handleFacilityAgreementUpload(formData.facilityAgreementFile);
     }
     // Simulate API call with a delay
     await new Promise((resolve) => setTimeout(resolve, 7000));
@@ -45,8 +45,6 @@ const LetterCreation = () => {
       if (!response.ok) throw new Error('Upload failed');
       const data: IFacilityUploadDetails = await response.json();
       setFacilityUploadDetails(data);
-
-      // Optionally update form state with uploaded file info here
     } catch (error) {
       console.error('Upload error:', error);
     }
@@ -62,45 +60,13 @@ const LetterCreation = () => {
       const { name, type } = e.target;
       if (type === 'checkbox') {
         const isChecked = (e.target as HTMLInputElement).checked;
-        if (name.includes('.')) {
-          const [parent, child] = name.split('.');
-          setForm((prev) => ({
-            ...prev,
-            [parent]: {
-              ...prev[parent],
-              [child]: isChecked,
-            },
-          }));
-        } else {
-          setForm((prev) => ({ ...prev, [name]: isChecked }));
-        }
-      } else if (name.includes('.')) {
-        const [parent, child] = name.split('.');
-        setForm((prev) => ({
-          ...prev,
-          [parent]: {
-            ...prev[parent],
-            [child]: e.target.value,
-          },
-        }));
+        updateFormField(name, isChecked);
       } else {
-        setForm((prev) => ({ ...prev, [name]: e.target.value }));
+        updateFormField(name, e.target.value);
       }
     } else {
       // If called directly with field and value
-      const field = fieldOrEvent;
-      if (field.includes('.')) {
-        const [parent, child] = field.split('.');
-        setForm((prev) => ({
-          ...prev,
-          [parent]: {
-            ...prev[parent],
-            [child]: value,
-          },
-        }));
-      } else {
-        setForm((prev) => ({ ...prev, [field]: value }));
-      }
+      updateFormField(fieldOrEvent, value ?? null);
     }
   };
 
@@ -108,23 +74,23 @@ const LetterCreation = () => {
     switch (activeStep) {
       case 0: {
         const basicFields = ['borrowerName', 'facilityAgentName', 'amount'];
-        return basicFields.some((field) => !form[field as keyof typeof form]);
+        return basicFields.some((field) => !formData[field as keyof typeof formData]);
       }
       case 1: {
-        const hasAnyFeeType = Object.values(form.feeTypes).some((value) => value);
+        const hasAnyFeeType = Object.values(formData.feeTypes).some((value) => value);
         if (!hasAnyFeeType) return true;
 
         // Check if any selected fee type has an amount
-        const hasFeeAmount = Object.entries(form.feeTypes).some(([key, value]) => {
+        const hasFeeAmount = Object.entries(formData.feeTypes).some(([key, value]) => {
           if (!value) return false;
           const amountField = `${key.replace('feeTypes.', '')}Amount`;
-          return !form[amountField];
+          return !formData[amountField];
         });
 
         // Only validate additional fee fields if hasFacilityAgentOptions is checked
-        if (form.hasFacilityAgentOptions) {
+        if (formData.hasFacilityAgentOptions) {
           const additionalFeeFields = ['setupFeeAmount', 'increaseFeeAmount', 'debtdomainFeeAmount', 'increaseCount'];
-          const hasAdditionalFeeAmount = additionalFeeFields.some((field) => !form[field]);
+          const hasAdditionalFeeAmount = additionalFeeFields.some((field) => !formData[field]);
           return hasFeeAmount || hasAdditionalFeeAmount;
         }
 
@@ -132,16 +98,16 @@ const LetterCreation = () => {
       }
       case 2: {
         const paymentFields = ['paymentModality', 'businessDays', 'governingLaw'];
-        return paymentFields.some((field) => !form[field as keyof typeof form]);
+        return paymentFields.some((field) => !formData[field as keyof typeof formData]);
       }
       case 3: {
         const bankFields = ['accountBank', 'accountHolder', 'accountNumber', 'sortCode', 'iban'];
-        return bankFields.some((field) => !form.bankDetails[field as keyof typeof form.bankDetails]);
+        return bankFields.some((field) => !formData.bankDetails[field as keyof typeof formData.bankDetails]);
       }
       case 4: {
         const otherFields = ['natureOfDocument'];
-        const hasRequiredFields = otherFields.some((field) => !form[field as keyof typeof form]);
-        return hasRequiredFields || !form.facilityAgreementUpload;
+        const hasRequiredFields = otherFields.some((field) => !formData[field as keyof typeof formData]);
+        return hasRequiredFields || !formData.facilityAgreementUpload;
       }
       default:
         return false;
@@ -196,39 +162,33 @@ const LetterCreation = () => {
             {activeStep === 0 && (
               <>
                 <LetterIndex />
-                <BasicInformation form={form} onChange={handleFormChange} />
+                <BasicInformation form={formData} onChange={handleFormChange} />
               </>
             )}
-            {activeStep === 1 && <FeeTypes form={form} onChange={handleFormChange} />}
-            {activeStep === 2 && <PaymentModalities form={form} onChange={handleFormChange} />}
-            {activeStep === 3 && <BankDetails form={form} onChange={handleFormChange} />}
-            {activeStep === 4 && <OtherDetails form={form} onChange={handleFormChange} />}
+            {activeStep === 1 && <FeeTypes form={formData} onChange={handleFormChange} />}
+            {activeStep === 2 && <PaymentModalities form={formData} onChange={handleFormChange} />}
+            {activeStep === 3 && <BankDetails form={formData} onChange={handleFormChange} />}
+            {activeStep === 4 && <OtherDetails form={formData} onChange={handleFormChange} />}
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-between mt-10">
-            {activeStep > 0 ? (
-              <button
-                className="bg-gray-600 text-white px-8 py-2 rounded-lg font-semibold"
-                disabled={activeStep === 0}
-                onClick={() => setActiveStep((s) => Math.max(0, s - 1))}
-              >
-                BACK
-              </button>
-            ) : (
-              <div />
-            )}
-            {activeStep < 4 ? (
+          <div className="flex justify-between mt-8">
+            <button
+              className="bg-gray-600 text-white px-8 py-2 rounded-lg font-semibold"
+              disabled={activeStep === 0}
+              onClick={() => setActiveStep((prev) => prev - 1)}
+            >
+              BACK
+            </button>
+            {activeStep < STEPS.length - 1 ? (
               <button
                 className={`bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold ${
                   handleDisable() ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
-                onClick={() => {
-                  setActiveStep((s) => Math.min(STEPS.length - 1, s + 1));
-                }}
+                onClick={() => setActiveStep((prev) => prev + 1)}
                 disabled={handleDisable()}
               >
-                NEXT
+                Next
               </button>
             ) : (
               <button
@@ -236,16 +196,16 @@ const LetterCreation = () => {
                   handleDisable() ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
                 onClick={handleGenerate}
-                disabled={isGenerating || handleDisable()}
+                disabled={handleDisable()}
               >
-                {isGenerating ? 'Generating...' : 'Generate Fee Letter'}
+                Generate Fee Letter
               </button>
             )}
           </div>
         </div>
       ) : (
         <FeeLetterOutput
-          data={form}
+          data={formData}
           isGenerating={isGenerating}
           hasGenerated={hasGenerated}
           facilityUploadDetails={facilityUploadDetails as IFacilityUploadDetails}
