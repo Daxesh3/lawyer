@@ -1,10 +1,10 @@
 import React from 'react';
 import { IFeeTypesProps } from '../interface/Letter.interface';
 
-const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
+const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange, screenIndex }) => {
   return (
     <div>
-      <h3 className="text-blue-400 font-semibold mb-1">Step 2.</h3>
+      <h3 className="text-blue-400 font-semibold mb-1">Step {screenIndex}.</h3>
       <h2 className="text-xl font-bold mb-6 text-white">Fee Types</h2>
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

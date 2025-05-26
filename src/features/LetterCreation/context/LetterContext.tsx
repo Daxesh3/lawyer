@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
 import { INITIAL_FORM } from '../constants/Letter.constants';
+import { Clause } from '../interface/Letter.interface';
 
 interface ICoverFormData {
   borrowerName: string;
@@ -25,7 +26,10 @@ interface ILetterContext {
   setLetterIndexSelections: (selections: (ClauseSelection | null)[]) => void;
   formData: IFeeLetterData;
   setFormData: (data: IFeeLetterData) => void;
-  updateFormField: (field: string, value: string | boolean | number | File | null) => void;
+  updateFormField: (
+    field: string,
+    value: string | boolean | number | File | null | Clause[] | string[] | Record<string, string>
+  ) => void;
 }
 
 const LetterContext = createContext<ILetterContext | undefined>(undefined);
@@ -45,7 +49,10 @@ export const LetterProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [letterIndexSelections, setLetterIndexSelections] = useState<(ClauseSelection | null)[]>(Array(24).fill(null));
   const [formData, setFormData] = useState<IFeeLetterData>(INITIAL_FORM);
 
-  const updateFormField = (field: string, value: string | boolean | number | File | null) => {
+  const updateFormField = (
+    field: string,
+    value: string | boolean | number | File | null | Clause[] | string[] | Record<string, string>
+  ) => {
     setFormData((prev) => {
       if (field.includes('.')) {
         const [parent, child] = field.split('.');

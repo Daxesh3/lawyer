@@ -87,7 +87,6 @@ const FeeLetter: React.FC = () => {
       <div className="bg-white rounded-lg shadow-md p-6 h-fit sticky top-4">
         <h2 className="text-xl font-bold mb-6 text-blue-900">Generated Fee Letter</h2>
         <FeeLetterOutput
-          data={feeLetterData}
           isGenerating={isGenerating}
           hasGenerated={hasGenerated}
           setHasGenerated={setHasGenerated}

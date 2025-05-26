@@ -2,11 +2,11 @@ import React from 'react';
 import { IFeeTypesProps } from '../interface/Letter.interface';
 import { useLetterContext } from '../context/LetterContext';
 
-const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
+const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange, screenIndex }) => {
   const { coverFormData } = useLetterContext();
   return (
     <div>
-      <h3 className="text-blue-400 font-semibold mb-1">Step 4.</h3>
+      <h3 className="text-blue-400 font-semibold mb-1">Step {screenIndex}.</h3>
       <h2 className="text-xl font-bold mb-6 text-white space-y-4">Bank Details</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>

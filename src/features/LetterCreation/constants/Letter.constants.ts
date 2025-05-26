@@ -59,7 +59,10 @@ export const INITIAL_FORM: IFeeLetterData = {
     reference: '',
   },
   natureOfDocument: 'neutral',
-  facilityAgreementUpload: true,
+  facilityAgreementUpload: '',
+  indexClauses: [],
+  definitions: [],
+  variations: {},
 };
 
 export const CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'CHF'];
