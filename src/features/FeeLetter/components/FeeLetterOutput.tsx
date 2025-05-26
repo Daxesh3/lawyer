@@ -103,12 +103,18 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
           id="fee-letter-content"
           className="whitespace-pre-wrap font-mono text-sm bg-gray-50 p-4 rounded-lg min-h-[500px] mx-5 max-w-4xl"
         >
-          {hasGenerated
-            ? generateFeeLetterText(
-                { ...formData, ...coverFormData, indexClauses: letterIndexSelections.filter(Boolean) },
-                facilityUploadDetails
-              )
-            : 'Click Generate to create the fee letter'}
+          {hasGenerated ? (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: generateFeeLetterText(
+                  { ...formData, ...coverFormData, indexClauses: letterIndexSelections.filter(Boolean) },
+                  facilityUploadDetails
+                ),
+              }}
+            />
+          ) : (
+            'Click Generate to create the fee letter'
+          )}
         </div>
       </div>
     </div>
