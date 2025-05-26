@@ -47,7 +47,7 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
   };
 
   // Header
-  output += `<p style=text-align:center;font-size:18px><b>${getLetterTitle()}</b></p>\n\n`;
+  output += `<p style=text-align:center;font-size:18px;font-weight:600>${getLetterTitle()}</p>\n\n`;
 
   // Addressee
   output += `To: ${data.borrowerName}\n\n`;

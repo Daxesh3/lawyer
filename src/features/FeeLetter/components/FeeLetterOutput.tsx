@@ -1,4 +1,4 @@
-import { Document, Packer, Paragraph, TextRun } from 'docx';
+import { Document, Packer, Paragraph, TextRun, AlignmentType } from 'docx';
 import { saveAs } from 'file-saver';
 import Lottie from 'lottie-react';
 import React from 'react';
@@ -34,33 +34,105 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
 
   const handleDownload = async () => {
     try {
-      const content = document.getElementById('fee-letter-content');
-      if (!content) return;
+      const contentElement = document.getElementById('fee-letter-content');
+      if (!contentElement) return;
 
-      // Split content into paragraphs and create document sections
-      const paragraphs = content.textContent?.split('\n').filter((line) => line.trim()) || [];
+      const htmlContent = contentElement.innerHTML;
+
+      // Function to parse HTML and create DOCX elements
+      const parseHtmlToDocx = (html: string): Paragraph[] => {
+        const docxElements: Paragraph[] = [];
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+
+        // Helper function to determine styles from parent elements
+        const getStylesFromAncestors = (node: Node): { bold: boolean; italics: boolean } => {
+          let bold = false;
+          let italics = false;
+          let currentNode = node.parentNode;
+          while (currentNode && currentNode !== tempDiv) {
+            if (currentNode.nodeType === Node.ELEMENT_NODE) {
+              const element = currentNode as HTMLElement;
+              if (element.tagName === 'B' || element.tagName === 'STRONG') bold = true;
+              if (element.tagName === 'I' || element.tagName === 'EM') italics = true;
+            }
+            currentNode = currentNode.parentNode;
+          }
+          return { bold, italics };
+        };
+
+        let currentParagraphRuns: TextRun[] = [];
+        let currentParagraphAlignment = AlignmentType.LEFT;
+
+        const createParagraph = (runs: TextRun[], alignment: typeof AlignmentType): Paragraph | null => {
+          if (runs.length === 0) return null;
+          return new Paragraph({
+            spacing: {
+              before: 200,
+              after: 200,
+              line: 360, // 1.5 line spacing
+            },
+            children: runs,
+            alignment: alignment,
+          });
+        };
+
+        const processNode = (node: Node) => {
+          if (node.nodeType === Node.TEXT_NODE && node.textContent) {
+            const styles = getStylesFromAncestors(node);
+            const segments = node.textContent.split('\n');
+
+            segments.forEach((segment, index) => {
+              if (segment) {
+                currentParagraphRuns.push(
+                  new TextRun({ text: segment, bold: styles.bold, italics: styles.italics, size: 20 })
+                );
+              }
+              if (index < segments.length - 1) {
+                currentParagraphRuns.push(new TextRun({ break: 1 }));
+              }
+            });
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            const element = node as HTMLElement;
+
+            if (element.tagName === 'BR') {
+              currentParagraphRuns.push(new TextRun({ break: 1 }));
+            } else if (element.tagName === 'P' || element.tagName === 'DIV') {
+              const paragraph = createParagraph(currentParagraphRuns, currentParagraphAlignment);
+              if (paragraph) docxElements.push(paragraph);
+
+              currentParagraphRuns = [];
+              currentParagraphAlignment =
+                element.style.textAlign === 'center' ? AlignmentType.CENTER : AlignmentType.LEFT;
+
+              element.childNodes.forEach((childNode) => processNode(childNode));
+
+              const blockParagraph = createParagraph(currentParagraphRuns, currentParagraphAlignment);
+              if (blockParagraph) docxElements.push(blockParagraph);
+
+              currentParagraphRuns = [];
+              currentParagraphAlignment = AlignmentType.LEFT;
+            } else {
+              element.childNodes.forEach((childNode) => processNode(childNode));
+            }
+          }
+        };
+
+        // Start processing from the top-level children of the temporary div
+        tempDiv.childNodes.forEach((node) => processNode(node));
+
+        // Push any remaining runs as the last paragraph
+        const lastParagraph = createParagraph(currentParagraphRuns, currentParagraphAlignment);
+        if (lastParagraph) docxElements.push(lastParagraph);
+
+        return docxElements;
+      };
 
       const doc = new Document({
         sections: [
           {
             properties: {},
-            children: paragraphs.map(
-              (text) =>
-                new Paragraph({
-                  spacing: {
-                    before: 200,
-                    after: 200,
-                    line: 360, // 1.5 line spacing
-                  },
-                  children: [
-                    new TextRun({
-                      text: text.trim(),
-                      size: 24, // 12pt
-                      font: 'Calibri',
-                    }),
-                  ],
-                })
-            ),
+            children: parseHtmlToDocx(htmlContent),
           },
         ],
       });

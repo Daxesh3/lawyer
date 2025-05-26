@@ -3,3 +3,11 @@
 
 export const API_BASE_URL = 'https://api-facex.9span.in';
 export const API_VITE_API_FACILITY_FILE_UPLOAD = 'https://api-social-ai.9span.in/api/document/parse';
+
+export function formatToUSD(value: number): string {
+  return value.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
+}
