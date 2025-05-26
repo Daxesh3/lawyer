@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLetterContext } from '../../LetterCreation/context/LetterContext';
 import { CURRENCIES } from '../../LetterCreation/constants/Letter.constants';
+import { formatToUSD } from '../../../shared/constants/constant';
 
 interface ICoverForm {
   borrowerName: string;
@@ -44,7 +45,7 @@ const Cover = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm((prev) => ({ ...prev, [name]: name === 'amount' ? formatToUSD(value) : value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
