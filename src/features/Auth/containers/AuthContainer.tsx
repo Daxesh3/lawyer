@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import Login from '../components/Login';
 import Logo from '../../../assets/Images/Logo.png';
 import Animation from '../components/Animation';
+import LoginForm from '../components/LoginForm';
 
 const AuthContainer: FC = () => {
   return (
@@ -18,7 +18,8 @@ const AuthContainer: FC = () => {
           </div>
         </div>
         <div className="auth-right-container">
-          <Login />
+          {/* <Login /> */}
+          <LoginForm />
         </div>
       </div>
     </>

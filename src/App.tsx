@@ -6,7 +6,7 @@ import Layout from './hoc/layout/Layout';
 import Dashboard from './features/Dashboard/containers/Dashboard';
 import LetterCreation from './features/LetterCreation/containers/LetterCreation';
 import { LetterProvider } from './features/LetterCreation/context/LetterContext';
-import Cover from './features/Cover/container/Cover';
+import Cover from './features/FacilityType/container/Cover';
 
 function App() {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin') === 'true');

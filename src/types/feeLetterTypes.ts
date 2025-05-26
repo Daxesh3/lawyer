@@ -49,7 +49,7 @@ export interface IFeeLetterData {
     reference: string;
   };
   natureOfDocument: 'neutral' | 'bankFriendly' | 'borrowerFriendly';
-  facilityAgreementUpload: boolean;
+  facilityAgreementUpload: string;
   facilityAgreementFile?: File;
   [key: string]: any;
 }

@@ -8,7 +8,6 @@ export const LETTER_TYPES = [
 ];
 
 export const STEPS = [
-  { label: 'Basic Information' },
   { label: 'Fee Types' },
   { label: 'Payment Modalities' },
   { label: 'Bank Details' },
@@ -59,7 +58,10 @@ export const INITIAL_FORM: IFeeLetterData = {
     reference: '',
   },
   natureOfDocument: 'neutral',
-  facilityAgreementUpload: true,
+  facilityAgreementUpload: '',
+  indexClauses: [],
+  definitions: [],
+  variations: {},
 };
 
 export const CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'CHF'];

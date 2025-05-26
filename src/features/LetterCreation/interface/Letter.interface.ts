@@ -1,6 +1,7 @@
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
 
 export interface IFeeTypesProps {
+  screenIndex: number;
   form: IFeeLetterData;
   onChange: (field: string, value: string | boolean | number | File | null) => void;
 }

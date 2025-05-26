@@ -10,7 +10,6 @@ import OtherDetails from '../components/OtherDetails';
 import PaymentModalities from '../components/PaymentModalities';
 import { STEPS } from '../constants/Letter.constants';
 import { IFacilityUploadDetails } from '../interface/Letter.interface';
-import LetterIndex from '../components/LetterIndex';
 import { useLetterContext } from '../context/LetterContext';
 
 const LetterCreation = () => {
@@ -73,9 +72,7 @@ const LetterCreation = () => {
 
   const handleDisable = (): boolean => {
     switch (activeStep) {
-      case 0:
-        return false;
-      case 1: {
+      case 0: {
         const hasAnyFeeType = Object.values(formData.feeTypes).some((value) => value);
         if (!hasAnyFeeType) return true;
 
@@ -95,18 +92,18 @@ const LetterCreation = () => {
 
         return hasFeeAmount;
       }
-      case 2: {
+      case 1: {
         const paymentFields = ['paymentModality', 'businessDays', 'governingLaw'];
         return paymentFields.some((field) => !formData[field as keyof typeof formData]);
       }
-      case 3: {
+      case 2: {
         const bankFields = ['accountBank', 'accountHolder', 'accountNumber', 'sortCode', 'iban'];
         return bankFields.some((field) => !formData.bankDetails[field as keyof typeof formData.bankDetails]);
       }
-      case 4: {
+      case 3: {
         const otherFields = ['natureOfDocument'];
         const hasRequiredFields = otherFields.some((field) => !formData[field as keyof typeof formData]);
-        return hasRequiredFields || !formData.facilityAgreementUpload;
+        return hasRequiredFields;
       }
       default:
         return false;
@@ -162,20 +159,14 @@ const LetterCreation = () => {
             </div>
 
             {/* Step Content */}
-            {activeStep === 0 && (
-              <>
-                <LetterIndex />
-                {/* <BasicInformation form={formData} onChange={handleFormChange} /> */}
-              </>
-            )}
-            {activeStep === 1 && <FeeTypes form={formData} onChange={handleFormChange} />}
-            {activeStep === 2 && <PaymentModalities form={formData} onChange={handleFormChange} />}
-            {activeStep === 3 && <BankDetails form={formData} onChange={handleFormChange} />}
-            {activeStep === 4 && <OtherDetails form={formData} onChange={handleFormChange} />}
+            {activeStep === 0 && <FeeTypes form={formData} onChange={handleFormChange} screenIndex={1} />}
+            {activeStep === 1 && <PaymentModalities form={formData} onChange={handleFormChange} screenIndex={2} />}
+            {activeStep === 2 && <BankDetails form={formData} onChange={handleFormChange} screenIndex={3} />}
+            {activeStep === 3 && <OtherDetails form={formData} onChange={handleFormChange} screenIndex={4} />}
           </div>
 
           {/* Navigation Buttons */}
-          <div className={`flex mt-8 ${activeStep === 0 ? 'justify-center' : 'justify-between '}`}>
+          <div className={`flex mt-8 justify-between`}>
             {activeStep > 0 ? (
               <button
                 className="bg-gray-600 text-white px-8 py-2 rounded-lg font-semibold"
@@ -195,7 +186,7 @@ const LetterCreation = () => {
                 onClick={() => setActiveStep((prev) => prev + 1)}
                 disabled={handleDisable()}
               >
-                {activeStep > 0 ? 'Next' : 'Upload'}
+                Next
               </button>
             ) : (
               <button
