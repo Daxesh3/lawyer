@@ -32,7 +32,7 @@ const LetterCreation = () => {
   };
 
   const handleFacilityAgreementUpload = async (file: File) => {
-    if (!file) return;
+    if (!file || file) return;
 
     const formData = new FormData();
     formData.append('file', file);

@@ -71,7 +71,7 @@ const OtherDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
           </div>
         </div>
         <div className="flex gap-4">
-          <div className="w-2/3">
+          <div className="w-1/2">
             <label className="block text-sm font-medium text-white mb-1">Governing Law</label>
             <input
               type="text"
@@ -96,6 +96,46 @@ const OtherDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
               Include Facility Agreement
             </label>
           </div>
+        </div>
+        <div className="flex items-center ml-2">
+          <input
+            type="file"
+            accept=".docx,.pdf"
+            id="facilityAgreementUploadFile"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files && e.target.files[0];
+              if (file) {
+                const allowedTypes = [
+                  'application/pdf',
+                  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                ];
+                if (!allowedTypes.includes(file.type)) {
+                  onChange('facilityAgreementUploadFile', null);
+                  e.target.value = '';
+                  return;
+                }
+                onChange('facilityAgreementUploadFile', file);
+                onChange('facilityAgreementUpload', file.name);
+              }
+            }}
+          />
+          <label
+            htmlFor="facilityAgreementUploadFile"
+            className="flex w-fit items-center bg-blue-400 text-[#FBFBFB] p-2 rounded-md border border-[#454545] cursor-pointer hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors !ml-0"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Upload Term Sheet
+          </label>
+          {form.facilityAgreementUpload && (
+            <div className="flex items-center">
+              <p className="text-[#FBFBFB] text-xs underline truncate max-w-[240px] opacity-80 ml-2">
+                {form.facilityAgreementUpload}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
