@@ -47,7 +47,7 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
   };
 
   // Header
-  output += `${getLetterTitle()}\n\n`;
+  output += `<p style=text-align:center;font-size:18px;font-weight:600><b>${getLetterTitle()}</b></p>\n\n`;
 
   // Addressee
   output += `To: ${data.borrowerName}\n\n`;
@@ -62,7 +62,7 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
   output += `Dear Sir/Madam\n\n`;
 
   // Header
-  output += `${data.currency}${data.amount}${data.facilityType} (the "Facility Agreement") dated on or about the date hereof and made between, amongst others, ${data.borrowerName} as borrower (the "Borrower") and ${data.facilityAgentName} as facility agent (the "Facility Agent")\n\n`;
+  output += `<b>${data.currency} ${data.amount} ${data.facilityType} (the "Facility Agreement") dated on or about the date hereof and made between, amongst others, ${data.borrowerName} as borrower (the "Borrower") and ${data.facilityAgentName} as facility agent (the "Facility Agent")</b>\n\n`;
 
   // Introduction
   output += `1. We refer to the Facility Agreement.\n\n`;
@@ -110,35 +110,35 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
         output += `5. You shall pay to the Facility Agent (for its own account):\n\n`;
 
         if (data.setupFeeAmount) {
-          output += `(a) a one-off set-up fee in an amount of ${data.currency} ${data.setupFeeAmount} (the "Set-Up Fee"),\n\n`;
+          output += `(a) a one-off set-up fee in an amount of ${data.currency} ${data.setupFeeAmount} (the <b>"Set-Up Fee"</b>),\n\n`;
         }
 
-        output += `(b) a fee of ${data.currency}${data.facilityAgentFeeAmount} per annum, which is payable in advance, for the Facility Agent acting as facility agent pursuant to the provisions of the Facility Agreement (the "Facility Agent Fee"),\n\n`;
+        output += `(b) a fee of ${data.currency}${data.facilityAgentFeeAmount} per annum, which is payable in advance, for the Facility Agent acting as facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>),\n\n`;
 
         if (data.increaseFeeAmount) {
           output += `(c) a fee of ${data.currency} ${data.increaseFeeAmount} if the Borrower exercises the Increase Option more than ${data.increaseCount} times (the "Increase Fee"), and\n\n`;
         }
 
         if (data.debtdomainFeeAmount) {
-          output += `(d) a fee of ${data.currency}${data.debtdomainFeeAmount} per annum, which is payable in advance, for the use of a publishing system known as Debtdomain to assist in certain administrative tasks specific to the Facility Agent under the terms of the Facility Agreement (the "Debtdomain Fee"). The Facility Agent reserves the right to increase the Debtdomain Fee at its discretion if Debtdomain charges increase provided always that such increase of the Debtdomain Fee shall be more than the increase of Debtdomain charges.\n\n`;
+          output += `(d) a fee of ${data.currency}${data.debtdomainFeeAmount} per annum, which is payable in advance, for the use of a publishing system known as Debtdomain to assist in certain administrative tasks specific to the Facility Agent under the terms of the Facility Agreement(the  <b>"Debtdomain Fee"</b>). The Facility Agent reserves the right to increase the Debtdomain Fee at its discretion if Debtdomain charges increase provided always that such increase of the Debtdomain Fee shall be more than the increase of Debtdomain charges.\n\n`;
         }
 
-        output += `(e) The Set-Up Fee, Facility Agent Fee, Increase Fee and Debtdomain Fee shall hereinafter be referred to as the "Agency Fees".\n\n`;
+        output += `(e) The Set-Up Fee, Facility Agent Fee, Increase Fee and Debtdomain Fee shall hereinafter be referred to as the <b>"Agency Fees"</b>.\n\n`;
       } else {
-        output += `Only one type: facility agent pursuant to the provisions of the Facility Agreement (an "Facility Agent Fee").\n\n`;
+        output += `Only one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>).\n\n`;
       }
       break;
 
     case 'securityAgent':
-      output += `5. You shall pay to the Security Agent (for its own account) a fee of ${data.currency} ${data.securityAgentFeeAmount} per annum, which is payable in advance, for the Security Agent acting as security agent pursuant to the provisions of the Facility Agreement (the "Security Agent Fee").\n\n`;
+      output += `5. You shall pay to the Security Agent (for its own account) a fee of ${data.currency} ${data.securityAgentFeeAmount} per annum, which is payable in advance, for the Security Agent acting as security agent pursuant to the provisions of the Facility Agreement (the <b>"Security Agent Fee"</b>).\n\n`;
       break;
 
     case 'globalCoordinator':
-      output += `5. You shall pay to the Global Co-Ordinator (for its own account) a flat fee of ${data.currency} ${data.globalCoordinatorFeeAmount} for the Global Co-Ordinator acting as global co-ordinator pursuant to the provisions of the Facility Agreement (the "Global Co-Ordinator Bank Fee").\n\n`;
+      output += `5. You shall pay to the Global Co-Ordinator (for its own account) a flat fee of ${data.currency} ${data.globalCoordinatorFeeAmount} for the Global Co-Ordinator acting as global co-ordinator pursuant to the provisions of the Facility Agreement (the <b>"Global Co-Ordinator Bank Fee"</b>).\n\n`;
       break;
 
     case 'coordinatingBank':
-      output += `5. You shall pay to the Co-Ordinating Bank (for its own account) a flat fee of ${data.currency}${data.coordinatingBankFeeAmount} for the CoOrdinating Bank acting as co-ordinating bank pursuant to the provisions of the Facility Agreement (the "CoOrdinating Bank Fee").\n\n`;
+      output += `5. You shall pay to the Co-Ordinating Bank (for its own account) a flat fee of ${data.currency}${data.coordinatingBankFeeAmount} for the CoOrdinating Bank acting as co-ordinating bank pursuant to the provisions of the Facility Agreement (the <b>"Coordinating Bank Fee"</b>).\n\n`;
       break;
 
     case 'upfront':
@@ -150,12 +150,12 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
       break;
 
     case 'arranger':
-      output += `5. You shall pay to the Facility Agent (for the account of the *{Arrangers}*) a fee of ${data.currency} ${data.arrangerFeeAmount} for the *{Arrangers}* under the Facility Agreement (an "Arranger Fee"). Each *{Arranger}* shall be entitled to its pro rata share of the Arranger Fee. Its pro rata share shall be equal to the proportion its Commitment bears to the Total Commitment of all the *{Arrangers}*\n\n`;
+      output += `5. You shall pay to the Facility Agent (for the account of the *{Arrangers}*) a fee of ${data.currency} ${data.arrangerFeeAmount} for the *{Arrangers}* under the Facility Agreement (an <b>"Arranger Fee"</b>). Each *{Arranger}* shall be entitled to its pro rata share of the Arranger Fee. Its pro rata share shall be equal to the proportion its Commitment bears to the Total Commitment of all the *{Arrangers}*\n\n`;
       break;
 
     default:
       // Default to facility agent
-      output += `Only one type: facility agent pursuant to the provisions of the Facility Agreement (an "Facility Agent Fee").\n\n`;
+      output += `Only one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>).\n\n`;
   }
 
   // Payment Modalities based on letter type
@@ -163,14 +163,14 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
     case 'facilityAgent':
       if (data.hasFacilityAgentOptions) {
         output += `Payment Modalities Facility Agent (More than one type)\n6. The Agency Fees shall become due and payable as set out below.\n`;
-        output += `(a) The Set-Up Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date").\n`;
+        output += `(a) The Set-Up Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the <b>"First Payment Date"</b>).\n`;
 
         if (data.paymentModality === 'annual') {
-          output += `(b) The first payment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "FirstPayment Date")][the First Payment Date]. Each subsequent payment of the Facility Agent Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of(i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as facility agent and (iii) the date of prepayment of all *{Loans}* and cancellation - of all *{Commitments}*, in each case under the Facility Agreement (the "Final Payment Date").\n`;
+          output += `(b) The first payment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "FirstPayment Date")][the First Payment Date]. Each subsequent payment of the Facility Agent Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of(i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as facility agent and (iii) the date of prepayment of all *{Loans}* and cancellation - of all *{Commitments}*, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).\n`;
         } else if (data.paymentModality === 'semiannual') {
-          output += `(b) The Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before the First Payment Date. Thereafter any subsequent installment of the FacilityAgent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of (i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as agent and (iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the "Final Payment Date").\n`;
+          output += `(b) The Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before the First Payment Date. Thereafter any subsequent installment of the FacilityAgent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of (i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as agent and (iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).\n`;
         } else if (data.paymentModality === 'quarterly') {
-          output += `(b) The Facility Agent Fee shall be payable to us in equal quarterly instalments. Each instrument shall amount to a quarter of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date")] [the First Payment Date]. Thereafter any subsequent installment of the Facility Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of (i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as agent and (iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the "Final Payment Date").\n`;
+          output += `(b) The Facility Agent Fee shall be payable to us in equal quarterly instalments. Each instrument shall amount to a quarter of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date")] [the First Payment Date]. Thereafter any subsequent installment of the Facility Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of (i) the *{Final Maturity Date}*, (ii) the date we resign or are replaced as agent and (iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).\n`;
         }
 
         output += `\n(c) The Increase Fee shall be payable to the Facility Agent on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after the Increase Date and on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after each subsequent Increase Date.\n`;
@@ -216,7 +216,7 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
 
   // Bank account details
   if (data.bankDetails.accountBank || data.bankDetails.accountNumber) {
-    output += `7. All payments made by you under this Fee Letter must be made in immediately available, freely transferable and cleared funds by crediting the following bank account \nAccount Bank: ${data.bankDetails.accountBank}\nAccount Holder: ${data.bankDetails.accountHolder}\nAccount No.: ${data.bankDetails.accountNumber}\nSort Code: ${data.bankDetails.sortCode}\nIBAN: ${data.bankDetails.iban}\nRef: ${data.borrowerName}-${data.currency} ${data.amount} ${data.facilityType}\nor such other account as we may notify you in writing with {[${data.businessDays}]} *{Business Days'}* prior notice.\n\n`;
+    output += `7. All payments made by you under this Fee Letter must be made in immediately available, freely transferable and cleared funds by crediting the following bank account \nAccount Bank: ${data.bankDetails.accountBank}\nAccount Holder: ${data.bankDetails.accountHolder}\nAccount No.: ${data.bankDetails.accountNumber}\nSort Code: ${data.bankDetails.sortCode}\nIBAN: ${data.bankDetails.iban}\nRef: ${data.borrowerName}-${data.currency} ${data.amount} ${data.facilityType} Facility Agreement\nor such other account as we may notify you in writing with {[${data.businessDays}]} *{Business Days'}* prior notice.\n\n`;
   } else {
     output += `7. A11 payments made by you under this Fee Letter must be made in immediately available, freely transferable and cleared funds by crediting our account (the details of which we have provided you with separately) or such other account as we may notify you in writing with {[${data.businessDays}]} *{Business Days'}*' prior notice.\n\n`;
   }
@@ -269,35 +269,34 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
   output += `By signing and returning a copy of this Fee Letter to the ${agentName}, you acknowledge your agreement to its terms.\n\n`;
   output += `Yours faithfully\n\n\n\n`;
   output += `_______________\n\n`;
-  output += `For and on behalf of \n${getSenderName()}\n\n\n`;
+  output += `For and on behalf of \n<b>${getSenderName()}</b>\n\n\n`;
   output += `Agreed and accepted by\n\n`;
   output += `_______________\n\n`;
-  output += `For and on behalf of \n${data.borrowerName}\n`;
+  output += `For and on behalf of \n<b>${data.borrowerName}</b>\n`;
 
+  if (data?.indexClauses.length > 0) {
+    // Updated regex to match all clause formats:
+    const clausePattern =
+      /clause\s*(?:\*\s*)?(?:{\s*)?(?:{\s*)?([^{()]+)(?:}\s*)?(?:}\s*)?\(\s*([^)]+?)\s*\)(?:\s*}\s*)?(?:\*\s*)?/gi;
+
+    const replaceClauseWithNumber = (match: string, clauseValue: string, title: string) => {
+      // Extract the original 'clause' text (preserving case)
+      const originalClause = match.match(/^[Cc]lause/)?.[0] || 'Clause';
+
+      const matchingClause = data.indexClauses.find(
+        (clause: { title: string }) => clause.title.toLowerCase() === title.toLowerCase()
+      );
+
+      if (matchingClause) {
+        return `${originalClause} {${matchingClause.clause}} (${matchingClause.title}) `;
+      }
+
+      return match;
+    };
+
+    output = output.replace(clausePattern, replaceClauseWithNumber);
+  }
   if (facilityUploadDetails) {
-    if (facilityUploadDetails.indexClauses.length > 0) {
-      // Updated regex to match all clause formats:
-      const clausePattern =
-        /clause\s*(?:\*\s*)?(?:{\s*)?(?:{\s*)?([^{()]+)(?:}\s*)?(?:}\s*)?\(\s*([^)]+?)\s*\)(?:\s*}\s*)?(?:\*\s*)?/gi;
-
-      const replaceClauseWithNumber = (match: string, clauseValue: string, title: string) => {
-        // Extract the original 'clause' text (preserving case)
-        const originalClause = match.match(/^[Cc]lause/)?.[0] || 'Clause';
-
-        const matchingClause = facilityUploadDetails.indexClauses.find(
-          (clause) => clause.title.toLowerCase() === title.toLowerCase()
-        );
-
-        if (matchingClause) {
-          return `${originalClause} {${matchingClause.clause}} (${matchingClause.title}) `;
-        }
-
-        return match;
-      };
-
-      output = output.replace(clausePattern, replaceClauseWithNumber);
-    }
-
     if (facilityUploadDetails.definitions.length > 0) {
       const replaceDefinitionWordsWithSup = (text: string): string => {
         return text.replace(/\*\{([^}]+)\}\*/g, (_, defWord) => {

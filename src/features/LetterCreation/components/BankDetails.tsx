@@ -1,7 +1,9 @@
 import React from 'react';
 import { IFeeTypesProps } from '../interface/Letter.interface';
+import { useLetterContext } from '../context/LetterContext';
 
 const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
+  const { coverFormData } = useLetterContext();
   return (
     <div>
       <h3 className="text-blue-400 font-semibold mb-1">Step 4.</h3>
@@ -91,8 +93,8 @@ const BankDetails: React.FC<IFeeTypesProps> = ({ form, onChange }) => {
             id="bankDetails.reference"
             name="bankDetails.reference"
             readOnly
-            value={`${form.borrowerName}-${form.currency}${form.amount} ${form.facilityType}`}
-            defaultValue={`${form.borrowerName}-${form.currency} ${form.amount} ${form.facilityType}`}
+            value={`${coverFormData.borrowerName}-${form.currency}${form.amount} ${form.facilityType} Facility Agreement`}
+            defaultValue={`${coverFormData.borrowerName}-${form.currency} ${form.amount} ${form.facilityType} Facility Agreement`}
             onChange={(e) => onChange('bankDetails.reference', e.target.value)}
             className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             placeholder="Enter reference"

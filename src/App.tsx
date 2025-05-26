@@ -5,6 +5,8 @@ import AuthContainer from './features/Auth/containers/AuthContainer';
 import Layout from './hoc/layout/Layout';
 import Dashboard from './features/Dashboard/containers/Dashboard';
 import LetterCreation from './features/LetterCreation/containers/LetterCreation';
+import { LetterProvider } from './features/LetterCreation/context/LetterContext';
+import Cover from './features/Cover/container/Cover';
 
 function App() {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin') === 'true');
@@ -39,16 +41,22 @@ function App() {
     <>
       {!isLogin ? (
         <Routes>
+          <Route path="/cover" element={<Cover />} />
           <Route path="/login" element={<AuthContainer />} />
+          <Route path="/home" element={<Dashboard />} />
+          <Route path="/letter" element={<LetterCreation />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       ) : (
         <Layout>
-          <Routes>
-            <Route path="/home" element={<Dashboard />} />
-            <Route path="/letter" element={<LetterCreation />} />
-            <Route path="*" element={<Navigate to="/home" replace />} />
-          </Routes>
+          <LetterProvider>
+            <Routes>
+              <Route path="/cover" element={<Cover />} />
+              <Route path="/home" element={<Dashboard />} />
+              <Route path="/letter" element={<LetterCreation />} />
+              <Route path="*" element={<Navigate to="/home" replace />} />
+            </Routes>
+          </LetterProvider>
         </Layout>
       )}
     </>

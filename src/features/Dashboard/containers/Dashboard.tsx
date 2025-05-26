@@ -18,15 +18,15 @@ const Dashboard = () => {
       <div className="grid grid-cols-3 gap-4 mt-12 max-w-4xl mx-auto">
         {CARD_OPTIONS.map((card, idx) => (
           <motion.div
-            key={card}
+            key={card.link}
             whileHover="visible"
             initial="hidden"
             className="relative block bg-[#3b3b3b] rounded-lg group text-white text-center text-lg overflow-hidden"
           >
-            <Link to={`/letter`} className="block h-full py-12 px-4">
-              {card}
+            <Link to={`/${card.link}`} className="block h-full py-12 px-4">
+              {card.label}
             </Link>
-            {idx > 0 && (
+            {idx > 1 && (
               <motion.div
                 variants={overlayVariants}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
