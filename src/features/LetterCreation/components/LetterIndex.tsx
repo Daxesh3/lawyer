@@ -51,7 +51,7 @@ const LetterIndex: React.FC = () => {
                       value={letterIndexSelections[idx]?.title || ''}
                       onChange={(e) => handleSelect(idx, e.target.value)}
                     >
-                      <option value="">Select...</option>
+                      <option value="">Select clause...</option>
                       {DROPDOWN_OPTIONS.filter(
                         (option) => !selectedTitles.includes(option) || letterIndexSelections[idx]?.title === option
                       ).map((option) => (
