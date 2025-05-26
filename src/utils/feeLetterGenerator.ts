@@ -296,8 +296,8 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
 
     output = output.replace(clausePattern, replaceClauseWithNumber);
   }
-  if (facilityUploadDetails) {
-    if (facilityUploadDetails.definitions.length > 0) {
+ 
+    if (data?.definitions.length > 0) {
       const replaceDefinitionWordsWithSup = (text: string): string => {
         return text.replace(/\*\{([^}]+)\}\*/g, (_, defWord) => {
           // Extract initials from the definition word
@@ -312,10 +312,12 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
       output = replaceDefinitionWordsWithSup(output);
     }
 
-    output = normalizeLetterTerms(output, facilityUploadDetails);
+    if(data?.definitions?.length > 0 && !!data?.variations ) {
+
+      output = normalizeLetterTerms(output, data?.definitions, data?.variations);
 
     // Replace variations in letter content
-  }
+    }
 
   return output;
 };
@@ -336,8 +338,8 @@ const buildDefinitionReplacementMap = (
 };
 
 // Replace in text
-const normalizeLetterTerms = (letterText: string, details: IFacilityUploadDetails): string => {
-  const replacements = buildDefinitionReplacementMap(details.definitions, details.variations);
+const normalizeLetterTerms = (letterText: string, definitions:string[], variations: Record<string,any>): string => {
+  const replacements = buildDefinitionReplacementMap(definitions, variations);
   const pattern = new RegExp(`\\b(${Object.keys(replacements).join('|')})\\b`, 'g');
   return letterText.replace(pattern, (match) => replacements[match]);
 };
