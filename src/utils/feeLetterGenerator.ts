@@ -47,7 +47,7 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
   };
 
   // Header
-  output += `<p style=text-align:center;font-size:18px;font-weight:600>${getLetterTitle()}</p>\n\n`;
+  output += `<p style=text-align:center;font-size:18px;font-weight:600><b>${getLetterTitle()}</b></p>\n\n`;
 
   // Addressee
   output += `To: ${data.borrowerName}\n\n`;
@@ -62,7 +62,7 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
   output += `Dear Sir/Madam\n\n`;
 
   // Header
-  output += `<b>${data.currency}${data.amount}${data.facilityType} (the "Facility Agreement") dated on or about the date hereof and made between, amongst others, ${data.borrowerName} as borrower (the "Borrower") and ${data.facilityAgentName} as facility agent (the "Facility Agent")</b>\n\n`;
+  output += `<b>${data.currency} ${data.amount} ${data.facilityType} (the "Facility Agreement") dated on or about the date hereof and made between, amongst others, ${data.borrowerName} as borrower (the "Borrower") and ${data.facilityAgentName} as facility agent (the "Facility Agent")</b>\n\n`;
 
   // Introduction
   output += `1. We refer to the Facility Agreement.\n\n`;
@@ -110,35 +110,35 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
         output += `5. You shall pay to the Facility Agent (for its own account):\n\n`;
 
         if (data.setupFeeAmount) {
-          output += `(a) a one-off set-up fee in an amount of ${data.currency} ${data.setupFeeAmount} <b>(the "Set-Up Fee"),</b>\n\n`;
+          output += `(a) a one-off set-up fee in an amount of ${data.currency} ${data.setupFeeAmount} (the <b>"Set-Up Fee"</b>),\n\n`;
         }
 
-        output += `(b) a fee of ${data.currency}${data.facilityAgentFeeAmount} per annum, which is payable in advance, for the Facility Agent acting as facility agent pursuant to the provisions of the Facility Agreement <b>(the "Facility Agent Fee"),</b>\n\n`;
+        output += `(b) a fee of ${data.currency}${data.facilityAgentFeeAmount} per annum, which is payable in advance, for the Facility Agent acting as facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>),\n\n`;
 
         if (data.increaseFeeAmount) {
           output += `(c) a fee of ${data.currency} ${data.increaseFeeAmount} if the Borrower exercises the Increase Option more than ${data.increaseCount} times (the "Increase Fee"), and\n\n`;
         }
 
         if (data.debtdomainFeeAmount) {
-          output += `(d) a fee of ${data.currency}${data.debtdomainFeeAmount} per annum, which is payable in advance, for the use of a publishing system known as Debtdomain to assist in certain administrative tasks specific to the Facility Agent under the terms of the Facility Agreement <b>(the "Debtdomain Fee")</b>. The Facility Agent reserves the right to increase the Debtdomain Fee at its discretion if Debtdomain charges increase provided always that such increase of the Debtdomain Fee shall be more than the increase of Debtdomain charges.\n\n`;
+          output += `(d) a fee of ${data.currency}${data.debtdomainFeeAmount} per annum, which is payable in advance, for the use of a publishing system known as Debtdomain to assist in certain administrative tasks specific to the Facility Agent under the terms of the Facility Agreement(the  <b>"Debtdomain Fee"</b>). The Facility Agent reserves the right to increase the Debtdomain Fee at its discretion if Debtdomain charges increase provided always that such increase of the Debtdomain Fee shall be more than the increase of Debtdomain charges.\n\n`;
         }
 
         output += `(e) The Set-Up Fee, Facility Agent Fee, Increase Fee and Debtdomain Fee shall hereinafter be referred to as the <b>"Agency Fees"</b>.\n\n`;
       } else {
-        output += `Only one type: facility agent pursuant to the provisions of the Facility Agreement <b>(the "Facility Agent Fee")</b>.\n\n`;
+        output += `Only one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>).\n\n`;
       }
       break;
 
     case 'securityAgent':
-      output += `5. You shall pay to the Security Agent (for its own account) a fee of ${data.currency} ${data.securityAgentFeeAmount} per annum, which is payable in advance, for the Security Agent acting as security agent pursuant to the provisions of the Facility Agreement <b>(the "Security Agent Fee")</b>.\n\n`;
+      output += `5. You shall pay to the Security Agent (for its own account) a fee of ${data.currency} ${data.securityAgentFeeAmount} per annum, which is payable in advance, for the Security Agent acting as security agent pursuant to the provisions of the Facility Agreement (the <b>"Security Agent Fee"</b>).\n\n`;
       break;
 
     case 'globalCoordinator':
-      output += `5. You shall pay to the Global Co-Ordinator (for its own account) a flat fee of ${data.currency} ${data.globalCoordinatorFeeAmount} for the Global Co-Ordinator acting as global co-ordinator pursuant to the provisions of the Facility Agreement <b>(the "Global Co-Ordinator Bank Fee")</b>.\n\n`;
+      output += `5. You shall pay to the Global Co-Ordinator (for its own account) a flat fee of ${data.currency} ${data.globalCoordinatorFeeAmount} for the Global Co-Ordinator acting as global co-ordinator pursuant to the provisions of the Facility Agreement (the <b>"Global Co-Ordinator Bank Fee"</b>).\n\n`;
       break;
 
     case 'coordinatingBank':
-      output += `5. You shall pay to the Co-Ordinating Bank (for its own account) a flat fee of ${data.currency}${data.coordinatingBankFeeAmount} for the CoOrdinating Bank acting as co-ordinating bank pursuant to the provisions of the Facility Agreement <b>(the "Coordinating Bank Fee")</b>.\n\n`;
+      output += `5. You shall pay to the Co-Ordinating Bank (for its own account) a flat fee of ${data.currency}${data.coordinatingBankFeeAmount} for the CoOrdinating Bank acting as co-ordinating bank pursuant to the provisions of the Facility Agreement (the <b>"Coordinating Bank Fee"</b>).\n\n`;
       break;
 
     case 'upfront':
@@ -150,7 +150,7 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
       break;
 
     case 'arranger':
-      output += `5. You shall pay to the Facility Agent (for the account of the *{Arrangers}*) a fee of ${data.currency} ${data.arrangerFeeAmount} for the *{Arrangers}* under the Facility Agreement (an "Arranger Fee"). Each *{Arranger}* shall be entitled to its pro rata share of the Arranger Fee. Its pro rata share shall be equal to the proportion its Commitment bears to the Total Commitment of all the *{Arrangers}*\n\n`;
+      output += `5. You shall pay to the Facility Agent (for the account of the *{Arrangers}*) a fee of ${data.currency} ${data.arrangerFeeAmount} for the *{Arrangers}* under the Facility Agreement (an <b>"Arranger Fee"</b>). Each *{Arranger}* shall be entitled to its pro rata share of the Arranger Fee. Its pro rata share shall be equal to the proportion its Commitment bears to the Total Commitment of all the *{Arrangers}*\n\n`;
       break;
 
     default:
@@ -284,7 +284,7 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
       const originalClause = match.match(/^[Cc]lause/)?.[0] || 'Clause';
 
       const matchingClause = data.indexClauses.find(
-        (clause: any) => clause.title.toLowerCase() === title.toLowerCase()
+        (clause: { title: string }) => clause.title.toLowerCase() === title.toLowerCase()
       );
 
       if (matchingClause) {

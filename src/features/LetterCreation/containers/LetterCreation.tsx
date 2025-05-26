@@ -206,7 +206,6 @@ const LetterCreation = () => {
         </div>
       ) : (
         <FeeLetterOutput
-          data={formData}
           isGenerating={isGenerating}
           hasGenerated={hasGenerated}
           facilityUploadDetails={facilityUploadDetails as IFacilityUploadDetails}

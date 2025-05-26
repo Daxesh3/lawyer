@@ -1,4 +1,4 @@
-import { Document, Packer, Paragraph, TextRun, AlignmentType } from 'docx';
+import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
 import Lottie from 'lottie-react';
 import React from 'react';
@@ -6,6 +6,12 @@ import letterGeneration from '../../../assets/Json/LetterGenerate.json';
 import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
 import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
 import { useLetterContext } from '../../LetterCreation/context/LetterContext';
+
+enum AlignmentType {
+  Left = 'left',
+  Center = 'center',
+  Right = 'right',
+}
 
 interface FeeLetterOutputProps {
   isGenerating: boolean;
@@ -62,9 +68,9 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
         };
 
         let currentParagraphRuns: TextRun[] = [];
-        let currentParagraphAlignment = AlignmentType.LEFT;
+        let currentParagraphAlignment = AlignmentType.Left;
 
-        const createParagraph = (runs: TextRun[], alignment: typeof AlignmentType): Paragraph | null => {
+        const createParagraph = (runs: TextRun[], alignment: AlignmentType): Paragraph | null => {
           if (runs.length === 0) return null;
           return new Paragraph({
             spacing: {
@@ -85,7 +91,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
             segments.forEach((segment, index) => {
               if (segment) {
                 currentParagraphRuns.push(
-                  new TextRun({ text: segment, bold: styles.bold, italics: styles.italics, size: 20 })
+                  new TextRun({ text: segment, bold: styles.bold, italics: styles.italics, size: 24 })
                 );
               }
               if (index < segments.length - 1) {
@@ -103,7 +109,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
 
               currentParagraphRuns = [];
               currentParagraphAlignment =
-                element.style.textAlign === 'center' ? AlignmentType.CENTER : AlignmentType.LEFT;
+                element.style.textAlign === 'center' ? AlignmentType.Center : AlignmentType.Left;
 
               element.childNodes.forEach((childNode) => processNode(childNode));
 
@@ -111,7 +117,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
               if (blockParagraph) docxElements.push(blockParagraph);
 
               currentParagraphRuns = [];
-              currentParagraphAlignment = AlignmentType.LEFT;
+              currentParagraphAlignment = AlignmentType.Left;
             } else {
               element.childNodes.forEach((childNode) => processNode(childNode));
             }
