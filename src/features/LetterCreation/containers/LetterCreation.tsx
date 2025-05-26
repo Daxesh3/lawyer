@@ -121,7 +121,11 @@ const LetterCreation = () => {
         >
           {isGenerating ? (
             <div className="absolute inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center z-50">
-              <Lottie animationData={letterGeneration} loop={true} />
+              <div className="bg-black drop-shadow-[0_6px_12px_rgba(255,255,255,0.4)] p-20 rounded-md">
+                <p className="text-white text-sm font-bold text-center">Letter generation is in progress.</p>
+                <p className="text-white text-sm font-bold text-center mt-3">Please wait...</p>
+                <Lottie animationData={letterGeneration} loop={true} style={{ width: '400px' }} />
+              </div>
             </div>
           ) : null}
           <div>
