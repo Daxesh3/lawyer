@@ -18,7 +18,6 @@ export const numberFields = [
   'debtdomainFeeAmount',
   'facilityAgentFeeAmount',
   'increaseFeeAmount',
-  'increaseCount',
   'upfrontFeeAmount',
   'mandatedLeadArrangerFeeAmount',
   'arrangerFeeAmount',
