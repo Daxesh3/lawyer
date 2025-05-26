@@ -20,7 +20,7 @@ const DROPDOWN_OPTIONS = [
 
 const LetterIndex: React.FC = () => {
   const { formData, updateFormField, letterIndexSelections, setLetterIndexSelections } = useLetterContext();
-  const [facilityAgreementDetails, setFacilityAgreementDetails] = useState(false);
+  const [facilityAgreementDetails, setFacilityAgreementDetails] = useState(formData?.indexClauses?.length > 0 || false);
   const [isUpload, setIsUploading] = useState(false);
 
   // Helper: get all selected titles except for the current row

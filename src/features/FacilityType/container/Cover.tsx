@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useLetterContext } from '../../LetterCreation/context/LetterContext';
 import { CURRENCIES } from '../../LetterCreation/constants/Letter.constants';
 import { formatToUSD } from '../../../shared/constants/constant';
@@ -23,7 +24,7 @@ const Cover = () => {
     globalCoordinatorName: '',
     bookrunnerNames: '',
     facilityAgentName: '',
-    currency: '',
+    currency: 'USD',
     amount: '',
     facilityType: 'Single Currency',
     termType: 'Term',
@@ -204,13 +205,21 @@ const Cover = () => {
         </form>
         {activeTab === 'index' && <LetterIndex />}
         {activeTab === 'index' && (
-          <button
-            type="button"
-            className="bg-black text-white px-8 py-2 rounded-lg font-semibold mt-8"
-            onClick={() => setActiveTab('cover')}
-          >
-            Back
-          </button>
+          <div className="flex justify-between items-center mt-8">
+            <button
+              type="button"
+              className="bg-black text-white px-8 py-2 rounded-lg font-semibold"
+              onClick={() => setActiveTab('cover')}
+            >
+              Back
+            </button>
+            <Link
+              className="block bg-blue-400 text-white px-8 py-2 rounded-lg font-semibold hover:bg-blue-500 transition-colors"
+              to={'/home'}
+            >
+              Home
+            </Link>
+          </div>
         )}
       </div>
     </div>
