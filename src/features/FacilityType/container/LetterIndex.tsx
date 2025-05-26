@@ -3,6 +3,11 @@ import { useLetterContext } from '../../LetterCreation/context/LetterContext';
 import { API_VITE_API_FACILITY_FILE_UPLOAD, formatToUSD, numberFields } from '../../../shared/constants/constant';
 import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
 
+interface IIndexClause {
+  clause: number;
+  title: string;
+}
+
 const DROPDOWN_OPTIONS = [
   'Definitions and Interpretation',
   'Construction',
@@ -14,15 +19,13 @@ const DROPDOWN_OPTIONS = [
 ];
 
 const LetterIndex: React.FC = () => {
-  const { formData, updateFormField } = useLetterContext();
+  const { formData, updateFormField, letterIndexSelections, setLetterIndexSelections } = useLetterContext();
   const [facilityAgreementDetails, setFacilityAgreementDetails] = useState(false);
   const [isUpload, setIsUploading] = useState(false);
 
   // Helper: get all selected titles except for the current row
   const getSelectedTitles = (excludeIdx: number) =>
-    formData.indexClauses
-      .map((sel: any, idx: number) => (idx !== excludeIdx && sel ? sel.title : null))
-      .filter(Boolean) as string[];
+    letterIndexSelections.map((sel, idx) => (idx !== excludeIdx && sel ? sel.title : null)).filter(Boolean) as string[];
 
   const handleFacilityAgreementUpload = async (file: File) => {
     if (!file) return;
@@ -43,7 +46,18 @@ const LetterIndex: React.FC = () => {
       updateFormField('variations', data?.variations || {});
       setIsUploading(false);
 
-      // Optionally update form state with uploaded file info here
+      // IMPORTANT: Populate letterIndexSelections from uploaded data if available
+      if (data?.indexClauses) {
+        // Map the uploaded clauses to ClauseSelection | null format
+        const initialSelections: (IIndexClause | null)[] = Array(24).fill(null);
+        data.indexClauses.forEach((clause) => {
+          if (clause.clause >= 1 && clause.clause <= 24) {
+            initialSelections[clause.clause - 1] = { clause: clause.clause, title: clause.title };
+          }
+        });
+        setLetterIndexSelections(initialSelections);
+        setFacilityAgreementDetails(true); // Ensure this is true if upload is successful and data is processed
+      }
     } catch (error) {
       console.error(error);
       setIsUploading(false);
@@ -51,13 +65,13 @@ const LetterIndex: React.FC = () => {
   };
 
   const handleSelect = (idx: number, value: string) => {
-    const updated = [...formData.indexClauses];
+    const updatedSelections = [...letterIndexSelections];
     if (value === '') {
-      updated[idx] = null;
+      updatedSelections[idx] = null;
     } else {
-      updated[idx] = { clause: idx + 1, title: value };
+      updatedSelections[idx] = { clause: idx + 1, title: value };
     }
-    updateFormField('indexClauses', updated);
+    setLetterIndexSelections(updatedSelections);
   };
 
   const handleFormChange = (
@@ -83,7 +97,8 @@ const LetterIndex: React.FC = () => {
   };
 
   const getClauseValue = (idx: number) => {
-    const clauseVal = formData.indexClauses.filter((clauseData: any) => clauseData?.clause == idx + 1)?.[0] || '';
+    // Directly access the element at the index from letterIndexSelections
+    const clauseVal = letterIndexSelections[idx];
     return clauseVal;
   };
 
