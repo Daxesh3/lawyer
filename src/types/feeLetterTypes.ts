@@ -51,5 +51,6 @@ export interface IFeeLetterData {
   natureOfDocument: 'neutral' | 'bankFriendly' | 'borrowerFriendly';
   facilityAgreementUpload: string;
   facilityAgreementFile?: File;
+  refundableTerms: 'refundable' | 'nonRefundable';
   [key: string]: any;
 }

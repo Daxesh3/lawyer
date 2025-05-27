@@ -222,8 +222,21 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
   }
 
   // Tax and VAT
-  output += `8. Clause *{ {12} (Tax Gross Up and Indemnities)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.\n\n`;
-  output += `9. Clause *{ {¢} (VAT)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.\n\n`;
+
+  //For Gross Up Provision
+  if (data.grossUpProvision === 'Standalone') {
+    output += `8. Clause *{ {12} (Tax Gross Up and Indemnities)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.\n\n`;
+  } else {
+    output += `8. If any *{Tax}* or amount in respect of a *{Tax}* must be deducted or withheld from any amount payable or paid by the ${data.borrowerName} on account of or by reference to any payment by or obligation of the ${data.borrowerName} hereunder, the ${data.borrowerName} shall pay such additional amounts as may be necessary to ensure that the recipient of such payment receives a net amount equal to the full amount which we would have received from the ${data.borrowerName} had such *{Tax}* not been made.
+\n\n`;
+  }
+
+  //For VAT Provision
+  if (data.vatProvision === 'Standalone') {
+    output += `9. Clause *{ {¢} (VAT)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.\n\n`;
+  } else {
+    output += `9. All payments in connection with this Fee Letter are exclusive of any value added tax or similar charge ("<b>VAT</b>"). If VAT is chargeable, the ${data.borrowerName} shall also and at the same time pay to the recipient of the relevant payment an amount equal to the amount of the VAT.\n\n`;
+  }
 
   // Fee refunds - only for facility agent and security agent
   if (data.letterType === 'facilityAgent' || data.letterType === 'securityAgent') {

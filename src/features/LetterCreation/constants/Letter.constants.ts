@@ -63,6 +63,7 @@ export const INITIAL_FORM: IFeeLetterData = {
   indexClauses: [],
   definitions: [],
   variations: {},
+  refundableTerms: 'refundable',
 };
 
 export const CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'CHF'];

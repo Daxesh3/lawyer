@@ -74,22 +74,21 @@ const PaymentModalities: React.FC<IFeeTypesProps> = ({ form, onChange, screenInd
         <label className="inline-flex items-center text-white mr-4">
           <input
             type="radio"
-            name="paymentModality"
-            value="annual"
-            checked={form.paymentModality === 'annual'}
-            onChange={(e) => onChange('paymentModality', e.target.value)}
+            name="refundableTerms"
+            value="refundable"
+            checked={form.refundableTerms === 'refundable'}
+            onChange={(e) => onChange('refundableTerms', e.target.value)}
             className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
           />
           <span className="ml-2 text-sm text-white">Refundable</span>
         </label>
-
         <label className="inline-flex items-center text-white">
           <input
             type="radio"
-            name="paymentModality"
-            value="semiannual"
-            checked={form.paymentModality === 'semiannual'}
-            onChange={(e) => onChange('paymentModality', e.target.value)}
+            name="refundableTerms"
+            value="nonRefundable"
+            checked={form.refundableTerms === 'nonRefundable'}
+            onChange={(e) => onChange('refundableTerms', e.target.value)}
             className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
           />
           <span className="ml-2 text-sm text-white">Non Refundable</span>
