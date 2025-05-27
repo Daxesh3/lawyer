@@ -14,11 +14,11 @@ const OtherDetails: React.FC<IFeeTypesProps> = ({ form, onChange, screenIndex })
             </label>
             <select
               name="grossUpProvision"
-              value={form.grossUpProvision || 'Gross Up'}
+              value={form.grossUpProvision || 'Standalone'}
               onChange={(e) => onChange('grossUpProvision', e.target.value)}
               className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             >
-              <option value="Gross Up">Gross Up</option>
+              {/* <option value="Gross Up">Gross Up</option> */}
               <option value="Standalone">Standalone</option>
               <option value="Refer to Facility Agreement">Refer to Facility Agreement</option>
             </select>
@@ -29,11 +29,11 @@ const OtherDetails: React.FC<IFeeTypesProps> = ({ form, onChange, screenIndex })
             </label>
             <select
               name="vatProvision"
-              value={form.vatProvision || 'VAT'}
+              value={form.vatProvision || 'Standalone'}
               onChange={(e) => onChange('vatProvision', e.target.value)}
               className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             >
-              <option value="VAT">VAT</option>
+              {/* <option value="VAT">VAT</option> */}
               <option value="Standalone">Standalone</option>
               <option value="Refer to Facility Agreement">Refer to Facility Agreement</option>
             </select>
