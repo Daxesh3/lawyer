@@ -16,7 +16,7 @@ import BankDetails from '../components/BankDetails';
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [hasGenerated, setHasGenerated] = useState(true);
+  const [hasGenerated, setHasGenerated] = useState(false);
   const [facilityUploadDetails, setFacilityUploadDetails] = useState<IFacilityUploadDetails>();
   const { formData, updateFormField } = useLetterContext();
 
