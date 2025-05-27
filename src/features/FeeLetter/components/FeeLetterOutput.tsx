@@ -3,13 +3,29 @@ import { saveAs } from 'file-saver';
 import Lottie from 'lottie-react';
 import React from 'react';
 import letterGeneration from '../../../assets/Json/LetterGenerate.json';
+// import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface'; // Removed unused import
 import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
 import { useLetterContext } from '../../LetterCreation/context/LetterContext';
+// The CSS import is for browser display and not used by docx generation
+// import '../../../index.css';
 
 enum AlignmentType {
   Left = 'left',
   Center = 'center',
   Right = 'right',
+}
+
+interface IRunStyles {
+  bold?: boolean;
+  italics?: boolean;
+  // Add other inline style properties here as needed (e.g., size, color)
+}
+
+// Define a simple interface for TabStop to satisfy the linter
+// Based on the error, the type should be a string union
+interface ITabStop {
+  type: 'left' | 'center' | 'right' | 'start' | 'end' | 'bar' | 'clear' | 'decimal' | 'num';
+  position: number;
 }
 
 interface FeeLetterOutputProps {
@@ -64,61 +80,132 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
         let currentParagraphRuns: TextRun[] = [];
         let currentParagraphAlignment = AlignmentType.Left;
 
-        const createParagraph = (runs: TextRun[], alignment: AlignmentType): Paragraph | null => {
+        // Corrected function signature for createParagraph
+        const createParagraph = (
+          runs: TextRun[],
+          alignment: AlignmentType,
+          indent?: { left?: number; hanging?: number },
+          tabStops?: ITabStop[],
+          afterSpacing?: number
+        ): Paragraph | null => {
           if (runs.length === 0) return null;
+
+          const spacingOptions: { before?: number; after?: number; line?: number } = {
+            before: 200,
+            line: 360, // 1.5 line spacing
+          };
+
+          // Use the passed afterSpacing if provided, otherwise use a default or none
+          if (afterSpacing !== undefined) {
+            spacingOptions.after = afterSpacing;
+          } else {
+            spacingOptions.after = 200; // Default after spacing if not specified by class
+          }
+
           return new Paragraph({
-            spacing: {
-              before: 200,
-              after: 200,
-              line: 360, // 1.5 line spacing
-            },
-            indent: {
-              left: 720, // 0.5 inch
-              hanging: 360, // hanging indent for numbers like 1., 2., etc.
-            },
-            alignment: alignment as AlignmentType,
+            spacing: spacingOptions,
             children: runs,
+            alignment: alignment,
+            indent: indent, // Apply passed indent
+            tabStops: tabStops, // Apply passed tab stops
           });
         };
 
-        const processNode = (node: Node) => {
+        // Modified processNode to accept inherited run styles and handle classes
+        const processNode = (node: Node, inheritedRunStyles: IRunStyles = {}, depth = 0) => {
           if (node.nodeType === Node.TEXT_NODE && node.textContent) {
             const styles = getStylesFromAncestors(node);
-            const segments = node.textContent.split('\n');
+            // Combine styles from ancestors and inherited styles
+            const finalRunStyles: IRunStyles = { ...styles, ...inheritedRunStyles };
 
-            segments.forEach((segment, index) => {
-              if (segment.trim()) {
-                currentParagraphRuns.push(
-                  new TextRun({ text: segment.trim(), bold: styles.bold, italics: styles.italics, size: 24 })
-                );
-              }
-              if (index < segments.length - 1) {
-                currentParagraphRuns.push(new TextRun({ break: 1 }));
-              }
-            });
+            currentParagraphRuns.push(
+              new TextRun({
+                text: node.textContent.replace(/\t/g, '\u0009'), // Replace \t with Unicode tab character for docx
+                bold: finalRunStyles.bold, // Apply combined bold style
+                italics: finalRunStyles.italics, // Apply combined italics style
+                size: 24, // Base size
+                // Add other run properties here if needed (e.g., color, underline)
+              })
+            );
           } else if (node.nodeType === Node.ELEMENT_NODE) {
             const element = node as HTMLElement;
+            const classList = Array.from(element.classList);
 
-            if (element.tagName === 'BR') {
-              currentParagraphRuns.push(new TextRun({ break: 1 }));
-            } else if (element.tagName === 'P' || element.tagName === 'DIV') {
-              // Flush previous content
-              const paragraph = createParagraph(currentParagraphRuns, currentParagraphAlignment);
-              if (paragraph) docxElements.push(paragraph);
+            // const elementRunStyles: IRunStyles = { ...inheritedRunStyles };
+            // if (element.tagName === 'B' || element.tagName === 'STRONG') inheritedRunStyles.bold = true;
+            // ... existing code ...
+
+            if (
+              element.tagName === 'P' ||
+              element.tagName === 'DIV' ||
+              element.tagName === 'LI' ||
+              element.tagName === 'UL'
+            ) {
+              // Finalize any current runs as a paragraph before starting a new block element
+              const precedingParagraph = createParagraph(currentParagraphRuns, currentParagraphAlignment);
+              if (precedingParagraph) docxElements.push(precedingParagraph);
 
               currentParagraphRuns = [];
               currentParagraphAlignment =
                 element.style.textAlign === 'center' ? AlignmentType.Center : AlignmentType.Left;
 
-              element.childNodes.forEach((childNode) => processNode(childNode));
+              // Determine styling based on element type and classes
+              let paragraphIndent: { left?: number; hanging?: number } | undefined = undefined;
+              let paragraphTabStops: ITabStop[] | undefined = undefined;
+              let paragraphAfterSpacing: number | undefined = undefined;
 
-              const blockParagraph = createParagraph(currentParagraphRuns, currentParagraphAlignment);
-              if (blockParagraph) docxElements.push(blockParagraph);
+              if (classList.includes('fee-paragraph')) {
+                paragraphAfterSpacing = 200;
+                paragraphIndent = { left: 0 };
+              } else if (classList.includes('fee-list-item')) {
+                // Main list items (level 1)
+                paragraphIndent = { left: 720, hanging: 400 };
+                paragraphTabStops = [{ type: 'left', position: 760 }];
+                paragraphAfterSpacing = 200;
+              } else if (classList.includes('fee-sublist-item')) {
+                // Sublist items (level 2)
+                paragraphIndent = { left: 1080, hanging: 400 };
+                paragraphTabStops = [{ type: 'left', position: 1120 }];
+                paragraphAfterSpacing = 200;
+              } else if (classList.includes('fee-sublist-level2')) {
+                // Sublist level 2 items (level 3)
+                paragraphIndent = { left: 1440, hanging: 400 };
+                paragraphTabStops = [{ type: 'left', position: 1480 }];
+                paragraphAfterSpacing = 200;
+              } else if (classList.includes('fee-indent')) {
+                paragraphIndent = { left: 720 + depth * 360 };
+              }
 
-              currentParagraphRuns = [];
-              currentParagraphAlignment = AlignmentType.Left;
+              // Process children with increased depth if this is a list container
+              const newDepth = element.tagName === 'UL' || (element.tagName as any) === 'OL' ? depth + 1 : depth;
+
+              // Process children of the block element, passing down the combined run styles
+              element.childNodes.forEach((childNode) => processNode(childNode, inheritedRunStyles, newDepth));
+
+              // After processing children, finalize runs within this block element as a paragraph
+              const blockParagraph = createParagraph(
+                currentParagraphRuns,
+                currentParagraphAlignment,
+                paragraphIndent,
+                paragraphTabStops,
+                paragraphAfterSpacing
+              );
+              if (blockParagraph) {
+                docxElements.push(blockParagraph);
+              }
+
+              currentParagraphRuns = []; // Reset runs for content after this block element
+              currentParagraphAlignment = AlignmentType.Left; // Reset alignment
             } else {
-              element.childNodes.forEach((childNode) => processNode(childNode));
+              // For other elements, process their children and pass down the combined run styles
+              // Ensure current runs are added before processing children of non-block elements
+              if (currentParagraphRuns.length > 0) {
+                const paragraph = createParagraph(currentParagraphRuns, currentParagraphAlignment);
+                if (paragraph) docxElements.push(paragraph);
+                currentParagraphRuns = []; // Clear runs
+                currentParagraphAlignment = AlignmentType.Left; // Reset alignment
+              }
+              element.childNodes.forEach((childNode) => processNode(childNode, inheritedRunStyles));
             }
           }
         };

@@ -49,131 +49,131 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
   output += `<p style=text-align:center;font-size:18px;font-weight:600><b>${getLetterTitle()}</b></p>\n\n`;
 
   // Addressee
-  output += `<p style='margin-bottom:10px'>To: ${data.borrowerName}</p>`;
+  output += `To: ${data.borrowerName}\n\n`;
 
   // Sender
-  output += `<p style='margin-bottom:10px'>From: ${getSenderName()}</p>`;
+  output += `From: ${getSenderName()}\n\n`;
 
   // Date
-  output += `<p style='margin-bottom:10px'>Date: ${data.currentYear}</p>`;
+  output += `Date: ${data.currentYear}\n\n`;
 
   // Salutation
-  output += `<p style='margin-bottom:10px'>Dear Sir/Madam</p>`;
+  output += `Dear Sir/Madam\n\n`;
 
   // Header
-  output += `\t<p style='margin-bottom:10px'>\t<b>${data.currency} ${data.amount} ${data.facilityType} (the "Facility Agreement") dated on or about the date hereof and made between, amongst others, ${data.borrowerName} as borrower (the "Borrower") and ${data.facilityAgentName} as facility agent (the "Facility Agent")</b></p>`;
+  output += `<b>${data.currency} ${data.amount} ${data.facilityType} (the "Facility Agreement") dated on or about the date hereof and made between, amongst others, ${data.borrowerName} as borrower (the "Borrower") and ${data.facilityAgentName} as facility agent (the "Facility Agent")</b>\n\n`;
 
   // Introduction
-  output += `<p style='margin-bottom:10px'>1. \tWe refer to the Facility Agreement.</p>`;
-  output += `<p style='margin-bottom:10px'>2. \tUnless otherwise defined in this Fee Letter, terms defined in the Facility Agreement shall have the same meaning in this Fee Letter. The rules of interpretation and construction contained in clause *{[1.2] (Construction)}* of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the *{Finance Documents}* shall be construed as references to this Fee Letter.</p>`;
+  output += `<p class="fee-list-item">\n1. \tWe refer to the Facility Agreement.</p>\n\n`;
+  output += `<p class="fee-list-item">\n2. \tUnless otherwise defined in this Fee Letter, terms defined in the Facility Agreement shall have the same meaning in this Fee Letter. The rules of interpretation and construction contained in clause *{[1.2] (Construction)}* of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the *{Finance Documents}* shall be construed as references to this Fee Letter.</p>\n\n`;
 
   // Specific introduction based on letter type
   switch (data.letterType) {
     case 'facilityAgent':
-      output += `<p style='margin-bottom:10px'>3. \tThis Letter is the Facility Agent Fee Letter.</p>`;
+      output += `<p class="fee-list-item">\n3. \tThis Letter is the Facility Agent Fee Letter.</p>\n\n`;
       break;
     case 'securityAgent':
-      output += `<p style='margin-bottom:10px'>3. \tThis Letter is the Security Agent Fee Letter.</p>`;
+      output += `<p class="fee-list-item">\n3. \tThis Letter is the Security Agent Fee Letter.</p>\n\n`;
       break;
     case 'globalCoordinator':
-      output += `<p style='margin-bottom:10px'>3. \tThis Letter is the Global Co-Ordinator Fee Letter.</p>`;
+      output += `<p class="fee-list-item">\n3. \tThis Letter is the Global Co-Ordinator Fee Letter.</p>\n\n`;
       break;
     case 'coordinatingBank':
-      output += `<p style='margin-bottom:10px'>3. \tThis Letter is the Co-Ordinating Bank Fee Letter.</p>`;
+      output += `<p class="fee-list-item">\n3. \tThis Letter is the Co-Ordinating Bank Fee Letter.</p>\n\n`;
       break;
     case 'upfront':
-      output += `<p style='margin-bottom:10px'>3. \tThis Letter is the Upfront Fee Letter.</p>`;
+      output += `<p class="fee-list-item">\n3. \tThis Letter is the Upfront Fee Letter.</p>\n\n`;
       break;
     case 'mandatedLeadArranger':
-      output += `<p style='margin-bottom:10px'>3. \tThis Letter is the Mandated Lead Arranger Fee Letter.</p>`;
+      output += `<p class="fee-list-item">\n3. \tThis Letter is the Mandated Lead Arranger Fee Letter.</p>\n\n`;
       break;
     case 'arranger':
-      output += `<p style='margin-bottom:10px'>3. \tThis Letter is the Arranger Fee Letter.</p>`;
+      output += `<p class="fee-list-item">\n3. \tThis Letter is the Arranger Fee Letter.</p>\n\n`;
       break;
     default:
-      output += `<p style='margin-bottom:10px'>3. \tThis Letter is the Facility Agent Fee Letter.</p>`;
+      output += `<p class="fee-list-item">\n3. \tThis Letter is the Facility Agent Fee Letter.</p>\n\n`;
   }
 
   // Add the letter type as a Finance Document
-  output += `<p style='margin-bottom:10px'>4. \tThis ${getLetterTitle()
+  output += `<p class="fee-list-item">\n4. \tThis ${getLetterTitle()
     .replace(/\(|\)/g, '')
     .toLowerCase()
     .split(' ')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')} is a *{Finance Documents}* for the purposes of the Facility Agreement.</p>`;
+    .join(' ')} is a *{Finance Documents}* for the purposes of the Facility Agreement.</p>\n\n`;
 
   // Fees section based on letter type
   switch (data.letterType) {
     case 'facilityAgent':
       if (data.hasFacilityAgentOptions) {
-        output += `<p style='margin-bottom:10px'>5. \tYou shall pay to the Facility Agent (for its own account):</p>`;
+        output += `<p class="fee-list-item">\n5. \tYou shall pay to the Facility Agent (for its own account):</p>\n\n`;
 
         if (data.setupFeeAmount) {
-          output += `&emsp;<p style='margin-bottom:10px;margin-left:10px'>(a) \ta one-off set-up fee in an amount of ${data.currency} ${data.setupFeeAmount} (the <b>"Set-Up Fee"</b>),</p>\n\n`;
+          output += `<p class="fee-list-item">(a) a one-off set-up fee in an amount of ${data.currency} ${data.setupFeeAmount} (the <b>"Set-Up Fee"</b>),</p>\n\n`;
         }
 
-        output += `<p style='margin-bottom:10px;margin-left:10px'>(b) \ta fee of ${data.currency}${data.facilityAgentFeeAmount} per annum, which is payable in advance, for the Facility Agent acting as facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>),</p>\n\n`;
+        output += `<p class="fee-list-item">\n(b) \ta fee of ${data.currency}${data.facilityAgentFeeAmount} per annum, which is payable in advance, for the Facility Agent acting as facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>),</p>\n\n`;
 
         if (data.increaseFeeAmount) {
-          output += `<p style='margin-bottom:10px;margin-left:10px'>(c) \ta fee of ${data.currency} ${data.increaseFeeAmount} if the Borrower exercises the Increase Option more than ${data.increaseCount} times (the "Increase Fee"), and</p>\n\n`;
+          output += `<p class="fee-list-item">(c) a fee of ${data.currency} ${data.increaseFeeAmount} if the Borrower exercises the Increase Option more than ${data.increaseCount} times (the "Increase Fee"), and</p>\n\n`;
         }
 
         if (data.debtdomainFeeAmount) {
-          output += `<p style='margin-bottom:10px;margin-left:10px'>(d) \ta fee of ${data.currency}${data.debtdomainFeeAmount} per annum, which is payable in advance, for the use of a publishing system known as Debtdomain to assist in certain administrative tasks specific to the Facility Agent under the terms of the Facility Agreement(the  <b>"Debtdomain Fee"</b>). The Facility Agent reserves the right to increase the Debtdomain Fee at its discretion if Debtdomain charges increase provided always that such increase of the Debtdomain Fee shall be more than the increase of Debtdomain charges.</p>`;
+          output += `<p class="fee-list-item">(d) a fee of ${data.currency}${data.debtdomainFeeAmount} per annum, which is payable in advance, for the use of a publishing system known as Debtdomain to assist in certain administrative tasks specific to the Facility Agent under the terms of the Facility Agreement (the <b>"Debtdomain Fee"</b>). The Facility Agent reserves the right to increase the Debtdomain Fee at its discretion if Debtdomain charges increase provided always that such increase of the Debtdomain Fee shall be more than the increase of Debtdomain charges.</p>\n\n`;
         }
 
-        output += `<p style='margin-bottom:10px;margin-left:10px'>(e) \tThe Set-Up Fee, Facility Agent Fee, Increase Fee and Debtdomain Fee shall hereinafter be referred to as the <b>"Agency Fees"</b></p>.`;
+        output += `<p class="fee-list-item">\n(e) The Set-Up Fee, Facility Agent Fee, Increase Fee and Debtdomain Fee shall hereinafter be referred to as the <b>"Agency Fees"</b></p>\n`;
       } else {
-        output += `<p style='margin-bottom:10px;margin-left:10px'>\tOnly one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>)</p>.`;
+        output += `\tOnly one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>)</p>.\n\n`;
       }
       break;
 
     case 'securityAgent':
-      output += `<p style='margin-bottom:10px'>5. \tYou shall pay to the Security Agent (for its own account) a fee of ${data.currency} ${data.securityAgentFeeAmount} per annum, which is payable in advance, for the Security Agent acting as security agent pursuant to the provisions of the Facility Agreement (the <b>"Security Agent Fee"</b>).</p>`;
+      output += `5. You shall pay to the Security Agent (for its own account) a fee of ${data.currency} ${data.securityAgentFeeAmount} per annum, which is payable in advance, for the Security Agent acting as security agent pursuant to the provisions of the Facility Agreement (the <b>"Security Agent Fee"</b>).\n\n`;
       break;
 
     case 'globalCoordinator':
-      output += `<p style='margin-bottom:10px'>5. \tYou shall pay to the Global Co-Ordinator (for its own account) a flat fee of ${data.currency} ${data.globalCoordinatorFeeAmount} for the Global Co-Ordinator acting as global co-ordinator pursuant to the provisions of the Facility Agreement (the <b>"Global Co-Ordinator Bank Fee"</b>).</p>`;
+      output += `5. You shall pay to the Global Co-Ordinator (for its own account) a flat fee of ${data.currency} ${data.globalCoordinatorFeeAmount} for the Global Co-Ordinator acting as global co-ordinator pursuant to the provisions of the Facility Agreement (the <b>"Global Co-Ordinator Bank Fee"</b>).\n\n`;
       break;
 
     case 'coordinatingBank':
-      output += `<p style='margin-bottom:10px'>5. \tYou shall pay to the Co-Ordinating Bank (for its own account) a flat fee of ${data.currency}${data.coordinatingBankFeeAmount} for the CoOrdinating Bank acting as co-ordinating bank pursuant to the provisions of the Facility Agreement (the <b>"Coordinating Bank Fee"</b>).</p>`;
+      output += `5. You shall pay to the Co-Ordinating Bank (for its own account) a flat fee of ${data.currency}${data.coordinatingBankFeeAmount} for the CoOrdinating Bank acting as co-ordinating bank pursuant to the provisions of the Facility Agreement (the <b>"Coordinating Bank Fee"</b>).\n\n`;
       break;
 
     case 'upfront':
-      output += `<p style='margin-bottom:10px'>5. \tYou shall pay to the Facility Agent (for the account of the *{Original Lenders}*) a fee of ${data.currency} ${data.upfrontFeeAmount} for the *{Original Lenders}* extending their Commitments to the Borrower under the Facility Agreement (an "Upfront Fee"). Each *{Original Lender}* shall be entitled to its pro rata share of the Upfront Fee. Its pro rata share shall be equal to the proportion its Commitment bears to the Total Commitment.</p>`;
+      output += `5. You shall pay to the Facility Agent (for the account of the *{Original Lenders}*) a fee of ${data.currency} ${data.upfrontFeeAmount} for the *{Original Lenders}* extending their Commitments to the Borrower under the Facility Agreement (an "Upfront Fee"). Each *{Original Lender}* shall be entitled to its pro rata share of the Upfront Fee. Its pro rata share shall be equal to the proportion its Commitment bears to the Total Commitment.\n\n`;
       break;
 
     case 'mandatedLeadArranger':
-      output += `5.You shall pay to the Facility Agent (for the account of the *{Mandated Lead Arrangers}*) a fee of ${data.currency} ${data.mandatedLeadArrangerFeeAmount} for the *{Mandated Lead Arrangers}* under the Facility Agreement (an "Mandated Lead Arranger Fee"). Each *{Mandated Lead Arranger}* shall be entitled to its pro rata share of the Mandated Lead Arranger Fee. Its pro rata share shall be equal to the proportion its Commitment bears to the Total Commitment of all the *{Mandated Lead Arrangers}*</p>\n\n`;
+      output += `5.You shall pay to the Facility Agent (for the account of the *{Mandated Lead Arrangers}*) a fee of ${data.currency} ${data.mandatedLeadArrangerFeeAmount} for the *{Mandated Lead Arrangers}* under the Facility Agreement (an "Mandated Lead Arranger Fee"). Each *{Mandated Lead Arranger}* shall be entitled to its pro rata share of the Mandated Lead Arranger Fee. Its pro rata share shall be equal to the proportion its Commitment bears to the Total Commitment of all the *{Mandated Lead Arrangers}*\n\n`;
       break;
 
     case 'arranger':
-      output += `<p style='margin-bottom:10px'>5. \tYou shall pay to the Facility Agent (for the account of the *{Arrangers}*) a fee of ${data.currency} ${data.arrangerFeeAmount} for the *{Arrangers}* under the Facility Agreement (an <b>"Arranger Fee"</b>). Each *{Arranger}* shall be entitled to its pro rata share of the Arranger Fee. Its pro rata share shall be equal to the proportion its Commitment bears to the Total Commitment of all the *{Arrangers}*</p>\n\n`;
+      output += `5. You shall pay to the Facility Agent (for the account of the *{Arrangers}*) a fee of ${data.currency} ${data.arrangerFeeAmount} for the *{Arrangers}* under the Facility Agreement (an <b>"Arranger Fee"</b>). Each *{Arranger}* shall be entitled to its pro rata share of the Arranger Fee. Its pro rata share shall be equal to the proportion its Commitment bears to the Total Commitment of all the *{Arrangers}*\n\n`;
       break;
 
     default:
       // Default to facility agent
-      output += `<p style='margin-bottom:10px'>\tOnly one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>).</p>`;
+      output += `Only one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>).\n\n`;
   }
 
   // Payment Modalities based on letter type
   switch (data.letterType) {
     case 'facilityAgent':
       if (data.hasFacilityAgentOptions) {
-        output += `<p style='margin-bottom:10px'>Payment Modalities Facility Agent (More than one type)</p>\n <p>6. \tThe Agency Fees shall become due and payable as set out below.</p>\n`;
-        output += `<p style='margin-bottom:10px'>(a) \tThe Set-Up Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the <b>"First Payment Date"</b>).</p>\n`;
+        output += `Payment Modalities Facility Agent (More than one type)\n6. The Agency Fees shall become due and payable as set out below.\n`;
+        output += `<li class="fee-sublist-item">(a) The Set-Up Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the <b>"First Payment Date"</b>), </li>.\n`;
 
         if (data.paymentModality === 'annual') {
-          output += `<p style='margin-bottom:10px'>(b) \tThe first payment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "FirstPayment Date")][the First Payment Date]. Each subsequent payment of the Facility Agent Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of\t<p>(i) \tthe *{Final Maturity Date}*, </p>\t<p>(ii) \tthe date we resign or are replaced as facility agent and </p>\t<p>(iii) \tthe date of prepayment of all *{Loans}* and cancellation - of all *{Commitments}*, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></p>\n`;
+          output += `(b) The first payment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "FirstPayment Date")][the First Payment Date]. Each subsequent payment of the Facility Agent Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of\n(i) the *{Final Maturity Date}*, \n(ii) the date we resign or are replaced as facility agent and \n(iii) the date of prepayment of all *{Loans}* and cancellation - of all *{Commitments}*, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).\n`;
         } else if (data.paymentModality === 'semiannual') {
-          output += `<p style='margin-bottom:10px'>(b) \tThe Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before the First Payment Date. Thereafter any subsequent installment of the FacilityAgent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of <p>(i) \tthe *{Final Maturity Date}*, </p>\t<p>(ii) \tthe date we resign or are replaced as agent and </p>\t<p>(iii) \tthe date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></p>\n`;
+          output += `(b) The Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before the First Payment Date. Thereafter any subsequent installment of the FacilityAgent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of \n(i) the *{Final Maturity Date}*, \n(ii) the date we resign or are replaced as agent and \n(iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).\n`;
         } else if (data.paymentModality === 'quarterly') {
-          output += `<p style='margin-bottom:10px'>(b) \tThe Facility Agent Fee shall be payable to us in equal quarterly instalments. Each instrument shall amount to a quarter of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date")] [the First Payment Date]. Thereafter any subsequent installment of the Facility Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of <p>(i) \tthe *{Final Maturity Date}*, </p>\t<p>(ii) \tthe date we resign or are replaced as agent and </p>\t<p>(iii) \tthe date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></p>\n`;
+          output += `(b) The Facility Agent Fee shall be payable to us in equal quarterly instalments. Each instrument shall amount to a quarter of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date")] [the First Payment Date]. Thereafter any subsequent installment of the Facility Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of \n(i) the *{Final Maturity Date}*, \n(ii) the date we resign or are replaced as agent and \n(iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).\n`;
         }
 
-        output += `\n<p>(c) \tThe Increase Fee shall be payable to the Facility Agent on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after the Increase Date and on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after each subsequent Increase Date.</p>\n`;
-        output += `<p style='margin-bottom:10px'>(d) \tThe first payment of the Debtdomain Fee is payable on or before the First Payment Date. Each subsequent payment of the Debtdomain Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until the Final Payment Date.</p></p>\n\n`;
+        output += `<li class="fee-sublist-item">\n(c) The Increase Fee shall be payable to the Facility Agent on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after the Increase Date and on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after each subsequent Increase Date.</li>\n`;
+        output += `(d) The first payment of the Debtdomain Fee is payable on or before the First Payment Date. Each subsequent payment of the Debtdomain Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until the Final Payment Date.\n\n`;
       }
       break;
 
@@ -181,32 +181,32 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
       output += `Payment Modalities Security Agent\n[Optional]\n`;
 
       if (data.paymentModality === 'annual') {
-        output += `<p style='margin-bottom:10px'>6. \tThe first payment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date"). Each subsequent payment of the Security Agent Fee shall be made annually in advance, commencing on the fist anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of<p>(i) \tthe *{Final Maturity Date}*,</p>\t<p>(ii) \tthe date we resign or are replaced as facility agent and </p>\t<p>(iii) \tthe date of prepayment of all *{Loans}* and cancellation of all *{Commitments}*, in each case under the Facility Agreement.</p></p>\n\n`;
+        output += `6. The first payment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date"). Each subsequent payment of the Security Agent Fee shall be made annually in advance, commencing on the fist anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of\n(i) the *{Final Maturity Date}*, \n(ii) the date we resign or are replaced as facility agent and \n(iii) the date of prepayment of all *{Loans}* and cancellation of all *{Commitments}*, in each case under the Facility Agreement.\n\n`;
       } else if (data.paymentModality === 'semiannual') {
-        output += `<p style='margin-bottom:10px'>\tThe Security Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Security Agent Fee. The first installment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date"). Thereafter any subsequent installment of the Security Agent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of <p>(i) \tthe *{Final Maturity Date}*,</p>\t<p>(ii) \tthe date we resign or are replaced as agent and </p>\t<p>(iii) \tthe date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.</p></p>\n\n`;
+        output += `The Security Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Security Agent Fee. The first installment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date"). Thereafter any subsequent installment of the Security Agent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of \n(i) the *{Final Maturity Date}*, \n(ii) the date we resign or are replaced as agent and \n(iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.\n\n`;
       } else if (data.paymentModality === 'quarterly') {
-        output += `<p style='margin-bottom:10px'>\tThe Security Agent Fee shall be payable to us in equal quarterly instalments. Each installment shall amount to a quarter of the annual Security Agent Fee. The first installment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Uti1isation Date}* under the Facility Agreement (the "First Payment Date"). Thereafter any subsequent installment of the Security Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of <p>(i) \tthe *{Final Maturity Date}*,</p>\t<p>(ii) \tthe date we resign or are replaced as agent and </p>\t<p>(iii) \tthe date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.</p></p>\n\n`;
+        output += `The Security Agent Fee shall be payable to us in equal quarterly instalments. Each installment shall amount to a quarter of the annual Security Agent Fee. The first installment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Uti1isation Date}* under the Facility Agreement (the "First Payment Date"). Thereafter any subsequent installment of the Security Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of \n(i) the *{Final Maturity Date}*, \n(ii) the date we resign or are replaced as agent and \n(iii) the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.\n\n`;
       }
       break;
 
     case 'globalCoordinator':
-      output += `<p style='margin-bottom:10px'>\tPayment Modalities Global Co-Ordinating Bank\n: <p>6. \tThe Global Co-ordinator Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.</p>`;
+      output += `Payment Modalities Global Co-Ordinating Bank\n: 6. The Global Co-ordinator Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.\n\n`;
       break;
 
     case 'coordinatingBank':
-      output += `<p style='margin-bottom:10px'>\tPayment Modalities Co-Ordinating Bank\n: <p>6. \tThe Co-ordinating Bank Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.</p></p>\n\n`;
+      output += `Payment Modalities Co-Ordinating Bank\n: 6. The Co-ordinating Bank Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.\n\n`;
       break;
 
     case 'upfront':
-      output += `<p style='margin-bottom:10px'>\tPayment Modalities Upfront\n: <p>6. \tThe Upfront Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.</p></p>\n\n`;
+      output += `Payment Modalities Upfront\n: 6. The Upfront Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.\n\n`;
       break;
 
     case 'mandatedLeadArranger':
-      output += `<p style='margin-bottom:10px'>\tPayment Modalities Mandate Lead Arranger\n: <p>6. \tThe Mandated Lead Arranger Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.</p></p>\n\n`;
+      output += `Payment Modalities Mandate Lead Arranger\n: 6. The Mandated Lead Arranger Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.\n\n`;
       break;
 
     case 'arranger':
-      output += `<p style='margin-bottom:10px'>\tPayment Modalities Arranger\n: <p>6. \tThe Arranger Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.</p></p>\n\n`;
+      output += `Payment Modalities Arranger\n: 6. The Arranger Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement.\n\n`;
       break;
 
     default:
@@ -337,7 +337,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
 const convertSimpleOutput = (letterText: string) => {
   if (!letterText) return '';
 
-  return letterText.replace(/\*\{\s*(?:\[|\{)?([^}\])]+)(?:\]|\})?(?:\s*\(([^}]+)\))?\s*\}\*/g, (_, ref, title) => {
+  return letterText.replace(/\*\{\s*(?:\[|\{)?([^}\]\)]+)(?:\]|\})?(?:\s*\(([^}]+)\))?\s*\}\*/g, (_, ref, title) => {
     if (ref && title) {
       return `${ref.trim()} (${title.trim()})`;
     }
@@ -361,8 +361,12 @@ const buildDefinitionReplacementMap = (
 };
 
 // Replace in text
-const normalizeLetterTerms = (letterText: string, definitions: string[], variations: Record<string, any>): string => {
-  const replacements = buildDefinitionReplacementMap(definitions, variations);
+const normalizeLetterTerms = (
+  letterText: string,
+  definitions: string[],
+  variations: Record<string, unknown>
+): string => {
+  const replacements = buildDefinitionReplacementMap(definitions, variations as Record<string, string>);
   const pattern = new RegExp(`\\b(${Object.keys(replacements).join('|')})\\b`, 'g');
   return letterText.replace(pattern, (match) => replacements[match]);
 };
