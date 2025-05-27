@@ -163,11 +163,11 @@ const LetterCreation = () => {
             </div>
 
             {/* Step Content */}
-            {activeStep === 0 && <FeeLetterSelection form={formData} onChange={handleFormChange} screenIndex={0} />}
-            {activeStep === 1 && <FeeTypes form={formData} onChange={handleFormChange} screenIndex={1} />}
-            {activeStep === 2 && <PaymentModalities form={formData} onChange={handleFormChange} screenIndex={2} />}
-            {activeStep === 3 && <BankDetails form={formData} onChange={handleFormChange} screenIndex={3} />}
-            {activeStep === 4 && <OtherDetails form={formData} onChange={handleFormChange} screenIndex={4} />}
+            {activeStep === 0 && <FeeLetterSelection form={formData} onChange={handleFormChange} screenIndex={1} />}
+            {activeStep === 1 && <FeeTypes form={formData} onChange={handleFormChange} screenIndex={2} />}
+            {activeStep === 2 && <PaymentModalities form={formData} onChange={handleFormChange} screenIndex={3} />}
+            {activeStep === 3 && <BankDetails form={formData} onChange={handleFormChange} screenIndex={4} />}
+            {activeStep === 4 && <OtherDetails form={formData} onChange={handleFormChange} screenIndex={5} />}
           </div>
 
           {/* Navigation Buttons */}

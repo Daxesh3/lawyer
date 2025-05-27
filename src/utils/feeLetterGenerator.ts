@@ -216,7 +216,7 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
 
   // Bank account details
   if (data.bankDetails.accountBank || data.bankDetails.accountNumber) {
-    output += `7. All payments made by you under this Fee Letter must be made in immediately available, freely transferable and cleared funds by crediting the following bank account \nAccount Bank: ${data.bankDetails.accountBank}\nAccount Holder: ${data.bankDetails.accountHolder}\nAccount No.: ${data.bankDetails.accountNumber}\nSort Code: ${data.bankDetails.sortCode}\nIBAN: ${data.bankDetails.iban}\nRef: ${data.borrowerName}-${data.currency} ${data.amount} ${data.facilityType} Facility Agreement\nor such other account as we may notify you in writing with {[${data.businessDays}]} *{Business Days'}* prior notice.\n\n`;
+    output += `7. All payments made by you under this Fee Letter must be made in immediately available, freely transferable and cleared funds by crediting the following bank account \nAccount Bank: ${data.bankDetails.accountBank}\nAccount Holder: ${data.bankDetails.accountHolder}\nAccount No.: ${data.bankDetails.accountNumber}\nSort Code: ${data.bankDetails.sortCode}\nIBAN: ${data.bankDetails.iban}\nRef: ${data.borrowerName}-${data.currency} ${data.amount} ${data.facilityType} Facility Agreement\nor such other account as we may notify you in writing with {[${data.businessDays}]} *{Business Days}* prior notice.\n\n`;
   } else {
     output += `7. A11 payments made by you under this Fee Letter must be made in immediately available, freely transferable and cleared funds by crediting our account (the details of which we have provided you with separately) or such other account as we may notify you in writing with {[${data.businessDays}]} *{Business Days'}*' prior notice.\n\n`;
   }
@@ -296,30 +296,41 @@ export const generateFeeLetterText = (data: IFeeLetterData, facilityUploadDetail
 
     output = output.replace(clausePattern, replaceClauseWithNumber);
   }
- 
-    if (data?.definitions.length > 0) {
-      const replaceDefinitionWordsWithSup = (text: string): string => {
-        return text.replace(/\*\{([^}]+)\}\*/g, (_, defWord) => {
-          // Extract initials from the definition word
-          const initials = defWord
-            .split(/\s+/)
-            .map((word: string) => word[0]?.toUpperCase() || '')
-            .join('');
 
-          return `${defWord} ${initials}`;
-        });
-      };
-      output = replaceDefinitionWordsWithSup(output);
-    }
+  if (data?.definitions.length > 0) {
+    const replaceDefinitionWordsWithSup = (text: string): string => {
+      return text.replace(/\*\{([^}]+)\}\*/g, (_, defWord) => {
+        // Extract initials from the definition word
+        const initials = defWord
+          .split(/\s+/)
+          .map((word: string) => word[0]?.toUpperCase() || '')
+          .join('');
 
-    if(data?.definitions?.length > 0 && !!data?.variations ) {
+        return `${defWord} ${initials}`;
+      });
+    };
+    output = replaceDefinitionWordsWithSup(output);
+  }
 
-      output = normalizeLetterTerms(output, data?.definitions, data?.variations);
+  if (data?.definitions?.length > 0 && !!data?.variations) {
+    output = normalizeLetterTerms(output, data?.definitions, data?.variations);
 
     // Replace variations in letter content
-    }
+  }
 
+  output = convertSimpleOutput(output);
   return output;
+};
+
+const convertSimpleOutput = (letterText: string) => {
+  if (!letterText) return '';
+
+  return letterText.replace(/\*\{\s*(?:\[|\{)?([^}\]\)]+)(?:\]|\})?(?:\s*\(([^}]+)\))?\s*\}\*/g, (_, ref, title) => {
+    if (ref && title) {
+      return `${ref.trim()} (${title.trim()})`;
+    }
+    return ref.trim();
+  });
 };
 
 const buildDefinitionReplacementMap = (
@@ -338,7 +349,7 @@ const buildDefinitionReplacementMap = (
 };
 
 // Replace in text
-const normalizeLetterTerms = (letterText: string, definitions:string[], variations: Record<string,any>): string => {
+const normalizeLetterTerms = (letterText: string, definitions: string[], variations: Record<string, any>): string => {
   const replacements = buildDefinitionReplacementMap(definitions, variations);
   const pattern = new RegExp(`\\b(${Object.keys(replacements).join('|')})\\b`, 'g');
   return letterText.replace(pattern, (match) => replacements[match]);
