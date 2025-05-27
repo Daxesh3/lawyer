@@ -50,6 +50,10 @@ const FeeLetter: React.FC = () => {
     },
     natureOfDocument: 'neutral',
     facilityAgreementUpload: '',
+    indexClauses: [],
+    definitions: [],
+    variations: {},
+    refundableTerms: 'refundable',
   });
 
   const [isGenerating, setIsGenerating] = useState(false);

@@ -26,7 +26,7 @@ const LetterCreation = () => {
       await handleFacilityAgreementUpload(formData.facilityAgreementFile);
     }
     // Simulate API call with a delay
-    await new Promise((resolve) => setTimeout(resolve, 10));
+    await new Promise((resolve) => setTimeout(resolve, 7000));
     setIsGenerating(false);
     setHasGenerated(true);
   };
