@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import FeeLetterForm from './FeeLetterForm';
 import FeeLetterOutput from './FeeLetterOutput';
 import { IFeeLetterData } from '../../../types/feeLetterTypes';
-import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
 
 const FeeLetter: React.FC = () => {
   const [feeLetterData, setFeeLetterData] = useState<IFeeLetterData>({
@@ -50,6 +49,7 @@ const FeeLetter: React.FC = () => {
     },
     natureOfDocument: 'neutral',
     facilityAgreementUpload: '',
+    refundableTerms: 'refundable',
   });
 
   const [isGenerating, setIsGenerating] = useState(false);
@@ -86,12 +86,7 @@ const FeeLetter: React.FC = () => {
 
       <div className="bg-white rounded-lg shadow-md p-6 h-fit sticky top-4">
         <h2 className="text-xl font-bold mb-6 text-blue-900">Generated Fee Letter</h2>
-        <FeeLetterOutput
-          isGenerating={isGenerating}
-          hasGenerated={hasGenerated}
-          setHasGenerated={setHasGenerated}
-          facilityUploadDetails={{} as IFacilityUploadDetails}
-        />
+        <FeeLetterOutput isGenerating={isGenerating} hasGenerated={hasGenerated} setHasGenerated={setHasGenerated} />
       </div>
     </div>
   );

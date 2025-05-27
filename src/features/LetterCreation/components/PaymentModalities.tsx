@@ -12,7 +12,7 @@ const PaymentModalities: React.FC<IFeeTypesProps> = ({ form, onChange, screenInd
           <span className="text-red-500 text-xs align-super ml-1">*</span>
         </label>
         <div className="space-x-4">
-          <label className="inline-flex items-center text-white">
+          <label className="inline-flex items-center text-white cursor-pointer">
             <input
               type="radio"
               name="paymentModality"
@@ -24,7 +24,7 @@ const PaymentModalities: React.FC<IFeeTypesProps> = ({ form, onChange, screenInd
             <span className="ml-2 text-sm text-white">Annual</span>
           </label>
 
-          <label className="inline-flex items-center text-white">
+          <label className="inline-flex items-center text-white cursor-pointer">
             <input
               type="radio"
               name="paymentModality"
@@ -36,7 +36,7 @@ const PaymentModalities: React.FC<IFeeTypesProps> = ({ form, onChange, screenInd
             <span className="ml-2 text-sm text-white">Semi-Annual</span>
           </label>
 
-          <label className="inline-flex items-center text-white">
+          <label className="inline-flex items-center text-white cursor-pointer">
             <input
               type="radio"
               name="paymentModality"

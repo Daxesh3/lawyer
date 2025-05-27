@@ -2,13 +2,12 @@ import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import React, { useState } from 'react';
 import letterGeneration from '../../../assets/Json/LetterGenerate.json';
-import { API_VITE_API_FACILITY_FILE_UPLOAD, formatToUSD, numberFields } from '../../../shared/constants/constant';
+import { formatToUSD, numberFields } from '../../../shared/constants/constant';
 import FeeLetterOutput from '../../FeeLetter/components/FeeLetterOutput';
 import FeeTypes from '../components/FeeTypes';
 import OtherDetails from '../components/OtherDetails';
 import PaymentModalities from '../components/PaymentModalities';
 import { STEPS } from '../constants/Letter.constants';
-import { IFacilityUploadDetails } from '../interface/Letter.interface';
 import { useLetterContext } from '../context/LetterContext';
 import FeeLetterSelection from '../components/FeeLetterSelection';
 import BankDetails from '../components/BankDetails';
@@ -16,37 +15,16 @@ import BankDetails from '../components/BankDetails';
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [hasGenerated, setHasGenerated] = useState(false);
-  const [facilityUploadDetails, setFacilityUploadDetails] = useState<IFacilityUploadDetails>();
+  const [hasGenerated, setHasGenerated] = useState(true);
   const { formData, updateFormField } = useLetterContext();
 
   const handleGenerate = async () => {
     setIsGenerating(true);
-    if (formData.facilityAgreementFile) {
-      await handleFacilityAgreementUpload(formData.facilityAgreementFile);
-    }
+
     // Simulate API call with a delay
-    await new Promise((resolve) => setTimeout(resolve, 10));
+    await new Promise((resolve) => setTimeout(resolve, 7000));
     setIsGenerating(false);
     setHasGenerated(true);
-  };
-
-  const handleFacilityAgreementUpload = async (file: File) => {
-    if (!file || file) return;
-
-    const formData = new FormData();
-    formData.append('file', file);
-    try {
-      const response = await fetch(API_VITE_API_FACILITY_FILE_UPLOAD, {
-        method: 'POST',
-        body: formData,
-      });
-      if (!response.ok) throw new Error('Upload failed');
-      const data: IFacilityUploadDetails = await response.json();
-      setFacilityUploadDetails(data);
-    } catch (error) {
-      console.error('Upload error:', error);
-    }
   };
 
   const handleFormChange = (
@@ -207,12 +185,7 @@ const LetterCreation = () => {
           </div>
         </div>
       ) : (
-        <FeeLetterOutput
-          isGenerating={isGenerating}
-          hasGenerated={hasGenerated}
-          facilityUploadDetails={facilityUploadDetails as IFacilityUploadDetails}
-          setHasGenerated={setHasGenerated}
-        />
+        <FeeLetterOutput isGenerating={isGenerating} hasGenerated={hasGenerated} setHasGenerated={setHasGenerated} />
       )}
     </div>
   );

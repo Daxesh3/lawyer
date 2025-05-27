@@ -3,7 +3,6 @@ import { saveAs } from 'file-saver';
 import Lottie from 'lottie-react';
 import React from 'react';
 import letterGeneration from '../../../assets/Json/LetterGenerate.json';
-import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
 import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
 import { useLetterContext } from '../../LetterCreation/context/LetterContext';
 
@@ -17,22 +16,17 @@ interface FeeLetterOutputProps {
   isGenerating: boolean;
   hasGenerated: boolean;
   setHasGenerated: (hasGenerated: boolean) => void;
-  facilityUploadDetails: IFacilityUploadDetails;
 }
 
-const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
-  isGenerating,
-  hasGenerated,
-  setHasGenerated,
-  facilityUploadDetails,
-}) => {
+const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGenerated, setHasGenerated }) => {
   const { formData, coverFormData, letterIndexSelections } = useLetterContext();
 
   const handleCopy = () => {
-    const text = generateFeeLetterText(
-      { ...formData, ...coverFormData, indexClauses: letterIndexSelections.filter(Boolean) },
-      facilityUploadDetails
-    );
+    const text = generateFeeLetterText({
+      ...formData,
+      ...coverFormData,
+      indexClauses: letterIndexSelections.filter(Boolean),
+    });
     if (text) {
       navigator.clipboard.writeText(text);
     }
@@ -78,8 +72,12 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
               after: 200,
               line: 360, // 1.5 line spacing
             },
+            indent: {
+              left: 720, // 0.5 inch
+              hanging: 360, // hanging indent for numbers like 1., 2., etc.
+            },
+            alignment: alignment as AlignmentType,
             children: runs,
-            alignment: alignment,
           });
         };
 
@@ -89,9 +87,9 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
             const segments = node.textContent.split('\n');
 
             segments.forEach((segment, index) => {
-              if (segment) {
+              if (segment.trim()) {
                 currentParagraphRuns.push(
-                  new TextRun({ text: segment, bold: styles.bold, italics: styles.italics, size: 24 })
+                  new TextRun({ text: segment.trim(), bold: styles.bold, italics: styles.italics, size: 24 })
                 );
               }
               if (index < segments.length - 1) {
@@ -104,6 +102,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
             if (element.tagName === 'BR') {
               currentParagraphRuns.push(new TextRun({ break: 1 }));
             } else if (element.tagName === 'P' || element.tagName === 'DIV') {
+              // Flush previous content
               const paragraph = createParagraph(currentParagraphRuns, currentParagraphAlignment);
               if (paragraph) docxElements.push(paragraph);
 
@@ -184,10 +183,11 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({
           {hasGenerated ? (
             <div
               dangerouslySetInnerHTML={{
-                __html: generateFeeLetterText(
-                  { ...formData, ...coverFormData, indexClauses: letterIndexSelections.filter(Boolean) },
-                  facilityUploadDetails
-                ),
+                __html: generateFeeLetterText({
+                  ...formData,
+                  ...coverFormData,
+                  indexClauses: letterIndexSelections.filter(Boolean),
+                }),
               }}
             />
           ) : (
