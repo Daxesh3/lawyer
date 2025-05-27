@@ -21,6 +21,7 @@ const DROPDOWN_OPTIONS = [
 const LetterIndex: React.FC = () => {
   const { formData, updateFormField, letterIndexSelections, setLetterIndexSelections } = useLetterContext();
   const [facilityAgreementDetails, setFacilityAgreementDetails] = useState(formData?.indexClauses?.length > 0 || false);
+  const [isUploadTermsheet, setIsUploadingTermsheet] = useState(false);
   const [isUpload, setIsUploading] = useState(false);
 
   // Helper: get all selected titles except for the current row
@@ -44,6 +45,8 @@ const LetterIndex: React.FC = () => {
       updateFormField('indexClauses', data?.indexClauses || []);
       updateFormField('definitions', data?.definitions || []);
       updateFormField('variations', data?.variations || {});
+      // handleFormChange('facilityAgreementName', file.name);
+
       setIsUploading(false);
 
       // IMPORTANT: Populate letterIndexSelections from uploaded data if available
@@ -104,45 +107,92 @@ const LetterIndex: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center">
-        <input
-          type="file"
-          accept=".docx,.pdf"
-          id="facilityAgreementUpload"
-          className="hidden"
-          disabled={isUpload}
-          onChange={(e) => {
-            const file = e.target.files && e.target.files[0];
-            if (file) {
-              const allowedTypes = [
-                'application/pdf',
-                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-              ];
-              if (!allowedTypes.includes(file.type)) {
-                handleFormChange('facilityAgreementUpload', null);
-                e.target.value = '';
-                return;
+      <div className="flex justify-start items-start">
+        <div className="flex flex-col items-center justify-center">
+          <input
+            type="file"
+            accept=".docx,.pdf"
+            id="TermSheetUpload"
+            className="hidden"
+            disabled={isUploadTermsheet}
+            onChange={(e) => {
+              setIsUploadingTermsheet(true);
+              const file = e.target.files && e.target.files[0];
+              if (file) {
+                const allowedTypes = [
+                  'application/pdf',
+                  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                ];
+                if (!allowedTypes.includes(file.type)) {
+                  handleFormChange('TermSheetUpload', null);
+                  e.target.value = '';
+                  return;
+                }
+                // handleTermSheetUpload(file);
+                setTimeout(() => {
+                  handleFormChange('TermSheetUpload', file.name);
+                  setIsUploadingTermsheet(false);
+                }, 2000);
               }
-              handleFacilityAgreementUpload(file);
-            }
-          }}
-        />
-        <label
-          htmlFor="facilityAgreementUpload"
-          className="flex w-fit items-center bg-blue-400 text-[#FBFBFB] p-2 rounded-md border border-[#454545] cursor-pointer hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors !ml-0"
-        >
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-          </svg>
-          {!isUpload ? 'Upload Facility Agreement' : 'Uploading Facility Agreement... '}
-        </label>
-        {formData.facilityAgreementUpload && (
-          <div className="flex items-center mt-2">
-            <p className="text-[#FBFBFB] text-xs underline truncate max-w-[240px] opacity-80 ml-2">
-              {formData.facilityAgreementUpload}
-            </p>
-          </div>
-        )}
+            }}
+          />
+          <label
+            htmlFor="TermSheetUpload"
+            className="flex w-fit items-center bg-blue-400 text-[#FBFBFB] p-2 rounded-md border border-[#454545] cursor-pointer hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors !ml-0"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+            </svg>
+            {!isUploadTermsheet ? 'Upload Termsheet' : 'Uploading Termsheet... '}
+          </label>
+          {formData.TermSheetUpload && (
+            <div className="flex items-center mt-2">
+              <p className="text-[#FBFBFB] text-xs underline truncate max-w-[240px] opacity-80 ml-2">
+                {formData.TermSheetUpload}
+              </p>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col items-center justify-center ml-4">
+          <input
+            type="file"
+            accept=".docx,.pdf"
+            id="facilityAgreementUpload"
+            className="hidden"
+            disabled={isUpload}
+            onChange={(e) => {
+              const file = e.target.files && e.target.files[0];
+              if (file) {
+                const allowedTypes = [
+                  'application/pdf',
+                  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                ];
+                if (!allowedTypes.includes(file.type)) {
+                  handleFormChange('facilityAgreementUpload', null);
+                  e.target.value = '';
+                  return;
+                }
+                handleFacilityAgreementUpload(file);
+              }
+            }}
+          />
+          <label
+            htmlFor="facilityAgreementUpload"
+            className="flex w-fit items-center bg-blue-400 text-[#FBFBFB] p-2 rounded-md border border-[#454545] cursor-pointer hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors !ml-0"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+            </svg>
+            {!isUpload ? 'Upload Facility Agreement' : 'Uploading Facility Agreement... '}
+          </label>
+          {formData.facilityAgreementName && (
+            <div className="flex items-center mt-2">
+              <p className="text-[#FBFBFB] text-xs underline truncate max-w-[240px] opacity-80 ml-2">
+                {formData.facilityAgreementName}
+              </p>
+            </div>
+          )}
+        </div>
       </div>
       {!!facilityAgreementDetails && (
         <div className="w-full max-w-3xl mx-auto bg-[#232323] rounded-xl p-8 shadow-lg mt-12">

@@ -66,24 +66,34 @@ const PaymentModalities: React.FC<IFeeTypesProps> = ({ form, onChange, screenInd
         />
       </div>
 
-      <div className="mt-4">
-        <label htmlFor="governingLaw" className="block text-sm font-medium text-white mb-1">
-          Governing Law
+      <div>
+        <p className="mt-4 mb-2 block text-sm text-white">
+          Refundable Terms
           <span className="text-red-500 text-xs align-super ml-1">*</span>
+        </p>
+        <label className="inline-flex items-center text-white mr-4">
+          <input
+            type="radio"
+            name="paymentModality"
+            value="annual"
+            checked={form.paymentModality === 'annual'}
+            onChange={(e) => onChange('paymentModality', e.target.value)}
+            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+          />
+          <span className="ml-2 text-sm text-white">Refundable</span>
         </label>
-        <select
-          id="governingLaw"
-          name="governingLaw"
-          value={form.governingLaw}
-          onChange={(e) => onChange('governingLaw', e.target.value)}
-          className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
-        >
-          <option value="">Select Governing Law</option>
-          <option value="English">English</option>
-          <option value="New York">New York</option>
-          <option value="Singapore">Singapore</option>
-          <option value="Hong Kong">Hong Kong</option>
-        </select>
+
+        <label className="inline-flex items-center text-white">
+          <input
+            type="radio"
+            name="paymentModality"
+            value="semiannual"
+            checked={form.paymentModality === 'semiannual'}
+            onChange={(e) => onChange('paymentModality', e.target.value)}
+            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+          />
+          <span className="ml-2 text-sm text-white">Non Refundable</span>
+        </label>
       </div>
     </div>
   );

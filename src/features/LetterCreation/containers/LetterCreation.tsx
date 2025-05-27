@@ -4,13 +4,14 @@ import React, { useState } from 'react';
 import letterGeneration from '../../../assets/Json/LetterGenerate.json';
 import { API_VITE_API_FACILITY_FILE_UPLOAD, formatToUSD, numberFields } from '../../../shared/constants/constant';
 import FeeLetterOutput from '../../FeeLetter/components/FeeLetterOutput';
-import BankDetails from '../components/BankDetails';
 import FeeTypes from '../components/FeeTypes';
 import OtherDetails from '../components/OtherDetails';
 import PaymentModalities from '../components/PaymentModalities';
 import { STEPS } from '../constants/Letter.constants';
 import { IFacilityUploadDetails } from '../interface/Letter.interface';
 import { useLetterContext } from '../context/LetterContext';
+import FeeLetterSelection from '../components/FeeLetterSelection';
+import BankDetails from '../components/BankDetails';
 
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -73,6 +74,9 @@ const LetterCreation = () => {
   const handleDisable = (): boolean => {
     switch (activeStep) {
       case 0: {
+        return !formData.letterType;
+      }
+      case 1: {
         const hasAnyFeeType = Object.values(formData.feeTypes).some((value) => value);
         if (!hasAnyFeeType) return true;
 
@@ -92,15 +96,15 @@ const LetterCreation = () => {
 
         return hasFeeAmount;
       }
-      case 1: {
+      case 2: {
         const paymentFields = ['paymentModality', 'businessDays', 'governingLaw'];
         return paymentFields.some((field) => !formData[field as keyof typeof formData]);
       }
-      case 2: {
+      case 3: {
         const bankFields = ['accountBank', 'accountHolder', 'accountNumber', 'sortCode', 'iban'];
         return bankFields.some((field) => !formData.bankDetails[field as keyof typeof formData.bankDetails]);
       }
-      case 3: {
+      case 4: {
         const otherFields = ['natureOfDocument'];
         const hasRequiredFields = otherFields.some((field) => !formData[field as keyof typeof formData]);
         return hasRequiredFields;
@@ -159,10 +163,11 @@ const LetterCreation = () => {
             </div>
 
             {/* Step Content */}
-            {activeStep === 0 && <FeeTypes form={formData} onChange={handleFormChange} screenIndex={1} />}
-            {activeStep === 1 && <PaymentModalities form={formData} onChange={handleFormChange} screenIndex={2} />}
-            {activeStep === 2 && <BankDetails form={formData} onChange={handleFormChange} screenIndex={3} />}
-            {activeStep === 3 && <OtherDetails form={formData} onChange={handleFormChange} screenIndex={4} />}
+            {activeStep === 0 && <FeeLetterSelection form={formData} onChange={handleFormChange} screenIndex={1} />}
+            {activeStep === 1 && <FeeTypes form={formData} onChange={handleFormChange} screenIndex={2} />}
+            {activeStep === 2 && <PaymentModalities form={formData} onChange={handleFormChange} screenIndex={3} />}
+            {activeStep === 3 && <BankDetails form={formData} onChange={handleFormChange} screenIndex={4} />}
+            {activeStep === 4 && <OtherDetails form={formData} onChange={handleFormChange} screenIndex={5} />}
           </div>
 
           {/* Navigation Buttons */}
