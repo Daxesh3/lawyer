@@ -15,4 +15,5 @@ export interface IFacilityUploadDetails {
   indexClauses: Clause[];
   definitions: string[];
   variations: Record<string, string>;
+  definitionsWithDetail: Record<string, string>;
 }

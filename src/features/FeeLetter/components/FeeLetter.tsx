@@ -53,7 +53,11 @@ const FeeLetter: React.FC = () => {
     indexClauses: [],
     definitions: [],
     variations: {},
+    definitionsWithDetail: {},
     refundableTerms: 'refundable',
+    jurisdictionProvision: 'Standalone',
+    vatProvision: 'Standalone',
+    grossUpProvision: 'Standalone',
   });
 
   const [isGenerating, setIsGenerating] = useState(false);

@@ -63,6 +63,7 @@ export const INITIAL_FORM: IFeeLetterData = {
   indexClauses: [],
   definitions: [],
   variations: {},
+  definitionsWithDetail: {},
   refundableTerms: 'refundable',
   jurisdictionProvision: 'Standalone',
   vatProvision: 'Standalone',

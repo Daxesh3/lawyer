@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLetterContext } from '../../LetterCreation/context/LetterContext';
 import { API_VITE_API_FACILITY_FILE_UPLOAD, formatToUSD, numberFields } from '../../../shared/constants/constant';
 import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
+import { isEmpty } from 'lodash';
 
 interface IIndexClause {
   clause: number;
@@ -45,6 +46,7 @@ const LetterIndex: React.FC = () => {
       updateFormField('indexClauses', data?.indexClauses || []);
       updateFormField('definitions', data?.definitions || []);
       updateFormField('variations', data?.variations || {});
+      updateFormField('definitionsWithDetail', data?.definitionsWithDetail || {});
       // handleFormChange('facilityAgreementName', file.name);
 
       setIsUploading(false);
@@ -235,8 +237,30 @@ const LetterIndex: React.FC = () => {
               </tbody>
             </table>
           </div>
-          {/* For demonstration: show the current selection array */}
-          {/* <pre className="text-xs text-gray-400 mt-4">{JSON.stringify(selections.filter(Boolean), null, 2)}</pre> */}
+          {!isEmpty(formData.definitionsWithDetail) && (
+            <>
+              <h2 className="text-xl font-bold mb-8 text-white text-center">Definitions</h2>
+              <table className="min-w-full border border-[#454545] rounded-lg overflow-hidden">
+                <thead>
+                  <tr className="bg-[#333] text-white">
+                    <th className="px-4 py-2 text-left font-semibold">Term</th>
+                    <th className="px-4 py-2 text-left font-semibold">Definition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {!isEmpty(formData.definitionsWithDetail) &&
+                    Object.entries(formData.definitionsWithDetail).map(([label, def]: any, idx) => {
+                      return (
+                        <tr key={idx} className="border-b border-[#454545] hover:bg-[#2a2a2a]">
+                          <td className="px-4 py-2 text-white w-16">{label}</td>
+                          <td className="px-4 py-2 text-white">{def ?? ''}</td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </>
+          )}
         </div>
       )}
     </>
