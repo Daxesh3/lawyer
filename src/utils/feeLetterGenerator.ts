@@ -1,4 +1,5 @@
 import { IFeeLetterData } from '../types/feeLetterTypes';
+import isEmpty from 'lodash/isEmpty';
 
 export const generateFeeLetterText = (data: IFeeLetterData) => {
   let output: string = '';
@@ -165,24 +166,23 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
         output += `<div class='flex ml-6'><p class='ml-8 mr-2'>(a) </p><p>The Set-Up Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the <b>"First Payment Date"</b>).</p></div>\n`;
 
         if (data.paymentModality === 'annual') {
-          output += `<div class='flex flex-col'><div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>The first payment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "FirstPayment Date")][the First Payment Date]. Each subsequent payment of the Facility Agent Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of
-          </p></div>
-        <div class='flex flex-col mt-3'>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div>
+          output += `<div class='flex flex-col'><div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>The first payment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "FirstPayment Date")][the First Payment Date]. Each subsequent payment of the Facility Agent Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of</p></div>
+        
+        <div class='flex ml-6 mt-4'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div>
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as facility agent and</p></div>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all *{Loans}* and cancellation - of all *{Commitments}*, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div></div>\n`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all *{Loans}* and cancellation - of all *{Commitments}*, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div>\n`;
         } else if (data.paymentModality === 'semiannual') {
           output += `<div class='flex flex-col'><div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>The Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before the First Payment Date. Thereafter any subsequent installment of the FacilityAgent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of </p></div>
-        <div class='flex flex-col mt-3'>
+        
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div> 
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as agent and</p></div> 
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div></div>\n`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div>\n`;
         } else if (data.paymentModality === 'quarterly') {
           output += `<div class='flex flex-col'><div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>The Facility Agent Fee shall be payable to us in equal quarterly instalments. Each instrument shall amount to a quarter of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date")] [the First Payment Date]. Thereafter any subsequent installment of the Facility Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of </p></div>
-        <div class='flex flex-col mt-3'>
+        
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div> 
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as agent and</p></div>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div></div>\n`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div>\n`;
         }
 
         output += `<div class='flex ml-6'><p class='ml-8 mr-2'>(c) </p><p>The Increase Fee shall be payable to the Facility Agent on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after the Increase Date and on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after each subsequent Increase Date.</p></div>\n`;
@@ -195,22 +195,22 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
 
       if (data.paymentModality === 'annual') {
         output += `<div class='flex flex-col'><div class='flex ml-6'><p class='w-5 mr-2'>6.</p><p>The first payment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date"). Each subsequent payment of the Security Agent Fee shall be made annually in advance, commencing on the fist anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of</p></div>
-        <div class='flex flex-col mt-3'>
+        
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div>
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as facility agent and</p></div>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all *{Loans}* and cancellation of all *{Commitments}*, in each case under the Facility Agreement.</p></div></div></div>`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all *{Loans}* and cancellation of all *{Commitments}*, in each case under the Facility Agreement.</p></div></div>`;
       } else if (data.paymentModality === 'semiannual') {
         output += `<div class='flex flex-col'><div class='flex ml-6'><p class='w-5 mr-2'>6.</p><p>The Security Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Security Agent Fee. The first installment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date"). Thereafter any subsequent installment of the Security Agent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of</p></div>
-        <div class='flex flex-col mt-3'>
+       
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div>
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as agent and</p></div>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.</p></div></div></div>`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.</p></div></div>`;
       } else if (data.paymentModality === 'quarterly') {
         output += `<div class='flex flex-col'><div class='flex ml-6'><p class='w-5 mr-2'>6.</p><p>The Security Agent Fee shall be payable to us in equal quarterly instalments. Each installment shall amount to a quarter of the annual Security Agent Fee. The first installment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Uti1isation Date}* under the Facility Agreement (the "First Payment Date"). Thereafter any subsequent installment of the Security Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of </p></div>
-       <div class='flex flex-col mt-3'>
+       
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div>
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as agent and</p></div>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.</p></div></div></div>`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.</p></div></div>`;
       }
       break;
 
@@ -256,17 +256,16 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
 
   //For Gross Up Provision
   if (data.grossUpProvision === 'Standalone') {
-    output += `<div class='flex ml-6'><p class='w-5 mr-2'>8.</p>Clause *{ {12} (Tax Gross Up and Indemnities)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.</div>\n`;
+    output += `<div class='flex ml-6'><p class='w-5 mr-2'>8.</p>If any *{Tax}* or amount in respect of a *{Tax}* must be deducted or withheld from any amount payable or paid by the ${data.borrowerName} on account of or by reference to any payment by or obligation of the ${data.borrowerName} hereunder, the ${data.borrowerName} shall pay such additional amounts as may be necessary to ensure that the recipient of such payment receives a net amount equal to the full amount which we would have received from the ${data.borrowerName} had such *{Tax}* not been made.</div>\n`;
   } else {
-    output += `<div class='flex ml-6'><p class='w-5 mr-2'>8.</p>If any *{Tax}* or amount in respect of a *{Tax}* must be deducted or withheld from any amount payable or paid by the ${data.borrowerName} on account of or by reference to any payment by or obligation of the ${data.borrowerName} hereunder, the ${data.borrowerName} shall pay such additional amounts as may be necessary to ensure that the recipient of such payment receives a net amount equal to the full amount which we would have received from the ${data.borrowerName} had such *{Tax}* not been made.</div>
-\n`;
+    output += `<div class='flex ml-6'><p class='w-5 mr-2'>8.</p>Clause *{ {12} (Tax Gross Up and Indemnities)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.</div>\n`;
   }
 
   //For VAT Provision
   if (data.vatProvision === 'Standalone') {
-    output += `<div class='flex ml-6'><p class='w-5 mr-2'>9.</p>Clause *{ {¢} (VAT)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.</div>\n`;
-  } else {
     output += `<div class='flex ml-6'><p class='w-5 mr-2'>9.</p><p>All payments in connection with this Fee Letter are exclusive of any value added tax or similar charge ("<b>VAT</b>"). If VAT is chargeable, the ${data.borrowerName} shall also and at the same time pay to the recipient of the relevant payment an amount equal to the amount of the VAT.</p></div>\n`;
+  } else {
+    output += `<div class='flex ml-6'><p class='w-5 mr-2'>9.</p>Clause *{ {¢} (VAT)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.</div>\n`;
   }
 
   // Fee refunds - only for facility agent and security agent
@@ -310,13 +309,13 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
   output += `<div class='flex ml-6'><p class='w-5 mr-2'>16.</p>Clause {¢} (Enforcement) of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the Finance Documents shall be construed as references to this Fee Letter.</div>\n`;
 
   // Signature blocks
-  output += `By signing and returning a copy of this Fee Letter to the ${agentName}, you acknowledge your agreement to its terms.\n\n`;
-  output += `Yours faithfully\n\n\n\n`;
-  output += `_______________\n\n`;
-  output += `For and on behalf of \n<b>${getSenderName()}</b>\n\n\n`;
-  output += `Agreed and accepted by\n\n`;
-  output += `_______________\n\n`;
-  output += `For and on behalf of \n<b>${data.borrowerName}</b>\n`;
+  output += `<p>By signing and returning a copy of this Fee Letter to the ${agentName}, you acknowledge your agreement to its terms.</p>\n`;
+  output += `<p class='mb-10'>Yours faithfully</p>`;
+  output += `<p class='mb-6'>_______________</p>`;
+  output += `<div class='flex flex-col mb-10'><p class='mb-1'>For and on behalf of</p><p><b>${getSenderName()}</b></p></div>`;
+  output += `<div><p class='mb-10'>Agreed and accepted by</p></div>`;
+  output += `<p class='mb-6'>_______________</p>`;
+  output += `<div class='flex flex-col mb-2'><p class='mb-1'>For and on behalf of</p><p><b>${data.borrowerName}</b></p></div>`;
 
   if (data?.indexClauses.length > 0) {
     // Updated regex to match all clause formats:
@@ -356,7 +355,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
     output = replaceDefinitionWordsWithSup(output);
   }
 
-  if (data?.definitions?.length > 0 && !!data?.variations) {
+  if (data?.definitions?.length > 0 && !isEmpty(data?.variations)) {
     output = normalizeLetterTerms(output, data?.definitions, data?.variations);
 
     // Replace variations in letter content
