@@ -8,15 +8,15 @@ interface IIndexClause {
   title: string;
 }
 
-const DROPDOWN_OPTIONS = [
-  'Definitions and Interpretation',
-  'Construction',
-  'Rights of Third Parties',
-  'Tax Gross Up and Indemnities',
-  'VAT',
-  'Governing Law',
-  'Enforcement',
-];
+// const DROPDOWN_OPTIONS = [
+//   'Definitions and Interpretation',
+//   'Construction',
+//   'Rights of Third Parties',
+//   'Tax Gross Up and Indemnities',
+//   'VAT',
+//   'Governing Law',
+//   'Enforcement',
+// ];
 
 const LetterIndex: React.FC = () => {
   const { formData, updateFormField, letterIndexSelections, setLetterIndexSelections } = useLetterContext();
@@ -25,8 +25,8 @@ const LetterIndex: React.FC = () => {
   const [isUpload, setIsUploading] = useState(false);
 
   // Helper: get all selected titles except for the current row
-  const getSelectedTitles = (excludeIdx: number) =>
-    letterIndexSelections.map((sel, idx) => (idx !== excludeIdx && sel ? sel.title : null)).filter(Boolean) as string[];
+  // const getSelectedTitles = (excludeIdx: number) =>
+  //   letterIndexSelections.map((sel, idx) => (idx !== excludeIdx && sel ? sel.title : null)).filter(Boolean) as string[];
 
   const handleFacilityAgreementUpload = async (file: File) => {
     if (!file) return;
@@ -67,15 +67,15 @@ const LetterIndex: React.FC = () => {
     }
   };
 
-  const handleSelect = (idx: number, value: string) => {
-    const updatedSelections = [...letterIndexSelections];
-    if (value === '') {
-      updatedSelections[idx] = null;
-    } else {
-      updatedSelections[idx] = { clause: idx + 1, title: value };
-    }
-    setLetterIndexSelections(updatedSelections);
-  };
+  // const handleSelect = (idx: number, value: string) => {
+  //   const updatedSelections = [...letterIndexSelections];
+  //   if (value === '') {
+  //     updatedSelections[idx] = null;
+  //   } else {
+  //     updatedSelections[idx] = { clause: idx + 1, title: value };
+  //   }
+  //   setLetterIndexSelections(updatedSelections);
+  // };
 
   const handleFormChange = (
     fieldOrEvent: string | React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
@@ -208,12 +208,13 @@ const LetterIndex: React.FC = () => {
               <tbody>
                 {formData.indexClauses.length > 0 &&
                   Array.from({ length: 24 }).map((_, idx) => {
-                    const selectedTitles = getSelectedTitles(idx);
+                    // const selectedTitles = getSelectedTitles(idx);
                     return (
                       <tr key={idx} className="border-b border-[#454545] hover:bg-[#2a2a2a]">
                         <td className="px-4 py-2 text-white w-16">{idx + 1}</td>
-                        <td className="px-4 py-2">
-                          <select
+                        <td className="px-4 py-2 text-white">
+                          {getClauseValue(idx)?.title || ''}
+                          {/* <select
                             className="w-full px-3 py-2 border border-[#454545] rounded-md bg-[#191919] text-[#FBFBFB] focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={getClauseValue(idx)?.title || ''}
                             onChange={(e) => handleSelect(idx, e.target.value)}
@@ -226,7 +227,7 @@ const LetterIndex: React.FC = () => {
                                 {option}
                               </option>
                             ))}
-                          </select>
+                          </select> */}
                         </td>
                       </tr>
                     );

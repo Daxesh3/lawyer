@@ -144,7 +144,7 @@ const Cover = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-white mb-1">
-                    What is the quantum of the Facility?
+                    What is the quantum of the Facility? {form.currency ? `(in ${form.currency})` : ''}
                     <span className="text-red-500 text-xs align-super ml-1">*</span>
                   </label>
                   <input

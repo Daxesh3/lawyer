@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import { IFeeLetterData } from '../types/feeLetterTypes';
 import isEmpty from 'lodash/isEmpty';
 
@@ -113,14 +114,14 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
           output += `<div class='flex ml-6'><p class='ml-8 mr-2'>(a) </p><p>a one-off set-up fee in an amount of ${data.currency} ${data.setupFeeAmount} (the <b>"Set-Up Fee"</b>),</p></div>\n`;
         }
 
-        output += `<div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>a fee of ${data.currency}${data.facilityAgentFeeAmount} per annum, which is payable in advance, for the Facility Agent acting as facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>),</p></div>\n`;
+        output += `<div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>a fee of ${data.currency} ${data.facilityAgentFeeAmount} per annum, which is payable in advance, for the Facility Agent acting as facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>),</p></div>\n`;
 
         if (data.increaseFeeAmount) {
           output += `<div class='flex ml-6'><p class='ml-8 mr-2'>(c) </p><p>a fee of ${data.currency} ${data.increaseFeeAmount} if the Borrower exercises the Increase Option more than ${data.increaseCount} times (the "Increase Fee"), and</p></div>\n`;
         }
 
         if (data.debtdomainFeeAmount) {
-          output += `<div class='flex ml-6'><p class='ml-8 mr-2'>(d) </p><p><p>fee of ${data.currency}${data.debtdomainFeeAmount} per annum, which is payable in advance, for the use of a publishing system known as Debtdomain to assist in certain administrative tasks specific to the Facility Agent under the terms of the Facility Agreement(the  <b>"Debtdomain Fee"</b>). The Facility Agent reserves the right to increase the Debtdomain Fee at its discretion if Debtdomain charges increase provided always that such increase of the Debtdomain Fee shall be more than the increase of Debtdomain charges.</p></div>\n`;
+          output += `<div class='flex ml-6'><p class='ml-8 mr-2'>(d) </p><p><p>fee of ${data.currency} ${data.debtdomainFeeAmount} per annum, which is payable in advance, for the use of a publishing system known as Debtdomain to assist in certain administrative tasks specific to the Facility Agent under the terms of the Facility Agreement(the  <b>"Debtdomain Fee"</b>). The Facility Agent reserves the right to increase the Debtdomain Fee at its discretion if Debtdomain charges increase provided always that such increase of the Debtdomain Fee shall be more than the increase of Debtdomain charges.</p></div>\n`;
         }
 
         output += `<div class='flex ml-6'><p class='ml-8 mr-2'>(e) </p><p>The Set-Up Fee, Facility Agent Fee, Increase Fee and Debtdomain Fee shall hereinafter be referred to as the <b>"Agency Fees"</b>.</p></div>\n`;
@@ -138,7 +139,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
       break;
 
     case 'coordinatingBank':
-      output += `<div class='flex ml-6'><p class='w-5 mr-2'>5. </p><p>You shall pay to the Co-Ordinating Bank (for its own account) a flat fee of ${data.currency}${data.coordinatingBankFeeAmount} for the CoOrdinating Bank acting as co-ordinating bank pursuant to the provisions of the Facility Agreement (the <b>"Coordinating Bank Fee"</b>).</p></div>\n`;
+      output += `<div class='flex ml-6'><p class='w-5 mr-2'>5. </p><p>You shall pay to the Co-Ordinating Bank (for its own account) a flat fee of ${data.currency} ${data.coordinatingBankFeeAmount} for the CoOrdinating Bank acting as co-ordinating bank pursuant to the provisions of the Facility Agreement (the <b>"Coordinating Bank Fee"</b>).</p></div>\n`;
       break;
 
     case 'upfront':
@@ -173,7 +174,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all *{Loans}* and cancellation - of all *{Commitments}*, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div>\n`;
         } else if (data.paymentModality === 'semiannual') {
           output += `<div class='flex flex-col'><div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>The Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before the First Payment Date. Thereafter any subsequent installment of the FacilityAgent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of </p></div>
-        
+          
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div> 
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as agent and</p></div> 
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div>\n`;
@@ -306,16 +307,23 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
   output += `<div class='flex ml-6'><p class='w-5 mr-2'>13.</p>This ${agentName} Fee Letter may be signed in any number of counterparts. This has the same effect as if the signatures on the counterparts were on a single copy of this Fee Letter.</div>\n`;
   output += `<div class='flex ml-6'><p class='w-5 mr-2'>14.</p>A person who is not a party to this Fee Letter shall have no rights under the Contracts (Rights of Third Parties) Act 1999 or otherwise to enforce or enjoy the benefit of any terms of this Fee Letter.</div>\n`;
   output += `<div class='flex ml-6'><p class='w-5 mr-2'>15.</p>This letter and all non-contractual obligations arising from or connected with it are governed by ${data.governingLaw} law.</div>\n`;
-  output += `<div class='flex ml-6'><p class='w-5 mr-2'>16.</p>Clause {¢} (Enforcement) of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the Finance Documents shall be construed as references to this Fee Letter.</div>\n`;
+
+  //For Jurisdiction Provision
+  if (data.jurisdictionProvision === 'Standalone') {
+    output += `<div class='flex ml-6'><p class='w-5 mr-2'>16.</p>Each party hereby submits to exclusive jurisdiction of the ${data.governingLaw} courts and waives any defence of forum non conveniens which may be available.</div>\n`;
+  } else {
+    output += `<div class='flex ml-6'><p class='w-5 mr-2'>16.</p>Clause {¢} (Enforcement) of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the Finance Documents shall be construed as references to this Fee Letter.</div>\n`;
+  }
 
   // Signature blocks
-  output += `<p>By signing and returning a copy of this Fee Letter to the ${agentName}, you acknowledge your agreement to its terms.</p>\n`;
-  output += `<p class='mb-10'>Yours faithfully</p>`;
-  output += `<p class='mb-6'>_______________</p>`;
-  output += `<div class='flex flex-col mb-10'><p class='mb-1'>For and on behalf of</p><p><b>${getSenderName()}</b></p></div>`;
-  output += `<div><p class='mb-10'>Agreed and accepted by</p></div>`;
-  output += `<p class='mb-6'>_______________</p>`;
-  output += `<div class='flex flex-col mb-2'><p class='mb-1'>For and on behalf of</p><p><b>${data.borrowerName}</b></p></div>`;
+  output += `By signing and returning a copy of this Fee Letter to the ${agentName}, you acknowledge your agreement to its terms.\n\n`;
+  output += `<div><p>Yours faithfully</p></div></br>`;
+  output += `<div><p>_______________</p></div></br>`;
+  output += `<div><p>For and on behalf of</p><p><b>${getSenderName()}</b></p></div></br>`;
+  output += `<div><p>Agreed and accepted by</p></div></br>`;
+  output += `<div class='mb-5'><p>_______________</p></div>`;
+
+  output += `For and on behalf of \n<b>${data.borrowerName}</b>\n`;
 
   if (data?.indexClauses.length > 0) {
     // Updated regex to match all clause formats:
@@ -331,7 +339,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
       );
 
       if (matchingClause) {
-        return `${originalClause} {${matchingClause.clause}} (${matchingClause.title}) `;
+        return `${originalClause} ${matchingClause.clause} (${matchingClause.title}) `;
       }
 
       return match;
@@ -342,15 +350,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
 
   if (data?.definitions.length > 0) {
     const replaceDefinitionWordsWithSup = (text: string): string => {
-      return text.replace(/\*\{([^}]+)\}\*/g, (_, defWord) => {
-        // Extract initials from the definition word
-        const initials = defWord
-          .split(/\s+/)
-          .map((word: string) => word[0]?.toUpperCase() || '')
-          .join('');
-
-        return `${defWord} ${initials}`;
-      });
+      return text.replace(/\*\{([^}]+)\}\*/g, (_, defWord) => defWord);
     };
     output = replaceDefinitionWordsWithSup(output);
   }
@@ -368,7 +368,11 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
 const convertSimpleOutput = (letterText: string) => {
   if (!letterText) return '';
 
-  return letterText.replace(/\*\{\s*(?:\[|\{)?([^}\]\)]+)(?:\]|\})?(?:\s*\(([^}]+)\))?\s*\}\*/g, (_, ref, title) => {
+  // First, remove {[ and ]} brackets while preserving content
+  const cleanedText = letterText.replace(/\{\[/g, '').replace(/\]\}/g, '');
+
+  // Then handle the remaining *{...}* patterns
+  return cleanedText.replace(/\*\{\s*(?:\[|\{)?([^}\]\)]+)(?:\]|\})?(?:\s*\(([^}]+)\))?\s*\}\*/g, (_, ref, title) => {
     if (ref && title) {
       return `${ref.trim()} (${title.trim()})`;
     }

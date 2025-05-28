@@ -44,11 +44,10 @@ const OtherDetails: React.FC<IFeeTypesProps> = ({ form, onChange, screenIndex })
             </label>
             <select
               name="jurisdictionProvision"
-              value={form.jurisdictionProvision || 'Jurisdiction'}
+              value={form.jurisdictionProvision || 'Standalone'}
               onChange={(e) => onChange('jurisdictionProvision', e.target.value)}
               className="w-full px-3 py-2 border border-[#454545] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#191919] text-[#FBFBFB]"
             >
-              <option value="Jurisdiction">Jurisdiction</option>
               <option value="Standalone">Standalone</option>
               <option value="Refer to Facility Agreement">Refer to Facility Agreement</option>
             </select>
