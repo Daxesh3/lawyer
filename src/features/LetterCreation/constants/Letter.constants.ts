@@ -64,6 +64,9 @@ export const INITIAL_FORM: IFeeLetterData = {
   definitions: [],
   variations: {},
   refundableTerms: 'refundable',
+  jurisdictionProvision: 'Standalone',
+  vatProvision: 'Standalone',
+  grossUpProvision: 'Standalone',
 };
 
 export const CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'CHF'];

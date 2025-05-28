@@ -25,7 +25,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange, screenIndex }) => 
           {form.feeTypes.facilityAgentFee && (
             <div>
               <label htmlFor="facilityAgentFeeAmount" className="block text-sm font-medium text-white mb-1">
-                Facility Agent Fee Amount <b>(per annum)</b>
+                Facility Agent Fee Amount <b>(per annum)</b> {form.currency ? `(in ${form.currency})` : ''}
                 <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <input
@@ -92,7 +92,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange, screenIndex }) => 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pl-6 border-l-2 border-blue-100">
             <div>
               <label htmlFor="setupFeeAmount" className="block text-sm font-medium text-white mb-1">
-                Setup Fee Amount
+                Setup Fee Amount {form.currency ? `(in ${form.currency})` : ''}
                 <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <input
@@ -108,7 +108,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange, screenIndex }) => 
 
             <div>
               <label htmlFor="increaseFeeAmount" className="block text-sm font-medium text-white mb-1">
-                Increase Fee Amount
+                Increase Fee Amount {form.currency ? `(in ${form.currency})` : ''}
                 <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <input
@@ -124,7 +124,7 @@ const FeeTypes: React.FC<IFeeTypesProps> = ({ form, onChange, screenIndex }) => 
 
             <div>
               <label htmlFor="debtdomainFeeAmount" className="block text-sm font-medium text-white mb-1">
-                Debtdomain Fee Amount
+                Debtdomain Fee Amount {form.currency ? `(in ${form.currency})` : ''}
                 <span className="text-red-500 text-xs align-super ml-1">*</span>
               </label>
               <input
