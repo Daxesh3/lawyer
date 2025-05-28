@@ -1,5 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 import { IFeeLetterData } from '../types/feeLetterTypes';
+import isEmpty from 'lodash/isEmpty';
 
 export const generateFeeLetterText = (data: IFeeLetterData) => {
   let output: string = '';
@@ -166,24 +167,23 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
         output += `<div class='flex ml-6'><p class='ml-8 mr-2'>(a) </p><p>The Set-Up Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the <b>"First Payment Date"</b>).</p></div>\n`;
 
         if (data.paymentModality === 'annual') {
-          output += `<div class='flex flex-col'><div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>The first payment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "FirstPayment Date")][the First Payment Date]. Each subsequent payment of the Facility Agent Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of
-          </p></div>
-        <div class='flex flex-col mt-3'>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div>
+          output += `<div class='flex flex-col'><div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>The first payment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "FirstPayment Date")][the First Payment Date]. Each subsequent payment of the Facility Agent Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of</p></div>
+        
+        <div class='flex ml-6 mt-4'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div>
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as facility agent and</p></div>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all *{Loans}* and cancellation - of all *{Commitments}*, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div></div>\n`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all *{Loans}* and cancellation - of all *{Commitments}*, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div>\n`;
         } else if (data.paymentModality === 'semiannual') {
-          output += `<div class='flex flex-col'><div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>The Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before the First Payment Date. Thereafter any subsequent installment of the Facility Agent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of </p></div>
-        <div class='flex flex-col mt-3'>
+          output += `<div class='flex flex-col'><div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>The Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before the First Payment Date. Thereafter any subsequent installment of the FacilityAgent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of </p></div>
+          
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div> 
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as agent and</p></div> 
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div></div>\n`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div>\n`;
         } else if (data.paymentModality === 'quarterly') {
           output += `<div class='flex flex-col'><div class='flex ml-6'><p class='ml-8 mr-2'>(b) </p><p>The Facility Agent Fee shall be payable to us in equal quarterly instalments. Each instrument shall amount to a quarter of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date")] [the First Payment Date]. Thereafter any subsequent installment of the Facility Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of </p></div>
-        <div class='flex flex-col mt-3'>
+        
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div> 
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as agent and</p></div>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div></div>\n`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div>\n`;
         }
 
         output += `<div class='flex ml-6'><p class='ml-8 mr-2'>(c) </p><p>The Increase Fee shall be payable to the Facility Agent on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after the Increase Date and on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after each subsequent Increase Date.</p></div>\n`;
@@ -196,22 +196,22 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
 
       if (data.paymentModality === 'annual') {
         output += `<div class='flex flex-col'><div class='flex ml-6'><p class='w-5 mr-2'>6.</p><p>The first payment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date"). Each subsequent payment of the Security Agent Fee shall be made annually in advance, commencing on the fist anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of</p></div>
-        <div class='flex flex-col mt-3'>
+        
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div>
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as facility agent and</p></div>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all *{Loans}* and cancellation of all *{Commitments}*, in each case under the Facility Agreement.</p></div></div></div>`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all *{Loans}* and cancellation of all *{Commitments}*, in each case under the Facility Agreement.</p></div></div>`;
       } else if (data.paymentModality === 'semiannual') {
         output += `<div class='flex flex-col'><div class='flex ml-6'><p class='w-5 mr-2'>6.</p><p>The Security Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Security Agent Fee. The first installment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date"). Thereafter any subsequent installment of the Security Agent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of</p></div>
-        <div class='flex flex-col mt-3'>
+       
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div>
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as agent and</p></div>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.</p></div></div></div>`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.</p></div></div>`;
       } else if (data.paymentModality === 'quarterly') {
         output += `<div class='flex flex-col'><div class='flex ml-6'><p class='w-5 mr-2'>6.</p><p>The Security Agent Fee shall be payable to us in equal quarterly instalments. Each installment shall amount to a quarter of the annual Security Agent Fee. The first installment of the Security Agent Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Uti1isation Date}* under the Facility Agreement (the "First Payment Date"). Thereafter any subsequent installment of the Security Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of </p></div>
-       <div class='flex flex-col mt-3'>
+       
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(i)</p><p>the *{Final Maturity Date}*,</p></div>
         <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(ii)</p><p>the date we resign or are replaced as agent and</p></div>
-        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.</p></div></div></div>`;
+        <div class='flex ml-6'><p class='ml-20 mr-2 mb-2 w-11 text-center'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement.</p></div></div>`;
       }
       break;
 
