@@ -69,7 +69,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
             text-align: justify;
           }
           .para-content {
-            max-width: 795px;
+            max-width: 650px;
           }
           .title {
             text-align: center;
