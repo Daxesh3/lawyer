@@ -66,7 +66,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
 
   // Introduction
   output += `<div class="numbered-item"><p>1.</p><p class='para-content'>We refer to the Facility Agreement.</p></div>\n`;
-  output += `<div class="numbered-item"><p>2.</p><p class='para-content'>Unless otherwise defined in this Fee Letter, terms defined in the Facility Agreement shall have the same meaning in this Fee Letter. The rules of interpretation and construction contained in clause *{ [1.2] (Construction)}* of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the *{Finance Documents}* shall be construed as references to this Fee Letter.</p></div>\n`;
+  output += `<div class="numbered-item"><p>2.</p><p class='para-content'>Unless otherwise defined in this Fee Letter, terms defined in the Facility Agreement shall have the same meaning in this Fee Letter. The rules of interpretation and construction contained in clause *{ [1.2] (Construction)}* of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the *{Financing Documents}* shall be construed as references to this Fee Letter.</p></div>\n`;
 
   // Specific introduction based on letter type
   switch (data.letterType) {
@@ -101,7 +101,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
     .toLowerCase()
     .split(' ')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')} is a *{Finance Documents}* for the purposes of the Facility Agreement.</p></div>\n`;
+    .join(' ')} is a *{Financing Documents}* for the purposes of the Facility Agreement.</p></div>\n`;
 
   // Fees section based on letter type
   switch (data.letterType) {
@@ -259,14 +259,14 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
   if (data.grossUpProvision === 'Standalone') {
     output += `<div class="numbered-item"><p>8.</p><p class='para-content'>If any *{Tax}* or amount in respect of a *{Tax}* must be deducted or withheld from any amount payable or paid by the ${data.borrowerName} on account of or by reference to any payment by or obligation of the ${data.borrowerName} hereunder, the ${data.borrowerName} shall pay such additional amounts as may be necessary to ensure that the recipient of such payment receives a net amount equal to the full amount which we would have received from the ${data.borrowerName} had such *{Tax}* not been made.</p></div>\n`;
   } else {
-    output += `<div class="numbered-item"><p>8.</p><p class='para-content'>Clause *{ {12} (Tax Gross Up and Indemnities)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.</p></div>\n`;
+    output += `<div class="numbered-item"><p>8.</p><p class='para-content'>Clause *{ {12} (Tax Gross Up and Indemnities)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Financing Documents shall be construed as including this Fee Letter.</p></div>\n`;
   }
 
   //For VAT Provision
   if (data.vatProvision === 'Standalone') {
     output += `<div class="numbered-item"><p>9. </p><p class='para-content'>All payments in connection with this Fee Letter are exclusive of any value added tax or similar charge ("<b>VAT</b>"). If VAT is chargeable, the ${data.borrowerName} shall also and at the same time pay to the recipient of the relevant payment an amount equal to the amount of the VAT.</p></div>\n`;
   } else {
-    output += `<div class="numbered-item"><p>9. </p><p class='para-content'>Clause *{ {¢} (VAT)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.</p></div>\n`;
+    output += `<div class="numbered-item"><p>9. </p><p class='para-content'>Clause *{ {¢} (VAT)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Financing Documents shall be construed as including this Fee Letter.</p></div>\n`;
   }
 
   // Fee refunds - only for facility agent and security agent
@@ -312,7 +312,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
   if (data.jurisdictionProvision === 'Standalone') {
     output += `<div class="numbered-item"><p>16.</p><p class='para-content'>Each party hereby submits to exclusive jurisdiction of the ${data.governingLaw} courts and waives any defence of forum non conveniens which may be available.</p></div>\n`;
   } else {
-    output += `<div class="numbered-item"><p>16.</p><p class='para-content'>Clause {¢} (Enforcement) of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the Finance Documents shall be construed as references to this Fee Letter.</p></div>\n`;
+    output += `<div class="numbered-item"><p>16.</p><p class='para-content'>Clause {¢} (Enforcement) of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the Financing Documents shall be construed as references to this Fee Letter.</p></div>\n`;
   }
 
   // Signature blocks
