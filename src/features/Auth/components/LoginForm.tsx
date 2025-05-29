@@ -17,7 +17,7 @@ const LoginForm: FC = () => {
     const validPassword = 'Edmud@123';
 
     setTimeout(() => {
-      if (email === validEmail && password === validPassword) {
+      if (email.toLowerCase() === validEmail && password === validPassword) {
         localStorage.setItem('isLogin', 'true');
         navigate('/home');
       } else {
