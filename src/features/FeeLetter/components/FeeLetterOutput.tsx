@@ -110,8 +110,8 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
             display: flex;
             flex-direction: column;
           }
-          .ml-16 {
-            margin-left: 64px;
+          .ml-20 {
+            margin-left: 20px;
           }
             .mb-6 {
             margin-bottom: 12px;

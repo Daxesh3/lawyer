@@ -66,7 +66,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
 
   // Introduction
   output += `<div class="numbered-item"><p>1.</p><p class='para-content'>We refer to the Facility Agreement.</p></div>\n`;
-  output += `<div class="numbered-item"><p>2.</p><p class='para-content'>Unless otherwise defined in this Fee Letter, terms defined in the Facility Agreement shall have the same meaning in this Fee Letter. The rules of interpretation and construction contained in clause *{ [1.2] (Construction)}* of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the *{Financing Documents}* shall be construed as references to this Fee Letter.</p></div>\n`;
+  output += `<div class="numbered-item"><p>2.</p><p class='para-content'>Unless otherwise defined in this Fee Letter, terms defined in the Facility Agreement shall have the same meaning in this Fee Letter. The rules of interpretation and construction contained in clause *{ [1.2] (Construction)}* of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the *{Finance Documents}* shall be construed as references to this Fee Letter.</p></div>\n`;
 
   // Specific introduction based on letter type
   switch (data.letterType) {
@@ -101,7 +101,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
     .toLowerCase()
     .split(' ')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')} is a *{Financing Documents}* for the purposes of the Facility Agreement.</p></div>\n`;
+    .join(' ')} is a *{Finance Documents}* for the purposes of the Facility Agreement.</p></div>\n`;
 
   // Fees section based on letter type
   switch (data.letterType) {
@@ -243,12 +243,12 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
   if (data.bankDetails.accountBank || data.bankDetails.accountNumber) {
     output += `<div class='flex flex-col'><div class="numbered-item"><p>7.</p><p class='para-content'>All payments made by you under this Fee Letter must be made in immediately available, freely transferable and cleared funds by crediting the following bank account</p></div>
     <div class='flex flex-col mt-2'>
-    <p class='ml-16'>Account Bank: ${data.bankDetails.accountBank}</p>
-    <p class='ml-16'>Account Holder: ${data.bankDetails.accountHolder}</p>
-    <p class='ml-16'>Account No.: ${data.bankDetails.accountNumber}</p>
-    <p class='ml-16'>Sort Code: ${data.bankDetails.sortCode}</p>
-    <p class='ml-16'>IBAN: ${data.bankDetails.iban}</p>
-    <p class='ml-16'>Ref: ${data.borrowerName}-${data.currency} ${data.amount} ${data.facilityType} Facility Agreement\nor such other account as we manotify you in writing with {[${data.businessDays}]} *{Business Days}* prior notice.</p></div></div>\n`;
+    <p class='ml-20'>Account Bank: ${data.bankDetails.accountBank}</p>
+    <p class='ml-20'>Account Holder: ${data.bankDetails.accountHolder}</p>
+    <p class='ml-20'>Account No.: ${data.bankDetails.accountNumber}</p>
+    <p class='ml-20'>Sort Code: ${data.bankDetails.sortCode}</p>
+    <p class='ml-20'>IBAN: ${data.bankDetails.iban}</p>
+    <p class='ml-20'>Ref: ${data.borrowerName}-${data.currency} ${data.amount} ${data.facilityType} Facility Agreement\nor such other account as we manotify you in writing with {[${data.businessDays}]} *{Business Days}* prior notice.</p></div></div>\n`;
   } else {
     output += `<div class="numbered-item"><p>7.</p><p class='para-content'>A11 payments made by you under this Fee Letter must be made in immediately available, freely transferable and cleared funds by crediting our account (the details of which we have provided you with separately) or such other account as we may notify you in writing with {[${data.businessDays}]} *{Business Days'}*' prior notice.</p></div>\n`;
   }
@@ -259,14 +259,14 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
   if (data.grossUpProvision === 'Standalone') {
     output += `<div class="numbered-item"><p>8.</p><p class='para-content'>If any *{Tax}* or amount in respect of a *{Tax}* must be deducted or withheld from any amount payable or paid by the ${data.borrowerName} on account of or by reference to any payment by or obligation of the ${data.borrowerName} hereunder, the ${data.borrowerName} shall pay such additional amounts as may be necessary to ensure that the recipient of such payment receives a net amount equal to the full amount which we would have received from the ${data.borrowerName} had such *{Tax}* not been made.</p></div>\n`;
   } else {
-    output += `<div class="numbered-item"><p>8.</p><p class='para-content'>Clause *{ {12} (Tax Gross Up and Indemnities)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Financing Documents shall be construed as including this Fee Letter.</p></div>\n`;
+    output += `<div class="numbered-item"><p>8.</p><p class='para-content'>Clause *{ {12} (Tax Gross Up and Indemnities)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.</p></div>\n`;
   }
 
   //For VAT Provision
   if (data.vatProvision === 'Standalone') {
     output += `<div class="numbered-item"><p>9. </p><p class='para-content'>All payments in connection with this Fee Letter are exclusive of any value added tax or similar charge ("<b>VAT</b>"). If VAT is chargeable, the ${data.borrowerName} shall also and at the same time pay to the recipient of the relevant payment an amount equal to the amount of the VAT.</p></div>\n`;
   } else {
-    output += `<div class="numbered-item"><p>9. </p><p class='para-content'>Clause *{ {¢} (VAT)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Financing Documents shall be construed as including this Fee Letter.</p></div>\n`;
+    output += `<div class="numbered-item"><p>9. </p><p class='para-content'>Clause *{ {¢} (VAT)}* of the Facility Agreement shall apply to this letter as if set out in full in this letter, mutatis mutandis, and references in that clause to Finance Documents shall be construed as including this Fee Letter.</p></div>\n`;
   }
 
   // Fee refunds - only for facility agent and security agent
@@ -312,7 +312,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
   if (data.jurisdictionProvision === 'Standalone') {
     output += `<div class="numbered-item"><p>16.</p><p class='para-content'>Each party hereby submits to exclusive jurisdiction of the ${data.governingLaw} courts and waives any defence of forum non conveniens which may be available.</p></div>\n`;
   } else {
-    output += `<div class="numbered-item"><p>16.</p><p class='para-content'>Clause {¢} (Enforcement) of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the Financing Documents shall be construed as references to this Fee Letter.</p></div>\n`;
+    output += `<div class="numbered-item"><p>16.</p><p class='para-content'>Clause {¢} (Enforcement) of the Facility Agreement shall apply to this Fee Letter as if set out in full in this Fee Letter mutatis mutandis, and references in those clauses to "this Agreement" or the Finance Documents shall be construed as references to this Fee Letter.</p></div>\n`;
   }
 
   // Signature blocks
@@ -354,8 +354,8 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
     output = replaceDefinitionWordsWithSup(output);
   }
 
-  if (data?.definitions?.length > 0 && !isEmpty(data?.variations)) {
-    output = normalizeLetterTerms(output, data?.definitions, data?.variations);
+  if (data?.definitions?.length > 0) {
+    output = normalizeLetterTerms(output, data?.definitions);
 
     // Replace variations in letter content
   }
@@ -396,8 +396,17 @@ const buildDefinitionReplacementMap = (
 };
 
 // Replace in text
-const normalizeLetterTerms = (letterText: string, definitions: string[], variations: Record<string, any>): string => {
-  const replacements = buildDefinitionReplacementMap(definitions, variations);
+const normalizeLetterTerms = (letterText: string, definitions: string[]): string => {
+  const replacements = buildDefinitionReplacementMap(definitions, definitionList);
   const pattern = new RegExp(`\\b(${Object.keys(replacements).join('|')})\\b`, 'g');
   return letterText.replace(pattern, (match) => replacements[match]);
+};
+
+export const definitionList = {
+  'Finance Documents': 'Financing Documents',
+  'Financing Documents': 'Finance Documents',
+  'Utilisation Request': 'Drawdown Notice',
+  'Drawdown Notice': 'Utilisation Request',
+  'Final Maturity Date': 'Termination Date',
+  'Termination Date': 'Final Maturity Date',
 };
