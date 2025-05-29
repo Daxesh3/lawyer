@@ -134,7 +134,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
 
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'Fee-Letter.docx';
+      a.download = 'Fee-Letter.doc';
       document.body.appendChild(a);
       a.click();
       a.remove();
