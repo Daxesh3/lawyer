@@ -16,7 +16,7 @@ import BankDetails from '../components/BankDetails';
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [hasGenerated, setHasGenerated] = useState(false);
+  const [hasGenerated, setHasGenerated] = useState(true);
   const [facilityUploadDetails, setFacilityUploadDetails] = useState<IFacilityUploadDetails>();
   const { formData, updateFormField } = useLetterContext();
 
@@ -26,7 +26,7 @@ const LetterCreation = () => {
       await handleFacilityAgreementUpload(formData.facilityAgreementFile);
     }
     // Simulate API call with a delay
-    await new Promise((resolve) => setTimeout(resolve, 7000));
+    await new Promise((resolve) => setTimeout(resolve, 70));
     setIsGenerating(false);
     setHasGenerated(true);
   };
