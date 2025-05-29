@@ -158,6 +158,8 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
       output += `Only one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>).\n`;
   }
 
+  output += `<div class="numbered-item"><p>6. </p><p class='para-content'>The Agency Fees shall become due and payable as set out below</p></div>\n`;
+
   // Payment Modalities based on letter type
   switch (data.letterType) {
     case 'facilityAgent':
