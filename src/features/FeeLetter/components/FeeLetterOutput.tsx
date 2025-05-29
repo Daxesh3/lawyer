@@ -5,7 +5,6 @@ import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
 import { useLetterContext } from '../../LetterCreation/context/LetterContext';
 import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
 import { API_VITE_API_HTML_TO_DOC } from '../../../shared/constants/constant';
-import { finalGenerateFeeLetterText } from '../../../utils/finalFeeLetterGenerator';
 import { useReactToPrint } from 'react-to-print';
 
 interface FeeLetterOutputProps {
@@ -37,7 +36,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
   const handleDownload = useCallback(async () => {
     try {
       setIsGenerateDoc(true);
-      const content = finalGenerateFeeLetterText({
+      const content = generateFeeLetterText({
         ...formData,
         ...coverFormData,
         indexClauses: letterIndexSelections.filter(Boolean),
@@ -110,8 +109,8 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
             display: flex;
             flex-direction: column;
           }
-          .ml-16 {
-            margin-left: 64px;
+          .ml-20 {
+            margin-left: 80px;
           }
             .mb-6 {
             margin-bottom: 12px;
@@ -195,7 +194,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
         <div
           id="fee-letter-content"
           ref={contentRef}
-          className={`whitespace-pre-wrap font-mono text-sm bg-gray-50 p-4 rounded-lg min-h-[500px] mx-5 max-w-4xl ${
+          className={`whitespace-pre-wrap font-mono text-sm bg-gray-50 p-4 rounded-lg min-h-[500px] mx-5 max-w-3xl ${
             isGenerateDoc ? 'blur-sm' : ''
           }`}
         >

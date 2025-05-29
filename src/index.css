@@ -286,8 +286,8 @@
   display: flex;
   flex-direction: column;
 }
-.letter-wrapper .ml-16 {
-  margin-left: 64px;
+.letter-wrapper .ml-20 {
+  margin-left: 80px;
 }
 .letter-wrapper .mb-6 {
   margin-bottom: 12px;

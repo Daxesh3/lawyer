@@ -241,12 +241,12 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
   if (data.bankDetails.accountBank || data.bankDetails.accountNumber) {
     output += `<div class='flex flex-col'><div class="numbered-item"><p>7.</p><p class='para-content'>All payments made by you under this Fee Letter must be made in immediately available, freely transferable and cleared funds by crediting the following bank account</p></div>
     <div class='flex flex-col mt-2'>
-    <p class='ml-16'>Account Bank: ${data.bankDetails.accountBank}</p>
-    <p class='ml-16'>Account Holder: ${data.bankDetails.accountHolder}</p>
-    <p class='ml-16'>Account No.: ${data.bankDetails.accountNumber}</p>
-    <p class='ml-16'>Sort Code: ${data.bankDetails.sortCode}</p>
-    <p class='ml-16'>IBAN: ${data.bankDetails.iban}</p>
-    <p class='ml-16'>Ref: ${data.borrowerName}-${data.currency} ${data.amount} ${data.facilityType} Facility Agreement\nor such other account as we manotify you in writing with {[${data.businessDays}]} *{Business Days}* prior notice.</p></div></div>\n`;
+    <p class='ml-20'>Account Bank: ${data.bankDetails.accountBank}</p>
+    <p class='ml-20'>Account Holder: ${data.bankDetails.accountHolder}</p>
+    <p class='ml-20'>Account No.: ${data.bankDetails.accountNumber}</p>
+    <p class='ml-20'>Sort Code: ${data.bankDetails.sortCode}</p>
+    <p class='ml-20'>IBAN: ${data.bankDetails.iban}</p>
+    <p class='ml-20'>Ref: ${data.borrowerName}-${data.currency} ${data.amount} ${data.facilityType} Facility Agreement\nor such other account as we manotify you in writing with {[${data.businessDays}]} *{Business Days}* prior notice.</p></div></div>\n`;
   } else {
     output += `<div class="numbered-item"><p>7.</p><p class='para-content'>A11 payments made by you under this Fee Letter must be made in immediately available, freely transferable and cleared funds by crediting our account (the details of which we have provided you with separately) or such other account as we may notify you in writing with {[${data.businessDays}]} *{Business Days'}*' prior notice.</p></div>\n`;
   }
