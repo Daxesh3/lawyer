@@ -56,18 +56,21 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
         },
         body: JSON.stringify({
           html: `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Fee Letter</title>
-  <style>
-              p {
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <title>Fee Letter</title>
+            <style>
+                    p {
             margin: 0;
-            text-align:justify;
+            text-align: justify;
           }
-            div {
-             text-align:justify;
-            }
+          div {
+            text-align: justify;
+          }
+          .para-content {
+            max-width: 650px;
+          }
           .title {
             text-align: center;
             font-size: 20px;
@@ -91,7 +94,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
             margin-left: 4.5em;
           }
           .account-details {
-            margin-left: 4em;
+            margin-left: 7.5em;
             margin-top: 0.5em;
           }
           .signature-block {

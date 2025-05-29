@@ -270,7 +270,7 @@
   margin-left: 4.5em;
 }
 .letter-wrapper .account-details {
-  margin-left: 4em;
+  margin-left: 7.5em;
   margin-top: 0.5em;
 }
 .letter-wrapper .signature-block {
@@ -291,4 +291,8 @@
 }
 .letter-wrapper .mb-6 {
   margin-bottom: 12px;
+}
+
+.letter-wrapper .para-content {
+  max-width: 650px;
 }
