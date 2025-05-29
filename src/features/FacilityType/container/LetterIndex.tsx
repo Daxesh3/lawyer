@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useLetterContext } from '../../LetterCreation/context/LetterContext';
 import { API_VITE_API_FACILITY_FILE_UPLOAD, formatToUSD, numberFields } from '../../../shared/constants/constant';
 import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
@@ -29,7 +29,7 @@ const LetterIndex: React.FC = () => {
   // const getSelectedTitles = (excludeIdx: number) =>
   //   letterIndexSelections.map((sel, idx) => (idx !== excludeIdx && sel ? sel.title : null)).filter(Boolean) as string[];
 
-  const handleFacilityAgreementUpload = async (file: File) => {
+  const handleFacilityAgreementUpload = useCallback(async (file: File) => {
     if (!file) return;
     setIsUploading(true);
 
@@ -47,7 +47,6 @@ const LetterIndex: React.FC = () => {
       updateFormField('definitions', data?.definitions || []);
       updateFormField('variations', data?.variations || {});
       updateFormField('definitionsWithDetail', data?.definitionsWithDetail || {});
-      // handleFormChange('facilityAgreementName', file.name);
 
       setIsUploading(false);
 
@@ -67,7 +66,7 @@ const LetterIndex: React.FC = () => {
       console.error(error);
       setIsUploading(false);
     }
-  };
+  }, []);
 
   // const handleSelect = (idx: number, value: string) => {
   //   const updatedSelections = [...letterIndexSelections];
@@ -171,11 +170,12 @@ const LetterIndex: React.FC = () => {
                 ];
                 if (!allowedTypes.includes(file.type)) {
                   handleFormChange('facilityAgreementUpload', null);
-                  e.target.value = '';
+
                   return;
                 }
                 handleFacilityAgreementUpload(file);
               }
+              e.target.value = '';
             }}
           />
           <label
