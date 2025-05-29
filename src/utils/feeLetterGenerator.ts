@@ -110,22 +110,22 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
         output += `<div class="numbered-item"><p>5. </p>You shall pay to the Facility Agent (for its own account):</div>\n`;
 
         if (data.setupFeeAmount) {
-          output += `<div class="numbered-item"><p class='indent'>(a) </pclass=><p>a one-off set-up fee in an amount of ${data.currency} ${data.setupFeeAmount} (the <b>"Set-Up Fee"</b>),</p></div>\n`;
+          output += `<div class="numbered-item"><p class='indent'>(a) </p><p>a one-off set-up fee in an amount of ${data.currency} ${data.setupFeeAmount} (the <b>"Set-Up Fee"</b>),</p></div>\n`;
         }
 
-        output += `<div class="numbered-item"><p class='indent'>(b) </pclass=><p>a fee of ${data.currency} ${data.facilityAgentFeeAmount} per annum, which is payable in advance, for the Facility Agent acting as facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>),</p></div>\n`;
+        output += `<div class="numbered-item"><p class='indent'>(b) </p><p>a fee of ${data.currency} ${data.facilityAgentFeeAmount} per annum, which is payable in advance, for the Facility Agent acting as facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>),</p></div>\n`;
 
         if (data.increaseFeeAmount) {
-          output += `<div class="numbered-item"><p class='indent'>(c) </pclass=><p>a fee of ${data.currency} ${data.increaseFeeAmount} if the Borrower exercises the Increase Option more than ${data.increaseCount} times (the "Increase Fee"), and</p></div>\n`;
+          output += `<div class="numbered-item"><p class='indent'>(c) </p><p>a fee of ${data.currency} ${data.increaseFeeAmount} if the Borrower exercises the Increase Option more than ${data.increaseCount} times (the "Increase Fee"), and</p></div>\n`;
         }
 
         if (data.debtdomainFeeAmount) {
-          output += `<div class="numbered-item"><p class='indent'>(d) </pclass=><p><p>fee of ${data.currency} ${data.debtdomainFeeAmount} per annum, which is payable in advance, for the use of a publishing system known as Debtdomain to assist in certain administrative tasks specific to the Facility Agent under the terms of the Facility Agreement(the  <b>"Debtdomain Fee"</b>). The Facility Agent reserves the right to increase the Debtdomain Fee at its discretion if Debtdomain charges increase provided always that such increase of the Debtdomain Fee shall be more than the increase of Debtdomain charges.</p></div>\n`;
+          output += `<div class="numbered-item"><p class='indent'>(d) </p><p><p>fee of ${data.currency} ${data.debtdomainFeeAmount} per annum, which is payable in advance, for the use of a publishing system known as Debtdomain to assist in certain administrative tasks specific to the Facility Agent under the terms of the Facility Agreement(the  <b>"Debtdomain Fee"</b>). The Facility Agent reserves the right to increase the Debtdomain Fee at its discretion if Debtdomain charges increase provided always that such increase of the Debtdomain Fee shall be more than the increase of Debtdomain charges.</p></div>\n`;
         }
 
-        output += `<div class="numbered-item"><p class='indent'>(e) </pclass=><p>The Set-Up Fee, Facility Agent Fee, Increase Fee and Debtdomain Fee shall hereinafter be referred to as the <b>"Agency Fees"</b>.</p></div>\n`;
+        output += `<div class="numbered-item"><p class='indent'>(e) </p><p>The Set-Up Fee, Facility Agent Fee, Increase Fee and Debtdomain Fee shall hereinafter be referred to as the <b>"Agency Fees"</b>.</p></div>\n`;
       } else {
-        output += `<div class="numbered-item"><p class='indent'>Only one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>).</pclass=></div>\n`;
+        output += `<div class="numbered-item"><p class='indent'>Only one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>).</p></div>\n`;
       }
       break;
 
@@ -162,30 +162,30 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
   switch (data.letterType) {
     case 'facilityAgent':
       if (data.hasFacilityAgentOptions) {
-        output += `<div class="numbered-item"><p class='indent'>(a) </pclass=><p>The Set-Up Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the <b>"First Payment Date"</b>).</p></div>\n`;
+        output += `<div class="numbered-item"><p class='indent'>(a) </p><p>The Set-Up Fee is payable on or before the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the <b>"First Payment Date"</b>).</p></div>\n`;
 
         if (data.paymentModality === 'annual') {
-          output += `<div class='flex-col'><div class="numbered-item"><p class='indent'>(b) </pclass=><p>The first payment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "FirstPayment Date")][the First Payment Date]. Each subsequent payment of the Facility Agent Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of</p></div>
+          output += `<div class='flex-col'><div class="numbered-item"><p class='indent'>(b) </p><p>The first payment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "FirstPayment Date")][the First Payment Date]. Each subsequent payment of the Facility Agent Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until (but excluding) the earlier of</p></div>
         
        <div class="numbered-item"><p class='account-details'>(i)</p><p>the *{Final Maturity Date}*,</p></div>
         <div class="numbered-item"><p class='account-details'>(ii)</p><p>the date we resign or are replaced as facility agent and</p></div>
         <div class="numbered-item"><p class='account-details'>(iii)</p><p>the date of prepayment of all *{Loans}* and cancellation - of all *{Commitments}*, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div>\n`;
         } else if (data.paymentModality === 'semiannual') {
-          output += `<div class='flex-col'><div class="numbered-item"><p class='indent'>(b) </pclass=><p>The Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before the First Payment Date. Thereafter any subsequent installment of the FacilityAgent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of </p></div>
+          output += `<div class='flex-col'><div class="numbered-item"><p class='indent'>(b) </p><p>The Facility Agent Fee shall be payable to us in equal semi-annual instalments. Each installment shall amount to half of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before the First Payment Date. Thereafter any subsequent installment of the FacilityAgent Fee shall be made to us on the dates falling at intervals of six (6) months until (but excluding) the earlier of </p></div>
           
         <div class="numbered-item"><p class='account-details'>(i)</p><p>the *{Final Maturity Date}*,</p></div> 
         <div class="numbered-item"><p class='account-details'>(ii)</p><p>the date we resign or are replaced as agent and</p></div> 
         <div class="numbered-item"><p class='account-details'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div>\n`;
         } else if (data.paymentModality === 'quarterly') {
-          output += `<div class='flex-col'><div class="numbered-item"><p class='indent'>(b) </pclass=><p>The Facility Agent Fee shall be payable to us in equal quarterly instalments. Each instrument shall amount to a quarter of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date")] [the First Payment Date]. Thereafter any subsequent installment of the Facility Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of </p></div>
+          output += `<div class='flex-col'><div class="numbered-item"><p class='indent'>(b) </p><p>The Facility Agent Fee shall be payable to us in equal quarterly instalments. Each instrument shall amount to a quarter of the annual Facility Agent Fee. The first installment of the Facility Agent Fee is payable on or before [the earlier to occur of the date falling {[${data.businessDays}]} *{Business Days}* after the date of the Facility Agreement and the first *{Utilisation Date}* under the Facility Agreement (the "First Payment Date")] [the First Payment Date]. Thereafter any subsequent installment of the Facility Agent Fee shall be made to us on the dates falling at intervals of three (3) months until (but excluding) the earlier of </p></div>
         
         <div class="numbered-item"><p class='account-details'>(i)</p><p>the *{Final Maturity Date}*,</p></div> 
         <div class="numbered-item"><p class='account-details'>(ii)</p><p>the date we resign or are replaced as agent and</p></div>
         <div class="numbered-item"><p class='account-details'>(iii)</p><p>the date of prepayment of all Loans and cancellation of all Commitments, in each case under the Facility Agreement (the <b>"Final Payment Date"</b>).</p></div></div>\n`;
         }
 
-        output += `<div class="numbered-item"><p class='indent'>(c) </pclass=><p>The Increase Fee shall be payable to the Facility Agent on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after the Increase Date and on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after each subsequent Increase Date.</p></div>\n`;
-        output += `<div class="numbered-item"><p class='indent'>(d) </pclass=><p>The first payment of the Debtdomain Fee is payable on or before the First Payment Date. Each subsequent payment of the Debtdomain Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until the Final Payment Date.</p></div>\n`;
+        output += `<div class="numbered-item"><p class='indent'>(c) </p><p>The Increase Fee shall be payable to the Facility Agent on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after the Increase Date and on or prior to the date falling {[${data.businessDays}]} *{Business Days}* after each subsequent Increase Date.</p></div>\n`;
+        output += `<div class="numbered-item"><p class='indent'>(d) </p><p>The first payment of the Debtdomain Fee is payable on or before the First Payment Date. Each subsequent payment of the Debtdomain Fee shall be made annually in advance, commencing on the first anniversary of the First Payment Date and thereafter on each subsequent anniversary of the First Payment Date, until the Final Payment Date.</p></div>\n`;
       }
       break;
 
