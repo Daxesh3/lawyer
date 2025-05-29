@@ -18,7 +18,7 @@ interface FeeLetterOutputProps {
 const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGenerated, setHasGenerated }) => {
   const { formData, coverFormData, letterIndexSelections } = useLetterContext();
   const contentRef = useRef<HTMLDivElement>(null);
-  const [isGenerateDoc, setIsGenerateDoc] = useState(true);
+  const [isGenerateDoc, setIsGenerateDoc] = useState(false);
 
   // const handleCopy = () => {
   //   const htmlText = generateFeeLetterText({
@@ -131,7 +131,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
 
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'downloaded-file.docx';
+      a.download = 'Fee-Letter.docx';
       document.body.appendChild(a);
       a.click();
       a.remove();
