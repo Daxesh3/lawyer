@@ -59,7 +59,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
   output += `<p class='mb-6'>Date: ${data.currentYear}</p>`;
 
   // Salutation
-  output += `<p class='mb-6'>Dear Sir/Madam</p>\n\n`;
+  output += `<p>Dear Sir/Madam</p>`;
 
   // Header
   output += `<p class='mb-6'><b>${data.currency} ${data.amount} ${data.facilityType} (the "Facility Agreement") dated on or about the date hereof and made between, amongst others, ${data.borrowerName} as borrower (the "Borrower") and ${data.facilityAgentName} as facility agent (the "Facility Agent")</b></p>\n\n</br>`;
