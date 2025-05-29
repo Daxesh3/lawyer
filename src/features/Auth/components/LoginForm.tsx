@@ -13,7 +13,7 @@ const LoginForm: FC = () => {
     setIsLoading(true);
     e.preventDefault();
     // Static credentials
-    const validEmail = 'Edmund.Boyo@CliffordChance.com';
+    const validEmail = 'edmund.boyo@CliffordChance.com';
     const validPassword = 'Edmud@123';
 
     setTimeout(() => {
