@@ -125,7 +125,7 @@ export const generateFeeLetterText = (data: IFeeLetterData) => {
 
         output += `<div class="numbered-item"><p class='indent'>(e) </p><p>The Set-Up Fee, Facility Agent Fee, Increase Fee and Debtdomain Fee shall hereinafter be referred to as the <b>"Agency Fees"</b>.</p></div>\n`;
       } else {
-        output += `<div class="numbered-item"><p class='indent'>Only one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>).</p></div>\n`;
+        output += `<p class='indent'>Only one type: facility agent pursuant to the provisions of the Facility Agreement (the <b>"Facility Agent Fee"</b>).</p>\n`;
       }
       break;
 

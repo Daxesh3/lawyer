@@ -81,14 +81,14 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
             text-align:justify;
           }
           .numbered-item p:first-child {
-            width: 20px;
+            width: 25px;
             margin-right: 15px;
             margin-top: 0px;
             margin-bottom: 0px;
             font-weight: bold;
           }
           .indent {
-            margin-left: 3em;
+            margin-left: 4.5em;
           }
           .account-details {
             margin-left: 4em;
