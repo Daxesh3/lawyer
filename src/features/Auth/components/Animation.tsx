@@ -1,43 +1,6 @@
 import { useEffect } from 'react';
 import { gsap } from 'gsap';
-
-interface Point {
-  x: number;
-  y: number;
-  originX: number;
-  originY: number;
-  closest: Point[];
-  active?: number;
-  circle?: Circle;
-}
-
-interface CircleProps {
-  pos: Point;
-  radius: number;
-  color: string;
-}
-
-class Circle {
-  pos: Point;
-  radius: number;
-  color: string;
-  active: number;
-
-  constructor({ pos, radius, color }: CircleProps) {
-    this.pos = pos;
-    this.radius = radius;
-    this.color = color;
-    this.active = 0;
-  }
-
-  draw(ctx: CanvasRenderingContext2D) {
-    if (!this.active) return;
-    ctx.beginPath();
-    ctx.arc(this.pos.x, this.pos.y, this.radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = `rgba(0, 165, 203, ${this.active})`; // Use white for the circles
-    ctx.fill();
-  }
-}
+import { Circle, Point } from '../interface/Auth.interface';
 
 const Animation = () => {
   useEffect(() => {
@@ -45,7 +8,7 @@ const Animation = () => {
       height: number,
       largeHeader: HTMLElement | null,
       canvas: HTMLCanvasElement | null,
-      ctx: any,
+      ctx: CanvasRenderingContext2D | null,
       points: Point[] = [],
       target: { x: number; y: number },
       animateHeader = true;
@@ -153,7 +116,9 @@ const Animation = () => {
           }
 
           drawLines(point);
-          point.circle!.draw(ctx); // Pass ctx as an argument
+          if (ctx) {
+            point.circle!.draw(ctx); // Pass ctx as an argument
+          }
         });
       }
       requestAnimationFrame(animate);
@@ -172,11 +137,13 @@ const Animation = () => {
     function drawLines(p: Point) {
       if (!p.active || !ctx) return;
       p.closest.forEach((closestPoint: Point) => {
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(closestPoint.x, closestPoint.y);
-        ctx.strokeStyle = `rgba(135,206,250, ${p.active})`; // Use sky blue color for lines
-        ctx.stroke();
+        if (ctx) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(closestPoint.x, closestPoint.y);
+          ctx.strokeStyle = `rgba(135,206,250, ${p.active})`; // Use sky blue color for lines
+          ctx.stroke();
+        }
       });
     }
 
