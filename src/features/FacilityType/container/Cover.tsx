@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useLetterContext } from '../../LetterCreation/context/LetterContext';
-import { CURRENCIES } from '../../LetterCreation/constants/Letter.constants';
 import { formatToUSD } from '../../../shared/constants/constant';
+import { CURRENCIES } from '../../LetterCreation/constants/Letter.constants';
+import { useLetterContext } from '../../LetterCreation/context/LetterContext';
 import LetterIndex from './LetterIndex';
 
 interface ICoverForm {

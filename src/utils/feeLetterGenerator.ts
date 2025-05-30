@@ -1,4 +1,3 @@
-import isEmpty from 'lodash/isEmpty';
 import { IFeeLetterData } from '../types/feeLetterTypes';
 
 export const generateFeeLetterText = (data: IFeeLetterData) => {

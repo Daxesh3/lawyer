@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { CARD_OPTIONS } from '../../LetterCreation/constants/Letter.constants';
-import { motion } from 'framer-motion';
 
 const Dashboard = () => {
   const overlayVariants = {

@@ -1,17 +1,17 @@
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
-import React, { useState } from 'react';
 import letterGeneration from '../../../assets/Json/LetterGenerate.json';
 import { API_VITE_API_FACILITY_FILE_UPLOAD, formatToUSD, numberFields } from '../../../shared/constants/constant';
 import FeeLetterOutput from '../../FeeLetter/components/FeeLetterOutput';
+import BankDetails from '../components/BankDetails';
+import FeeLetterSelection from '../components/FeeLetterSelection';
 import FeeTypes from '../components/FeeTypes';
 import OtherDetails from '../components/OtherDetails';
 import PaymentModalities from '../components/PaymentModalities';
 import { STEPS } from '../constants/Letter.constants';
-import { IFacilityUploadDetails } from '../interface/Letter.interface';
 import { useLetterContext } from '../context/LetterContext';
-import FeeLetterSelection from '../components/FeeLetterSelection';
-import BankDetails from '../components/BankDetails';
+import { IFacilityUploadDetails } from '../interface/Letter.interface';
 
 const LetterCreation = () => {
   const [activeStep, setActiveStep] = useState(0);

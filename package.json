@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "docx": "^9.5.0",
-    "file-saver": "^2.0.5",
     "framer-motion": "^12.12.1",
     "gsap": "^3.13.0",
     "lodash": "^4.17.21",
@@ -19,8 +17,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.6.0",
-    "react-to-print": "^3.1.0",
-    "webcamjs": "^1.0.26"
+    "react-to-print": "^3.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
@@ -29,7 +26,6 @@
     "@types/node": "^22.15.19",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
-    "@types/webcamjs": "^1.0.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.18",
     "eslint": "^9.9.1",

@@ -1,12 +1,11 @@
-import Lottie from 'lottie-react';
 import React, { useCallback, useRef, useState } from 'react';
+import Lottie from 'lottie-react';
+import { useReactToPrint } from 'react-to-print';
 import letterGeneration from '../../../assets/Json/LetterGenerate.json';
+import { API_VITE_API_HTML_TO_DOC } from '../../../shared/constants/constant';
 import { generateFeeLetterText } from '../../../utils/feeLetterGenerator';
 import { useLetterContext } from '../../LetterCreation/context/LetterContext';
 import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
-import { API_VITE_API_HTML_TO_DOC } from '../../../shared/constants/constant';
-import { finalGenerateFeeLetterText } from '../../../utils/finalFeeLetterGenerator';
-import { useReactToPrint } from 'react-to-print';
 
 interface FeeLetterOutputProps {
   isGenerating: boolean;
@@ -37,7 +36,7 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
   const handleDownload = useCallback(async () => {
     try {
       setIsGenerateDoc(true);
-      const content = finalGenerateFeeLetterText({
+      const content = generateFeeLetterText({
         ...formData,
         ...coverFormData,
         indexClauses: letterIndexSelections.filter(Boolean),

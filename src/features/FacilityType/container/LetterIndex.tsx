@@ -1,33 +1,19 @@
+import isEmpty from 'lodash/isEmpty';
 import React, { useCallback, useState } from 'react';
-import { useLetterContext } from '../../LetterCreation/context/LetterContext';
 import { API_VITE_API_FACILITY_FILE_UPLOAD, formatToUSD, numberFields } from '../../../shared/constants/constant';
+import { useLetterContext } from '../../LetterCreation/context/LetterContext';
 import { IFacilityUploadDetails } from '../../LetterCreation/interface/Letter.interface';
-import { isEmpty } from 'lodash';
 
 interface IIndexClause {
   clause: number;
   title: string;
 }
 
-// const DROPDOWN_OPTIONS = [
-//   'Definitions and Interpretation',
-//   'Construction',
-//   'Rights of Third Parties',
-//   'Tax Gross Up and Indemnities',
-//   'VAT',
-//   'Governing Law',
-//   'Enforcement',
-// ];
-
 const LetterIndex: React.FC = () => {
   const { formData, updateFormField, letterIndexSelections, setLetterIndexSelections } = useLetterContext();
   const [facilityAgreementDetails, setFacilityAgreementDetails] = useState(formData?.indexClauses?.length > 0 || false);
   const [isUploadTermsheet, setIsUploadingTermsheet] = useState(false);
   const [isUpload, setIsUploading] = useState(false);
-
-  // Helper: get all selected titles except for the current row
-  // const getSelectedTitles = (excludeIdx: number) =>
-  //   letterIndexSelections.map((sel, idx) => (idx !== excludeIdx && sel ? sel.title : null)).filter(Boolean) as string[];
 
   const handleFacilityAgreementUpload = useCallback(async (file: File) => {
     if (!file) return;
@@ -67,16 +53,6 @@ const LetterIndex: React.FC = () => {
       setIsUploading(false);
     }
   }, []);
-
-  // const handleSelect = (idx: number, value: string) => {
-  //   const updatedSelections = [...letterIndexSelections];
-  //   if (value === '') {
-  //     updatedSelections[idx] = null;
-  //   } else {
-  //     updatedSelections[idx] = { clause: idx + 1, title: value };
-  //   }
-  //   setLetterIndexSelections(updatedSelections);
-  // };
 
   const handleFormChange = (
     fieldOrEvent: string | React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
@@ -214,23 +190,7 @@ const LetterIndex: React.FC = () => {
                     return (
                       <tr key={idx} className="border-b border-[#454545] hover:bg-[#2a2a2a]">
                         <td className="px-4 py-2 text-white w-16">{idx + 1}</td>
-                        <td className="px-4 py-2 text-white">
-                          {getClauseValue(idx)?.title || ''}
-                          {/* <select
-                            className="w-full px-3 py-2 border border-[#454545] rounded-md bg-[#191919] text-[#FBFBFB] focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            value={getClauseValue(idx)?.title || ''}
-                            onChange={(e) => handleSelect(idx, e.target.value)}
-                          >
-                            <option value="">Select clause...</option>
-                            {DROPDOWN_OPTIONS.filter(
-                              (option) => !selectedTitles.includes(option) || getClauseValue(idx)?.title === option
-                            ).map((option) => (
-                              <option key={option} value={option}>
-                                {option}
-                              </option>
-                            ))}
-                          </select> */}
-                        </td>
+                        <td className="px-4 py-2 text-white">{getClauseValue(idx)?.title || ''}</td>
                       </tr>
                     );
                   })}
