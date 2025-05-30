@@ -60,67 +60,67 @@ const FeeLetterOutput: React.FC<FeeLetterOutputProps> = ({ isGenerating, hasGene
             <meta charset="UTF-8" />
             <title>Fee Letter</title>
             <style>
-                    p {
-            margin: 0;
-            text-align: justify;
-          }
-          div {
-            text-align: justify;
-          }
-          .para-content {
-            max-width: 650px;
-          }
-          .title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            text-decoration: underline;
-          }
-          .numbered-item {
-            display: flex;
-            margin-left: 2em;
-            margin-bottom: 1em;
-            text-align:justify;
-          }
-          .numbered-item p:first-child {
-            width: 25px;
-            margin-right: 15px;
-            margin-top: 0px;
-            margin-bottom: 0px;
-            font-weight: bold;
-          }
-          .indent {
-            margin-left: 4.5em;
-          }
-          .account-details {
-            margin-left: 7.5em;
-            margin-top: 0.5em;
-          }
-          .signature-block {
-            margin-top: 3em;
-          }
-          .signature-line {
-            margin: 2em 0;
-          }
-          .flex {
-            display: flex;
-          }
-          .flex-col {
-            display: flex;
-            flex-direction: column;
-          }
-          .ml-20 {
-            margin-left: 20px;
-          }
-            .mb-6 {
-            margin-bottom: 12px;
-          }
-          </style>
-</head>
-<body>
-  ${contentRef?.current?.innerHTML}
-</body>
-</html>`,
+              p {
+                margin: 0;
+                text-align: justify;
+              }
+              div {
+                text-align: justify;
+              }
+              .para-content {
+                max-width: 650px;
+              }
+              .title {
+                text-align: center;
+                font-size: 20px;
+                font-weight: bold;
+                text-decoration: underline;
+              }
+              .numbered-item {
+                display: flex;
+                margin-left: 2em;
+                margin-bottom: 1em;
+                text-align:justify;
+              }
+              .numbered-item p:first-child {
+                width: 25px;
+                margin-right: 15px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+                font-weight: bold;
+              }
+              .indent {
+                margin-left: 4.5em;
+              }
+              .account-details {
+                margin-left: 7.5em;
+                margin-top: 0.5em;
+              }
+              .signature-block {
+                margin-top: 3em;
+              }
+              .signature-line {
+                margin: 2em 0;
+              }
+              .flex {
+                display: flex;
+              }
+              .flex-col {
+                display: flex;
+                flex-direction: column;
+              }
+              .ml-20 {
+                margin-left: 20px;
+              }
+                .mb-6 {
+                margin-bottom: 12px;
+              }
+              </style>
+            </head>
+            <body>
+              ${contentRef?.current?.innerHTML}
+            </body>
+          </html>`,
         }),
       });
 

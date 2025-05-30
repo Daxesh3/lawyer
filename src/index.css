@@ -50,73 +50,6 @@
   margin-top: 40px;
 }
 
-.auth-form {
-  display: block;
-  margin-top: 20px;
-}
-
-.text-input-field {
-  width: calc(100% - 20px);
-  border: 1px solid grey;
-  border-radius: 20px;
-  background-color: transparent;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.webcam-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.camera-container {
-  position: relative;
-  display: block;
-  width: 360px;
-  height: 270px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0px 1px 2px 0px #1018280d;
-  border: 2px solid #454545;
-  animation: border-glow 2s infinite alternate;
-}
-
-/* Scanning Line Animation */
-.camera-container::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 4px;
-  background: rgba(65, 165, 219, 0.7); /* Blue scan line */
-  top: -4px;
-  left: 0;
-  animation: scan 3s infinite linear;
-}
-
-/* Border Animation */
-@keyframes border-glow {
-  0% {
-    border-color: grey;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-  }
-  100% {
-    border-color: rgba(65, 165, 219, 0.79);
-    box-shadow: 0 0 15px rgba(65, 165, 219, 0.79);
-  }
-}
-
-/* Scanning Line Movement */
-@keyframes scan {
-  0% {
-    top: -4px;
-  }
-  100% {
-    top: 100%;
-  }
-}
-
 .btn-wrapper {
   width: 100%;
   margin-top: 10px;
@@ -141,101 +74,12 @@
   color: #ffffff;
 }
 
-.secondary-btn {
-  background-color: grey;
-  margin-right: 10px;
-}
-
-.auth-title {
-  font-size: 25px;
-  margin: 0 0 40px;
-  background-color: rgba(0, 165, 203, 0.9);
-  border-radius: 20px 20px 0 0;
-  padding: 10px;
-  color: #ffffff;
-}
-
-.login-text {
-  color: #000000;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 10px 0;
-  text-decoration: underline;
-  font-weight: 500;
-  margin-bottom: 0;
-}
-
 .cursor-animation-canvas {
   position: absolute;
   width: 100%;
   height: 100vh;
   left: 0;
   pointer-events: none;
-}
-
-.welcome-text {
-  font-size: 20px;
-  font-weight: 600;
-  color: rgba(0, 165, 203, 0.9);
-  margin: 0 0 20px;
-}
-
-.bottom-text {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-}
-
-.footer-text {
-  font-size: 16px;
-  font-weight: 600;
-  margin-right: 10px;
-}
-
-.error-text {
-  font-size: 14px;
-  color: red;
-  margin-top: 5px;
-}
-
-.spinner-wrapper {
-  min-height: 250px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.spinner {
-  display: block;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  border-top: 2px solid #ffffff;
-  width: 14px;
-  height: 14px;
-  animation: spin 1s linear infinite;
-}
-
-.page-spinner {
-  width: 30px;
-  height: 30px;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.green-tick-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 /* For Letter */
